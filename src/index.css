@@ -1,0 +1,32 @@
+/* import fonts file */
+@import url("./fonts.css");
+
+/* declare varialbes */
+:root {
+	/* primary colors */
+	--color-primary: #6987f1;
+	--color-primary-dark: #030a23;
+	--color-primary-light: #bccaf9;
+	--color-primary-lighter: #eef2fd;
+
+	/* secondary colors */
+	--color-secondary: #f1d369;
+	--color-secondary-dark: #231c03;
+	--color-secondary-light: #f9ebbc;
+	--color-secondary-lighter: #fcf5de;
+
+	/* other colors */
+	--color-error: #f84263;
+	--color-green: #6ce58e;
+	--color-border: #dbdfed;
+	--color-hint: #caccda;
+	--color-deactive: #030a234d;
+}
+
+*,
+*::before,
+*::after {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}

@@ -1,0 +1,97 @@
+@font-face {
+	font-family: "IRANSansX-Regular";
+	src: url("./assets/fonts/IRANSansX-Regular.woff2") format("woff2"),
+		url("./assets/fonts/IRANSansX-Regular.woff") format("woff");
+}
+@font-face {
+	font-family: "IRANSansX-Bold";
+	src: url("./assets/fonts/IRANSansX-Bold.woff2") format("woff2"),
+		url("./assets/fonts/IRANSansX-Bold.woff") format("woff");
+}
+@font-face {
+	font-family: "IRANSansX-Light";
+	src: url("./assets/fonts/IRANSansX-Light.woff2") format("woff2"),
+		url("./assets/fonts/IRANSansX-Light.woff") format("woff");
+}
+@font-face {
+	font-family: "IRANSansX-Medium";
+	src: url("./assets/fonts/IRANSansX-Medium.woff2") format("woff2"),
+		url("./assets/fonts/IRANSansX-Medium.woff") format("woff");
+}
+* {
+	line-height: 150%;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.display-1,
+.display-2 {
+	font-family: "IRANSansX-Bold", sans-serif;
+}
+.display-1 {
+	font-size: 64px;
+}
+.display-2 {
+	font-size: 56px;
+}
+h1 {
+	font-size: 44px;
+}
+h2 {
+	font-size: 40px;
+}
+h3 {
+	font-size: 32px;
+}
+h4 {
+	font-size: 24px;
+}
+h5 {
+	font-size: 20px;
+}
+h6 {
+	font-size: 16px;
+}
+.body-xl {
+	font-family: "IRANSansX-Regular", sans-serif;
+	font-size: 20px;
+	line-height: 190%;
+}
+.body-lg {
+	font-family: "IRANSansX-Light", sans-serif;
+	font-size: 18px;
+}
+.body-md {
+	font-family: "IRANSansX-Regular", sans-serif;
+	font-size: 16px;
+}
+.body-sm {
+	font-family: "IRANSansX-Light", sans-serif;
+	font-size: 14px;
+}
+.body-xs {
+	font-family: "IRANSansX-Light", sans-serif;
+	font-size: 12px;
+}
+.caption-lg,
+.caption-md,
+.button-lg,
+.button-sm {
+	font-family: "IRANSansX-Medium", sans-serif;
+}
+.caption-lg {
+	font-size: 14px;
+}
+.caption-md {
+	font-size: 12px;
+}
+.button-lg {
+	font-size: 16px;
+}
+.button-sm {
+	font-size: 14px;
+}
