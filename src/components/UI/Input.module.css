@@ -1,0 +1,20 @@
+.input {
+	outline: none;
+	border: 1px solid var(--color-border);
+	border-radius: var(--border-radius-1);
+	padding: 16px;
+	color: var(--color-primary-dark);
+}
+.input.error {
+    border-color: var(--color-error);
+}
+.input.system {
+    border: none;
+    background-color: var(--color-primary-lighter);
+}
+.input::placeholder {
+	color: var(--color-hint);
+}
+.input:focus {
+	border-color: var(--color-primary);
+}
