@@ -21,6 +21,10 @@
 	--color-border: #dbdfed;
 	--color-hint: #caccda;
 	--color-deactive: #030a234d;
+
+	/* border radius  */
+	--border-radius-1: 16px;
+	--border-radius-2: 24px;
 }
 
 *,
