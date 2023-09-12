@@ -1,0 +1,34 @@
+.box {
+	border: 1px solid var(--color-border);
+	border-radius: var(--border-radius-2);
+	background-color: #fff;
+	width: 392px;
+	padding: 24px;
+	position: relative;
+}
+.box::after {
+	content: url("../../assets/icons/gear-1.svg");
+	position: absolute;
+	top: 20px;
+	right: -45px;
+	z-index: -1;
+	animation: rotate 7s infinite linear;
+	transform-origin: 35px 33px;
+}
+.box::before {
+	content: url("../../assets/icons/gear-2.svg");
+	position: absolute;
+	bottom: -20px;
+	left: -51px;
+	z-index: -1;
+	animation: rotate 10s infinite linear reverse;
+}
+
+@keyframes rotate {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
