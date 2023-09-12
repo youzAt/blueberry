@@ -5,12 +5,12 @@
 	padding: 16px;
 	color: var(--color-primary-dark);
 }
-.input.error {
-    border-color: var(--color-error);
+.input:global(.error) {
+	border-color: var(--color-error);
 }
-.input.system {
-    border: none;
-    background-color: var(--color-primary-lighter);
+.input:global(.system) {
+	border: none;
+	background-color: var(--color-primary-lighter);
 }
 .input::placeholder {
 	color: var(--color-hint);

@@ -1,7 +1,7 @@
 import styles from "./Input.module.css";
 
-const Input = ({ onChange, value, placeholder, type = "text", className="" }) => {
-    const classes = `body-sm ${className} ${styles.input} ${styles.system}`
+const Input = ({ onChange, value, placeholder, type = "text", className="", id }) => {
+    const classes = `body-sm ${className} ${styles.input} `
 	return (
 		<input
 			className={classes}
@@ -9,6 +9,7 @@ const Input = ({ onChange, value, placeholder, type = "text", className="" }) =>
 			value={value}
 			placeholder={placeholder}
 			type={type}
+			id={id}
 		/>
 	);
 };
