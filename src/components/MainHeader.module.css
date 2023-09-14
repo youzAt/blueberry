@@ -1,0 +1,19 @@
+.mainHeader {
+	width: 100%;
+	padding: 32px 0;
+	border-bottom: 1px solid var(--color-border);
+    background-color: #fff;
+	margin-bottom: 72px;
+}
+.mainHeader div:global(.container) {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.mainHeader .navBox {
+	display: flex;
+	align-items: center;
+	gap: 40px;
+}
