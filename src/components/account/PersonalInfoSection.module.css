@@ -1,0 +1,25 @@
+.section{
+    margin-bottom: 32px;
+}
+.section .sectionTitle{
+    color: var(--color-primary-dark);
+    margin-bottom: 24px;
+}
+.section .box{
+    width: 704px;
+}
+.section form label {
+    color: var(--color-primary-dark);
+    margin-right: 16px;
+}
+.section .formBox{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 24px;
+}
+.section .inputBox{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}

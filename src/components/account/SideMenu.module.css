@@ -1,0 +1,23 @@
+.sideMenu>h6{
+    margin-bottom: 24px;
+    color: var(--color-primary-dark)
+}
+.sideMenu .menu{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 32px;
+}
+.menu .menuItem a{
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    color: var(--color-primary-dark)
+}
+
+.menu .menuItem a.active{
+    color: red;
+}
+.box{
+    width: 288px;
+}
