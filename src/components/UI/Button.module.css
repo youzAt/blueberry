@@ -1,19 +1,28 @@
-.btn{
-    outline: none;
-    border: none;
-    background-color: transparent;
-    border-radius: var(--border-radius-1);
-    padding: 16px 24px;
-    color: var(--color-primary-dark);
-    cursor: pointer;
+.btn {
+	outline: none;
+	border: none;
+	background-color: transparent;
+	border-radius: var(--border-radius-1);
+	padding: 16px 24px;
+	color: var(--color-primary-dark);
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 16px;
 }
-.btn.outline{
-    border: 1px solid var(--color-border);
+.btn.outline {
+	border: 1px solid var(--color-border);
+	background-color: #fff;
 }
-.btn.primary{
-    background-color: var(--color-primary);
-    color: #fff;
+.btn.primary {
+	background-color: var(--color-primary);
+	color: #fff;
 }
-.btn.secondary{
-    background-color: var(--color-secondary);
+.btn.secondary {
+	background-color: var(--color-secondary);
+}
+.btn.tertiary {
+	background-color: transparent;
+	border: none;
 }
