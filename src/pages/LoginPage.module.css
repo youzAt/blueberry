@@ -1,0 +1,45 @@
+.loginBox {
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 16px;
+	width: fit-content;
+}
+.loginBox h5 {
+	margin-bottom: 16px;
+	color: var(--color-primary-dark)
+}
+.loginBox .backBtn {
+	align-self: flex-end;
+}
+.box {
+	width: 392px;
+	position: relative;
+}
+.box::after {
+	content: url("../assets/icons/gear-1.svg");
+	position: absolute;
+	top: 20px;
+	right: -45px;
+	z-index: -1;
+	animation: rotate 7s infinite linear;
+	transform-origin: 35px 33px;
+}
+.box::before {
+	content: url("../assets/icons/gear-2.svg");
+	position: absolute;
+	bottom: -20px;
+	left: -51px;
+	z-index: -1;
+	animation: rotate 10s infinite linear reverse;
+}
+
+@keyframes rotate {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}

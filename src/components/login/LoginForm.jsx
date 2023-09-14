@@ -1,17 +1,28 @@
+// hooks
 import { useState } from "react";
-import styles from "./LoginForm.module.css";
-import Input from "./UI/Input";
-import Button from "./UI/Button";
-import mobileIcon from "../assets/icons/mobile.svg";
 
-const LoginForm = () => {
-	const [phoneNumber, setPhoneNumber] = useState("");
-	const inputChangeHandler = (e) => {
-		if (isNaN(e.target.value)) return;
-		setPhoneNumber(e.target.value);
-	};
+// styles
+import styles from "./LoginForm.module.css";
+
+// logo and icons
+import mobileIcon from "../../assets/icons/mobile.svg";
+
+// components
+import Input from "../UI/Input";
+import Button from "../UI/Button";
+import ErrorMessage from "../UI/ErrorMessage";
+
+const BASE_URL = "http://127.0.0.1:8000/";
+
+const LoginForm = ({phoneNumber, setPhoneNumber}) => {
+	const [hasError, setHasError] = useState(false);
+	
+	const submitHander =()=>{}
+	const inputChangeHandler = ()=>{}
+	
+
 	return (
-		<form className={styles.loginForm}>
+		<form className={styles.loginForm} onSubmit={submitHander}>
 			<label className="caption-lg" htmlFor="phone-number">
 				شماره موبایل
 			</label>
@@ -28,6 +39,9 @@ const LoginForm = () => {
 					placeholder="شماره موبایل خود را وارد کنید"
 					id="phone-number"
 				/>
+				{hasError && (
+					<ErrorMessage>شماره وارد شده نامعتبر است</ErrorMessage>
+				)}
 			</div>
 
 			<Button isSmall={true} type="secondary">
