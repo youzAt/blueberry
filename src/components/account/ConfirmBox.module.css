@@ -1,0 +1,17 @@
+.confirmBox {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+    margin-bottom: 16px;
+}
+.confirmBox > div {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+}
+.confirmBox p {
+	color: var(--color-primary-dark);
+}
+.confirmBox button{
+    padding: 0 16px;
+}

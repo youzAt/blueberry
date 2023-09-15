@@ -8,7 +8,7 @@
 .section .box{
     width: 704px;
 }
-.section form label {
+.section  label {
     color: var(--color-primary-dark);
     margin-right: 16px;
 }
@@ -18,4 +18,49 @@
     flex-direction: column;
     gap: 10px;
     margin-bottom: 24px;
+}
+.input {
+	outline: none;
+	border: 1px solid var(--color-border);
+	border-radius: var(--border-radius-1);
+    min-width: 48px;
+    min-height: 56px;
+	/* padding: 16px; */
+	color: var(--color-primary-dark);
+}
+.input:global(.error) {
+	border-color: var(--color-error);
+}
+
+.input:focus {
+	border-color: var(--color-primary);
+}
+
+.otpContainer{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+}
+.otpForm p{
+    margin-right: 16px;
+    margin-bottom: 13px;; 
+}
+.otpForm .deactiveBtn{
+    color: var(--color-deactive);
+    cursor: default;
+}
+.otpForm button span, .otpForm p{
+     color: var(--color-primary-dark)
+}
+.otpForm .error{
+    align-self: flex-end
+}
+.changePhoneOtp{
+    width: 346px;
+    margin: auto;
+    padding-top: 13px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }

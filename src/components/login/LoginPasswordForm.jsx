@@ -23,9 +23,38 @@ const LoginPasswordForm = ({ phoneNumber }) => {
 	const changePassVisibility = () => {
 		setIsPassVisible((cur) => !cur);
 	};
-	const passChangeHandler = (e) => {};
+	const passChangeHandler = (e) => {
+		setPassword(e.target.value);
+	};
 
-	const submitHandler = (e) => {};
+	const submitHandler = (e) => {
+		e.preventDefault();
+		setHasError(false);
+
+		const userLoginInfo = {
+			phone_number: phoneNumber,
+			password: password,
+		};
+		const validatePass = async () => {
+			try {
+				const res = await fetch(`${BASE_URL}api/account/login/`, {
+					method: "POST",
+					headers: {
+						"content-type": "application/json",
+					},
+					body: JSON.stringify(userLoginInfo),
+				});
+				if (!res.ok) throw new Error("");
+				const data = await res.json();
+				localStorage.setItem("blueberry-access", data.access);
+				localStorage.setItem("blueberry-refresh", data.refresh);
+				navigate("/my-account");
+			} catch {
+				setHasError(true);
+			}
+		};
+		validatePass();
+	};
 	return (
 		<div className={styles.loginBox}>
 			<form className={styles.loginPasswordForm} onSubmit={submitHandler}>
@@ -45,7 +74,7 @@ const LoginPasswordForm = ({ phoneNumber }) => {
 						onClick={changePassVisibility}
 					/>
 					<Input
-						className={hasError && "error"}
+						className={hasError ? "error" : ""}
 						id="password"
 						placeholder="رمز عبور حساب خود را وارد کنید"
 						type={isPassVisible ? "text" : "password"}
