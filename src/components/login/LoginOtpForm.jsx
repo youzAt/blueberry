@@ -68,6 +68,11 @@ const LoginOtpForm = ({ phoneNumber }) => {
 		}
 	};
 
+	const sendOtpHandler = ()=>{
+		setRemainingTime(WAITING_TIME);
+		sendOtp();
+	}
+
 	return (
 		<div className={styles.otpForm}>
 			<p className="caption-lg">
@@ -89,7 +94,7 @@ const LoginOtpForm = ({ phoneNumber }) => {
 				</ErrorMessage>
 			)}
 			{remainingTime === 0 ? (
-				<Button onClick={sendOtp} isSmall={true} type="tertiary">
+				<Button onClick={sendOtpHandler} isSmall={true} type="tertiary">
 					ارسال مجدد پیامک
 				</Button>
 			) : (
