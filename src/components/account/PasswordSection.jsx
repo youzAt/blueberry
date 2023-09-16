@@ -58,10 +58,13 @@ const PasswordSection = ({ phoneNumber }) => {
 		const userPass = {
 			password: newPassword,
 			password_confirmation: newPasswordRepeat,
-			old_password: oldPassword ? oldPassword : "",
 		};
 
-		sendPass(userPass);
+		sendPass(
+			oldPassword === ""
+				? userPass
+				: { ...userPass, old_password: oldPassword }
+		);
 		setNewPassword("");
 		setNewPasswordRepeat("");
 		setOldPassword("");
