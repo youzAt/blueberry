@@ -5,13 +5,20 @@ import Button from "../UI/Button";
 import { useEffect, useState } from "react";
 import ErrorMessage from "../UI/ErrorMessage";
 import ConfirmBox from "./ConfirmBox";
+import CheckListItem from "../UI/CheckListItem";
 const BASE_URL = "http://127.0.0.1:8000/";
 
-const PasswordSection = ({ phoneNumber }) => {
+const PasswordSection = () => {
 	const [newPassword, setNewPassword] = useState("");
 	const [newPasswordRepeat, setNewPasswordRepeat] = useState("");
 	const [oldPassword, setOldPassword] = useState("");
 	const [isPasswordChanged, setIsPasswordChanged] = useState(false);
+	const [hasPassword, setHasPassword] = useState(false);
+	const [passLengthCheck, setPassLengthCheck] = useState(false);
+	const [passNumberCheck, setPassNumberCheck] = useState(false);
+	const [passAlphaCheck, setPassAlphaCheck] = useState(false);
+	const [error, setError] = useState("");
+
 	const accessToken = localStorage.getItem("blueberry-access");
 
 	const sendPass = async (userPass) => {
@@ -26,35 +33,38 @@ const PasswordSection = ({ phoneNumber }) => {
 		if (res.ok) {
 			setHasPassword(true);
 			setIsPasswordChanged(true);
+		} else {
+			const data = await res.json();
+			setError("رمز عبور فعلی صحیح نمی باشد");
 		}
-
-		const data = await res.json();
-		console.log(res);
-		console.log(data);
 	};
 
-	const [hasPassword, setHasPassword] = useState(false);
 	useEffect(() => {
-		const userPhone = {
-			phone_number: phoneNumber,
-		};
-		const checkPhone = async () => {
-			const res = await fetch(`${BASE_URL}api/account/account-stat/`, {
-				method: "POST",
+		const checkPassStat = async () => {
+			const res = await fetch(`${BASE_URL}api/account/user/password/`, {
+				method: "GET",
 				headers: {
 					"content-type": "application/json",
+					Authorization: `Bearer ${accessToken}`,
 				},
-				body: JSON.stringify(userPhone),
 			});
-			if (!res.ok) throw new Error("");
 			const data = await res.json();
 			setHasPassword(data.password);
 		};
-		checkPhone();
-	}, [phoneNumber]);
+		checkPassStat();
+	}, [accessToken]);
 
 	const addPassHandler = (e) => {
+		setError("");
 		e.preventDefault();
+		if (!passAlphaCheck || !passChangeHandler || !passLengthCheck) return;
+		if (newPassword !== newPasswordRepeat) {
+			setError("رمز عبور با تکرار آن مطابقت ندارد");
+			console.log(false);
+			console.log(newPassword);
+			console.log(newPasswordRepeat);
+			return;
+		}
 		const userPass = {
 			password: newPassword,
 			password_confirmation: newPasswordRepeat,
@@ -70,20 +80,29 @@ const PasswordSection = ({ phoneNumber }) => {
 		setOldPassword("");
 	};
 
+	const passChangeHandler = (e) => {
+		setNewPassword(e.target.value);
+		setPassLengthCheck(e.target.value.length >= 8);
+		const regexNumber = /\d/;
+		setPassNumberCheck(regexNumber.test(e.target.value));
+		const regexUpper = /[A-Z]/;
+		setPassAlphaCheck(regexUpper.test(e.target.value));
+	};
+
 	return (
 		<div className={styles.section}>
-			{hasPassword ? (
-				<>
-					<h5 className={styles.sectionTitle}>تغییر رمز عبور</h5>
-					{isPasswordChanged && (
-						<ConfirmBox
-							btnHandler={() => setIsPasswordChanged(false)}
-						>
-							رمز عبور شما با موفقیت تغییر یافت
-						</ConfirmBox>
-					)}
-					<Box className={styles.box}>
-						<form onSubmit={addPassHandler}>
+			<h5 className={styles.sectionTitle}>
+				{hasPassword ? "تغییر رمز عبور" : "افزودن رمز عبور"}
+			</h5>
+			{isPasswordChanged && (
+				<ConfirmBox btnHandler={() => setIsPasswordChanged(false)}>
+					رمز عبور شما با موفقیت تغییر یافت
+				</ConfirmBox>
+			)}
+			<Box className={styles.box}>
+				<form onSubmit={addPassHandler}>
+					{hasPassword ? (
+						<>
 							<div className={styles.inputBox}>
 								<label
 									className="caption-lg"
@@ -110,9 +129,7 @@ const PasswordSection = ({ phoneNumber }) => {
 								</label>
 								<Input
 									value={newPassword}
-									onChange={(e) =>
-										setNewPassword(e.target.value)
-									}
+									onChange={passChangeHandler}
 									id="password"
 									placeholder="رمز عبور جدید خود را وارد کنید"
 									type="password"
@@ -135,18 +152,9 @@ const PasswordSection = ({ phoneNumber }) => {
 									type="password"
 								/>
 							</div>
-
-							<Button isSmall type="secondary">
-								تغییر رمز عبور
-							</Button>
-						</form>
-					</Box>
-				</>
-			) : (
-				<>
-					<h5 className={styles.sectionTitle}>افزودن رمز عبور</h5>
-					<Box className={styles.box}>
-						<form onSubmit={addPassHandler}>
+						</>
+					) : (
+						<>
 							<div className={styles.inputBox}>
 								<label
 									className="caption-lg"
@@ -156,9 +164,7 @@ const PasswordSection = ({ phoneNumber }) => {
 								</label>
 								<Input
 									value={newPassword}
-									onChange={(e) =>
-										setNewPassword(e.target.value)
-									}
+									onChange={passChangeHandler}
 									id="password"
 									placeholder="رمز عبور خود را وارد کنید"
 									type="password"
@@ -180,20 +186,39 @@ const PasswordSection = ({ phoneNumber }) => {
 									placeholder="رمز عبور خود را دوباره وارد کنید"
 									type="password"
 								/>
-								{/* {passRepeatError && (
-									<ErrorMessage>
-										تکرار رمز عبور را درست وارد کنید
-									</ErrorMessage>
-								)} */}
 							</div>
-
-							<Button isSmall type="secondary">
-								افزودن رمز عبور
-							</Button>
-						</form>
-					</Box>
-				</>
-			)}
+						</>
+					)}
+					{error && <ErrorMessage>{error}</ErrorMessage>}
+					<div className={styles.checkListBox}>
+						<CheckListItem
+							className={!passNumberCheck && "deactive"}
+						>
+							رمز عبور متشکل از حداقل یک رقم 9-0 باشد
+						</CheckListItem>
+						<CheckListItem
+							className={!passAlphaCheck && "deactive"}
+						>
+							رمز عبور متشکل از حداقل یک کاراکتر از حروف بزرگ
+							انگلیسی A-Z باشد
+						</CheckListItem>
+						<CheckListItem
+							className={!passLengthCheck && "deactive"}
+						>
+							رمز عبور حداقل ۸ کاراکتر باشد
+						</CheckListItem>
+					</div>
+					{hasPassword ? (
+						<Button isSmall type="secondary">
+							تغییر رمز عبور
+						</Button>
+					) : (
+						<Button isSmall type="secondary">
+							افزودن رمز عبور
+						</Button>
+					)}
+				</form>
+			</Box>
 		</div>
 	);
 };

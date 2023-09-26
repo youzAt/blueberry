@@ -41,15 +41,7 @@ const App = () => {
 						element={<LoginOtpForm phoneNumber={phoneNumber} />}
 					/>
 				</Route>
-				<Route
-					path="my-account"
-					element={
-						<AccountPage
-							phoneNumber={phoneNumber}
-							setPhoneNumber={setPhoneNumber}
-						/>
-					}
-				></Route>
+				<Route path="my-account" element={<AccountPage />}></Route>
 			</Routes>
 		</BrowserRouter>
 	);

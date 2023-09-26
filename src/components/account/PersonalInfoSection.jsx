@@ -74,7 +74,6 @@ const PersonalInfoSection = () => {
 				},
 				body: JSON.stringify(userPersonalInfo),
 			});
-			const data = await res.json();
 			
 		};
 		editProfile();

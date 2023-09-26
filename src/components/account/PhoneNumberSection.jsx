@@ -11,16 +11,37 @@ const WAITING_TIME = 30;
 const BASE_URL = "http://127.0.0.1:8000/";
 const OTP_LENGTH = 6;
 
-const PhoneNumberSection = ({ phoneNumber, setPhoneNumber }) => {
+const PhoneNumberSection = () => {
 	const [inputDisable, setInputDisable] = useState(true);
 	const [isChangingPhone, setIsChangingPhone] = useState(false);
 	const [hasError, setHasError] = useState(false);
 	const [otp, setOtp] = useState("");
 	const [remainingTime, setRemainingTime] = useState(WAITING_TIME);
 	const [showConfirmAlert, setShowConfirmAlert] = useState(false);
-	const [curPhoneNumber, setCurPhoneNumber] = useState(phoneNumber);
+	const [phoneNumber, setPhoneNumber] = useState("");
+	const [curPhoneNumber, setCurPhoneNumber] = useState("");
+	const [hasPhoneError, setHasPhoneError] = useState(false);
 
 	const accessToken = localStorage.getItem("blueberry-access");
+
+	useEffect(() => {
+		const fetchUserPhoneNumber = async () => {
+			const res = await fetch(`${BASE_URL}api/account/phone-number/`, {
+				method: "GET",
+				headers: {
+					"content-type": "application/json",
+					Authorization: `Bearer ${accessToken}`,
+				},
+			});
+			if (res.ok) {
+				const data = await res.json();
+				const formattedPhoneNumber = "09" + data.Phone_number.slice(4);
+				setPhoneNumber(formattedPhoneNumber);
+				setCurPhoneNumber(formattedPhoneNumber);
+			}
+		};
+		fetchUserPhoneNumber();
+	}, [accessToken]);
 
 	const sendOtp = useCallback(async () => {
 		setRemainingTime(30);
@@ -34,7 +55,13 @@ const PhoneNumberSection = ({ phoneNumber, setPhoneNumber }) => {
 				},
 			}
 		);
-		const data = await res.json();
+		if (!res.ok) {
+			setHasPhoneError(true);
+		} else {
+			setRemainingTime(30);
+			setIsChangingPhone(true);
+			
+		}
 	}, [phoneNumber, accessToken]);
 
 	useEffect(() => {
@@ -49,8 +76,7 @@ const PhoneNumberSection = ({ phoneNumber, setPhoneNumber }) => {
 	}, [remainingTime]);
 
 	const changePhoneNumberHandler = () => {
-		setRemainingTime(30);
-		setIsChangingPhone(true);
+		setHasPhoneError(false);
 		setOtp("");
 		sendOtp();
 	};
@@ -100,7 +126,7 @@ const PhoneNumberSection = ({ phoneNumber, setPhoneNumber }) => {
 			<h5 className={styles.sectionTitle}>شماره موبایل</h5>
 			{showConfirmAlert && (
 				<ConfirmBox btnHandler={() => setShowConfirmAlert(false)}>
-					شماره موبایل با موفقیت به {phoneNumber} تغییر یافت.
+					شماره موبایل با موفقیت به {curPhoneNumber} تغییر یافت.
 				</ConfirmBox>
 			)}
 			<Box className={styles.box}>
@@ -174,6 +200,11 @@ const PhoneNumberSection = ({ phoneNumber, setPhoneNumber }) => {
 								id="phone-number"
 								placeholder="شماره موبایل خود را وارد کنید"
 							/>
+							{hasPhoneError && (
+								<ErrorMessage>
+									شماره وارد شده نامعتبر است
+								</ErrorMessage>
+							)}
 						</div>
 						{inputDisable ? (
 							<Button

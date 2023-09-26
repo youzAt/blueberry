@@ -37,6 +37,3 @@
 .otpForm button span, .otpForm p{
      color: var(--color-primary-dark)
 }
-.otpForm .error{
-    align-self: flex-end
-}

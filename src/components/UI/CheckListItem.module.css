@@ -1,0 +1,14 @@
+.checkList{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.checkList p{
+    color: var(--color-primary-dark)
+}
+.checkList:global(.deactive) p{
+    color: var(--color-deactive)
+}
+.checkList:first-child{
+    margin-top: 16px;
+}

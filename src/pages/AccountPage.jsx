@@ -5,7 +5,7 @@ import PhoneNumberSection from "../components/account/PhoneNumberSection";
 import SideMenu from "../components/account/SideMenu";
 import styles from "./AccountPage.module.css";
 
-const AccountPage = ({ phoneNumber, setPhoneNumber }) => {
+const AccountPage = () => {
 	return (
 		<>
 			<MainHeader />
@@ -13,11 +13,8 @@ const AccountPage = ({ phoneNumber, setPhoneNumber }) => {
 				<SideMenu />
 				<div>
 					<PersonalInfoSection />
-					<PhoneNumberSection
-						phoneNumber={phoneNumber}
-						setPhoneNumber={setPhoneNumber}
-					/>
-					<PasswordSection phoneNumber={phoneNumber} />
+					<PhoneNumberSection />
+					<PasswordSection />
 				</div>
 			</main>
 		</>
