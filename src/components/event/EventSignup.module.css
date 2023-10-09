@@ -1,0 +1,23 @@
+.eventSignup {
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	gap: 16px;
+	text-align: center;
+}
+.eventSignup button {
+	margin: 8px 0;
+}
+.price {
+	color: var(--color-gray-2);
+	font-size: 16px !important;
+}
+.price h4 {
+	color: var(--color-primary);
+    display: inline-block;
+    margin: 0 4px;
+}
+.price s{
+	color: var(--color-gray);
+	margin: 0 8px;
+}

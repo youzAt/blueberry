@@ -1,0 +1,12 @@
+.eventsSection{
+    margin-bottom: 24px;
+}
+.eventsSection h5{
+    color: var(--color-primary-dark);
+    margin-bottom: 24px;
+}
+.eventsSection .events{
+    display: flex;
+    gap: 24px;  
+    flex-wrap: wrap;
+}

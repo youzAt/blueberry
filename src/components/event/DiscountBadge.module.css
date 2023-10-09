@@ -1,0 +1,7 @@
+.discount{
+    color: #FFF;
+    background-color: var(--color-green);
+    display: inline-block;
+    padding: 2px 6px;
+    border-radius: var(--border-radius-1)
+}

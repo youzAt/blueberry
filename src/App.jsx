@@ -5,14 +5,8 @@ import LoginPasswordForm from "./components/login/LoginPasswordForm";
 import LoginOtpForm from "./components/login/LoginOtpForm";
 import { useState } from "react";
 import AccountPage from "./pages/AccountPage";
-
-// const styles = {
-// 	display: "flex",
-// 	alignItems: "center",
-// 	justifyContent: "center",
-// 	height: "100vh",
-// 	gap: "500px",
-// };
+import EventsPage from "./pages/EventsPage";
+import EventPage from "./pages/EventPage";
 
 const App = () => {
 	const [phoneNumber, setPhoneNumber] = useState("");
@@ -41,7 +35,9 @@ const App = () => {
 						element={<LoginOtpForm phoneNumber={phoneNumber} />}
 					/>
 				</Route>
-				<Route path="my-account" element={<AccountPage />}></Route>
+				<Route path="my-account" element={<AccountPage />} />
+				<Route path="events" element={<EventsPage />} />
+				<Route path="events/:eventSlug" element={<EventPage />} />
 			</Routes>
 		</BrowserRouter>
 	);

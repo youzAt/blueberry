@@ -1,0 +1,9 @@
+.poster {
+    border-radius: var(--border-radius-2);
+    overflow: hidden;
+}
+.poster img{
+    width: 100%;
+    object-fit: contain;
+    display: block;
+}

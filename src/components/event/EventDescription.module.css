@@ -1,0 +1,5 @@
+.desc {
+	margin-bottom: 22px;
+	color: var(--color-primary-dark);
+    text-wrap: wrap;
+}
