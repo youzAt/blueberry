@@ -17,17 +17,19 @@
 
 	/* other colors */
 	--color-error: #f84263;
-	--color-green: #42B778;
+	--color-green: ##28A745;
 	--color-border: #dbdfed;
 	--color-hint: #caccda;
 	--color-deactive: #030a234d;
-	--color-surface: #f2f5fd;
+	--color-surface: #F6F7F9;
+	--color-gray: #CBCBCB;
+	--color-gray-2: #959EA6;
 
 	/* border radius  */
 	--border-radius-1: 16px;
 	--border-radius-2: 24px;
 }
-
+ 
 *,
 *::before,
 *::after {
