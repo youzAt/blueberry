@@ -26,3 +26,7 @@
 	background-color: transparent;
 	border: none;
 }
+.btn:global(.deactive){
+	color: var(--color-gray-2);
+	cursor: default;
+}

@@ -85,7 +85,7 @@ const LoginPasswordForm = ({ phoneNumber }) => {
 						<ErrorMessage>رمز وارد شده اشتباه است</ErrorMessage>
 					)}
 				</div>
-				<Button isSmall={true} type="secondary">
+				<Button isSmall={true} type="primary">
 					ورود به حساب
 				</Button>
 			</form>

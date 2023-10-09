@@ -76,7 +76,7 @@ const LoginForm = ({ phoneNumber, setPhoneNumber }) => {
 				)}
 			</div>
 
-			<Button isSmall={true} type="secondary">
+			<Button isSmall={true} type="primary">
 				ورود به حساب کاربری
 			</Button>
 		</form>

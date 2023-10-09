@@ -209,7 +209,7 @@ const PhoneNumberSection = () => {
 						{inputDisable ? (
 							<Button
 								isSmall
-								type="secondary"
+								type="primary"
 								onClick={() => setInputDisable(false)}
 							>
 								ویرایش شماره موبایل
@@ -217,7 +217,7 @@ const PhoneNumberSection = () => {
 						) : (
 							<Button
 								isSmall
-								type="secondary"
+								type="primary"
 								onClick={changePhoneNumberHandler}
 							>
 								ارسال کد تایید

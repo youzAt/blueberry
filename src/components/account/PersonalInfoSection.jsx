@@ -137,7 +137,7 @@ const PersonalInfoSection = () => {
 							/>
 						</div>
 					</div>
-					<Button isSmall type="secondary">
+					<Button isSmall type="primary">
 						ذخیره تغییرات
 					</Button>
 				</form>

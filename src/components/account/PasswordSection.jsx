@@ -209,11 +209,11 @@ const PasswordSection = () => {
 						</CheckListItem>
 					</div>
 					{hasPassword ? (
-						<Button isSmall type="secondary">
+						<Button isSmall type="primary">
 							تغییر رمز عبور
 						</Button>
 					) : (
-						<Button isSmall type="secondary">
+						<Button isSmall type="primary">
 							افزودن رمز عبور
 						</Button>
 					)}
