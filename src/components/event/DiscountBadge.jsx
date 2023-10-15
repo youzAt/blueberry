@@ -1,10 +1,14 @@
-import styles from './discountBadge.module.css'
-const DiscountBadge = ({children}) => {
-    return (
-        <span className={`body-md ${styles.discount}`}>
-            %{children}
-        </span>
-    )
-}
+import styles from "./DiscountBadge.module.css";
+const DiscountBadge = ({ children, isSecondary }) => {
+	return (
+		<span
+			className={`body-md ${styles.discount} ${
+				isSecondary && styles.secondary
+			}`}
+		>
+			%{children}
+		</span>
+	);
+};
 
-export default DiscountBadge
+export default DiscountBadge;

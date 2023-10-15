@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import ErrorMessage from "../UI/ErrorMessage";
 import ConfirmBox from "./ConfirmBox";
 import CheckListItem from "../UI/CheckListItem";
-const BASE_URL = "http://127.0.0.1:8000/";
+const BASE_URL = "https://api-akbarmasoud.iran.liara.run/";
 
 const PasswordSection = () => {
 	const [newPassword, setNewPassword] = useState("");

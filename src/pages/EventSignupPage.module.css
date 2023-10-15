@@ -1,0 +1,20 @@
+.pageTitle {
+	margin-bottom: 16px;
+}
+.desc {
+	margin-bottom: 24px;
+}
+.pageTitle,
+.desc {
+	color: var(--color-primary-dark);
+}
+.wrapper {
+	display: grid;
+	grid-template-columns: 2fr 1fr;
+	gap: 24px;
+}
+.side {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}

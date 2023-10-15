@@ -8,7 +8,7 @@ import ConfirmBox from "./ConfirmBox";
 import { useState, useCallback, useEffect } from "react";
 
 const WAITING_TIME = 30;
-const BASE_URL = "http://127.0.0.1:8000/";
+const BASE_URL = "https://api-akbarmasoud.iran.liara.run/";
 const OTP_LENGTH = 6;
 
 const PhoneNumberSection = () => {

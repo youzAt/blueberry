@@ -7,6 +7,8 @@ import { useState } from "react";
 import AccountPage from "./pages/AccountPage";
 import EventsPage from "./pages/EventsPage";
 import EventPage from "./pages/EventPage";
+import EventSignupPage from "./pages/EventSignupPage";
+import HomePage from './pages/HomePage'
 
 const App = () => {
 	const [phoneNumber, setPhoneNumber] = useState("");
@@ -14,6 +16,7 @@ const App = () => {
 	return (
 		<BrowserRouter>
 			<Routes>
+				<Route index element={<HomePage />} />
 				<Route path="login" element={<LoginPage />}>
 					<Route
 						index
@@ -38,6 +41,7 @@ const App = () => {
 				<Route path="my-account" element={<AccountPage />} />
 				<Route path="events" element={<EventsPage />} />
 				<Route path="events/:eventSlug" element={<EventPage />} />
+				<Route path="signup/:eventSlug" element={<EventSignupPage />} />
 			</Routes>
 		</BrowserRouter>
 	);

@@ -1,5 +1,6 @@
 import styles from "./MainHeader.module.css";
 import logo from "../assets/icons/logo-small.svg";
+import { Link } from "react-router-dom";
 
 const MainHeader = ({ children }) => {
 	return (
@@ -10,7 +11,9 @@ const MainHeader = ({ children }) => {
 					<img src={logo} alt="logo icon" />
 					<nav>
 						<ul>
-							<li className="body-md">رویداد ها</li>
+							<li className="body-md">
+								<Link to="/events"> رویداد ها </Link>
+							</li>
 						</ul>
 					</nav>
 				</div>

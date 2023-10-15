@@ -12,7 +12,7 @@ import eyeSlashIcon from "../../assets/icons/eye-slash.svg";
 import eyeIcon from "../../assets/icons/eye.svg";
 import smsIcon from "../../assets/icons/sms.svg";
 
-const BASE_URL = "http://127.0.0.1:8000/";
+const BASE_URL = "https://api-akbarmasoud.iran.liara.run/";
 
 const LoginPasswordForm = ({ phoneNumber }) => {
 	const [isPassVisible, setIsPassVisible] = useState(false);

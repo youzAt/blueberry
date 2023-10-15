@@ -4,7 +4,7 @@ import Button from "../UI/Button";
 import Input from "../UI/Input";
 import styles from "./PersonalInfoSection.module.css";
 
-const BASE_URL = "http://127.0.0.1:8000/";
+const BASE_URL = "https://api-akbarmasoud.iran.liara.run/";
 
 const initialProfille = {
 	firstName: "",

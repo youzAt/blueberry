@@ -17,19 +17,20 @@
 
 	/* other colors */
 	--color-error: #f84263;
-	--color-green: #28A745;
-	--color-border: #dbdfed;
+	--color-green: #28a745;
+	--color-green-surface: #eafaee;
+	--color-border: #ececf4;
 	--color-hint: #caccda;
 	--color-deactive: #030a234d;
-	--color-surface: #F6F7F9;
-	--color-gray: #CBCBCB;
-	--color-gray-2: #959EA6;
+	--color-surface: #f9fafc;
+	--color-gray: #cbcbcb;
+	--color-gray-2: #959ea6;
 
 	/* border radius  */
 	--border-radius-1: 16px;
 	--border-radius-2: 24px;
 }
- 
+
 *,
 *::before,
 *::after {
@@ -40,8 +41,8 @@
 li {
 	list-style-type: none;
 }
-a{
-	text-decoration: none;	
+a {
+	text-decoration: none;
 }
 body {
 	background-color: var(--color-surface);

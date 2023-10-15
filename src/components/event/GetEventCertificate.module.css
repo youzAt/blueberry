@@ -1,0 +1,9 @@
+.certificateBox {
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+	text-align: center;
+}
+.certificateBox button {
+	background-color: var(--color-green) !important;
+}

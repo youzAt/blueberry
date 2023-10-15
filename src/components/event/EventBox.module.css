@@ -40,6 +40,9 @@
 	padding-bottom: 0;
 	margin-top: 40px;
 }
+.eventDetails .outBtn{
+	width: 100%;
+}
 .eventAction {
 	display: flex;
 	justify-content: space-between;

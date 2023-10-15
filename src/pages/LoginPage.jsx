@@ -11,7 +11,6 @@ const LoginPage = () => {
 		navigate(-1);
 	};
 	const location = useLocation();
-	console.log(location);
 
 	return (
 		<>

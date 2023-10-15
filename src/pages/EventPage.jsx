@@ -7,21 +7,38 @@ import MainHeader from "../components/MainHeader";
 import EventSignup from "../components/event/EventSignup";
 import EventDates from "../components/event/EventDates";
 import EventPoster from "../components/event/EventPoster";
+import GetEventTicket from "../components/event/GetEventTicket";
+import GetEventCertificate from "../components/event/GetEventCertificate";
+import Box from "../components/UI/Box";
+import defaultPhoto from "../assets/defaultphoto.png";
 
-const BASE_URL = "http://127.0.0.1:8000/";
+const BASE_URL = "https://api-akbarmasoud.iran.liara.run/";
 
 const EventPage = () => {
 	const [event, setEvent] = useState({});
 	const { eventSlug } = useParams();
+	const accessToken = localStorage.getItem("blueberry-access");
+
 	useEffect(() => {
 		const fetchEvents = async () => {
-			const res = await fetch(`${BASE_URL}api/events/${eventSlug}/ `);
+			const reqHeader = accessToken
+				? {
+						"content-type": "application/json",
+						Authorization: `Bearer ${accessToken}`,
+				}
+				: {
+						"content-type": "application/json",
+				};
+
+			const res = await fetch(`${BASE_URL}api/events/${eventSlug}/`, {
+				method: "GET",
+				headers: reqHeader,
+			});
 			const data = await res.json();
-			console.log(data);
 			setEvent(data);
 		};
 		fetchEvents();
-	}, [eventSlug]);
+	}, [eventSlug, accessToken]);
 
 	const {
 		initial_fee: initialFee,
@@ -32,8 +49,9 @@ const EventPage = () => {
 		name,
 		status,
 		description,
+		poster,
+		banner,
 	} = event;
-
 	return (
 		<>
 			<MainHeader />
@@ -41,26 +59,35 @@ const EventPage = () => {
 				<h3>{name}</h3>
 				<div className={styles.wrapper}>
 					<main className={styles.mainContent}>
-						<EventBanner
-							src="https://www.techrepublic.com/wp-content/uploads/2023/07/tr71123-ai-art.jpeg"
-							name={name}
-						/>
+						<EventBanner src={banner || defaultPhoto} name={name} />
 						<EventDescription>{description}</EventDescription>
 					</main>
 					<aside className={styles.sideContent}>
-						<EventSignup
-							initialFee={initialFee}
-							finalFee={finalFee}
-						/>
+						{(status?.status === "END" ||
+							status?.status === "ERROR") && (
+							<Box>
+								<p className={`caption-lg ${styles.end}`}>
+									{status.details}
+								</p>
+							</Box>
+						)}
+						{status?.status === "TICKET" && <GetEventTicket />}
+						{status?.status === "CERTIFICATE" && (
+							<GetEventCertificate />
+						)}
+						{status?.status === "REG" && (
+							<EventSignup
+								slug={eventSlug}
+								initialFee={initialFee}
+								finalFee={finalFee}
+							/>
+						)}
 						<EventDates
 							regTime={regTime}
 							startTime={startTime}
 							endTime={endTime}
 						/>
-						<EventPoster
-							name={name}
-							src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/artificial-intelligence-poster-design-template-d34f88114be88ff24c1e62af96f06c76_screen.jpg?ts=1686030593"
-						/>
+						<EventPoster name={name} src={poster || defaultPhoto} />
 					</aside>
 				</div>
 			</div>

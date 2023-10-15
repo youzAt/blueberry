@@ -3,6 +3,9 @@ import moment from "moment-jalaali";
 import fa from "moment/src/locale/fa";
 import Button from "../UI/Button";
 import { useNavigate } from "react-router-dom";
+import defaultPhoto from "../../assets/defaultphoto.png";
+import certificateIcon from "../../assets/icons/award2.svg";
+import ticketIcon from "../../assets/icons/ticket2.svg";
 
 moment.locale("fa", fa);
 moment.loadPersian();
@@ -29,6 +32,7 @@ const EventBox = ({ event }) => {
 		fee: finalFee,
 		start_time: startTime,
 		status,
+		banner,
 	} = event;
 	const { week, month } = convertUnixToPersianWeekDate(startTime);
 
@@ -37,7 +41,12 @@ const EventBox = ({ event }) => {
 	};
 	const eventAction = (
 		<div className={styles.eventAction}>
-			<Button type="outline" isSmall className={styles.signUpBtn}>
+			<Button
+				type="outline"
+				isSmall
+				className={styles.signUpBtn}
+				onClick={redirectHandler}
+			>
 				خرید بلیت
 			</Button>
 			<div className={styles.price}>
@@ -61,7 +70,7 @@ const EventBox = ({ event }) => {
 		</div>
 	);
 	const error =
-		status.status !== "ERROR" ? null : (
+		status.status !== "ERROR" && status.status !== "END" ? null : (
 			<Button
 				isSmall
 				type="tertiary"
@@ -70,10 +79,25 @@ const EventBox = ({ event }) => {
 				{status.details}
 			</Button>
 		);
+	const certificate =
+		status.status !== "CERTIFICATE" ? null : (
+			<Button type="outline" isSmall className={styles.outBtn}>
+				<img src={certificateIcon} alt="certificate icon" />
+				دریافت گواهی
+			</Button>
+		);
+	const ticket =
+		status.status !== "TICKET" ? null : (
+			<Button type="outline" isSmall className={styles.outBtn}>
+				<img src={ticketIcon} alt="ticket icon" />
+				دریافت بلیت
+			</Button>
+		);
+		console.log(status.status)
 	return (
 		<div className={`${styles.eventBox} ${error && "deactive"}`}>
 			<div className={styles.eventBanner}>
-				<img src="https://static.invenglobal.com/upload/image/2020/05/11/o1589232897513893.jpeg" />
+				<img src={banner || defaultPhoto} />
 			</div>
 			<div className={styles.eventDetails}>
 				<span className={`caption-md ${styles.eventDate}`}>
@@ -81,7 +105,7 @@ const EventBox = ({ event }) => {
 				</span>
 				<h6 onClick={redirectHandler}>{title}</h6>
 
-				{error || eventAction}
+				{error || certificate || ticket || eventAction}
 			</div>
 		</div>
 	);

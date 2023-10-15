@@ -1,0 +1,18 @@
+.formBox form label {
+	color: var(--color-primary-dark);
+	margin-right: 16px;
+}
+.formBox {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 24px;
+	margin-bottom: 24px;
+}
+.formBox .inputBox {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+.inputBox label{
+	margin-right: 16px;
+}
