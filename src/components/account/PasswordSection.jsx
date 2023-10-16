@@ -35,6 +35,7 @@ const PasswordSection = () => {
 			setIsPasswordChanged(true);
 		} else {
 			const data = await res.json();
+			console.log(data)
 			setError("رمز عبور فعلی صحیح نمی باشد");
 		}
 	};
@@ -55,8 +56,8 @@ const PasswordSection = () => {
 	}, [accessToken]);
 
 	const addPassHandler = (e) => {
-		setError("");
 		e.preventDefault();
+		setError("");
 		if (!passAlphaCheck || !passChangeHandler || !passLengthCheck) return;
 		if (newPassword !== newPasswordRepeat) {
 			setError("رمز عبور با تکرار آن مطابقت ندارد");

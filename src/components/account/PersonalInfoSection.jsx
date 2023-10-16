@@ -1,8 +1,9 @@
-import { useEffect, useReducer } from "react";
+import { useEffect, useReducer, useState } from "react";
 import Box from "../UI/Box";
 import Button from "../UI/Button";
 import Input from "../UI/Input";
 import styles from "./PersonalInfoSection.module.css";
+import ConfirmBox from "./ConfirmBox";
 
 const BASE_URL = "https://api-akbarmasoud.iran.liara.run/";
 
@@ -27,6 +28,8 @@ const reducer = (state, action) => {
 const PersonalInfoSection = () => {
 	const [userProfile, dispatch] = useReducer(reducer, initialProfille);
 	const { firstName, lastName, meliCode, studentNumber } = userProfile;
+	const [hasError, setHasError] = useState("");
+	const [isSend, setIsSend] = useState(false);
 	const accessToken = localStorage.getItem("blueberry-access");
 
 	useEffect(() => {
@@ -59,6 +62,7 @@ const PersonalInfoSection = () => {
 	};
 	const formSubmitHandler = (e) => {
 		e.preventDefault();
+		setIsSend(false);
 		const userPersonalInfo = {
 			student_id: studentNumber,
 			personal_id: meliCode,
@@ -74,13 +78,28 @@ const PersonalInfoSection = () => {
 				},
 				body: JSON.stringify(userPersonalInfo),
 			});
-			
+			const data = await res.json();
+			if (res.ok) {
+				setIsSend(true);
+			} else {
+				setHasError(Object.values(data).at(0));
+			}
 		};
 		editProfile();
 	};
 	return (
 		<div className={styles.section}>
 			<h5 className={styles.sectionTitle}>اطلاعات فردی</h5>
+			{isSend && (
+				<ConfirmBox btnHandler={() => setIsSend(false)}>
+					اطلاعات شما با موفقیت تغییر یافت
+				</ConfirmBox>
+			)}
+			{hasError && (
+				<ConfirmBox btnHandler={() => setHasError("")} isError>
+					{hasError}
+				</ConfirmBox>
+			)}
 			<Box className={styles.box}>
 				<form onSubmit={formSubmitHandler}>
 					<div className={styles.formBox}>
