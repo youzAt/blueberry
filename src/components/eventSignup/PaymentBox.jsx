@@ -76,13 +76,13 @@ const PaymentBox = ({ fee, balance, slug, discountCode, setDiscountCode }) => {
 					</div>
 				</div>
 			)}
-			<div className={`${styles.costItem} ${styles.balance}`}>
+			{balance !== 0 && <div className={`${styles.costItem} ${styles.balance}`}>
 				<span className={`body-md `}>پرداخت از اعتبار</span>
 				<div>
 					<h6>{displayedBalance?.toLocaleString()}</h6>
 					<span className="caption-lg">ءتءء</span>
 				</div>
-			</div>
+			</div>}
 			<div className={`${styles.costItem} ${styles.final}`}>
 				<span className={`body-md `}>مبلغ قابل پرداخت</span>
 				<div>

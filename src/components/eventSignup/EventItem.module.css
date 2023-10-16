@@ -26,5 +26,6 @@
 	color: var(--color-gray);
 }
 .detailItem p {
+	margin-top: 4px;
 	color: var(--color-primary-dark);
 }

@@ -32,6 +32,9 @@
 	color: var(--color-primary-dark);
 	margin-bottom: 24px;
 	cursor: pointer;
+	text-overflow: ellipsis;
+	text-wrap: nowrap;
+	overflow: hidden;
 }
 .eventDetails .error {
 	width: 100%;

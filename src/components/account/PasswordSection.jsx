@@ -6,6 +6,8 @@ import { useEffect, useState } from "react";
 import ErrorMessage from "../UI/ErrorMessage";
 import ConfirmBox from "./ConfirmBox";
 import CheckListItem from "../UI/CheckListItem";
+import eyeSlashIcon from "../../assets/icons/eye-slash.svg";
+import eyeIcon from "../../assets/icons/eye.svg";
 const BASE_URL = "https://api-akbarmasoud.iran.liara.run/";
 
 const PasswordSection = () => {
@@ -17,6 +19,20 @@ const PasswordSection = () => {
 	const [passLengthCheck, setPassLengthCheck] = useState(false);
 	const [passNumberCheck, setPassNumberCheck] = useState(false);
 	const [passAlphaCheck, setPassAlphaCheck] = useState(false);
+	const [isOldPassVisible, setIsOldPassVisible] = useState(false);
+	const [isNewPassVisible, setIsNewPassVisible] = useState(false);
+	const [isNewPassRepeatVisible, setIsNewPassRepeatVisible] = useState(false);
+
+	const changeOldPassVisibility = () => {
+		setIsOldPassVisible((cur) => !cur);
+	};
+	const changeNewPassVisibility = () => {
+		setIsNewPassVisible((cur) => !cur);
+	};
+	const changeNewPassRepeatVisibility = () => {
+		setIsNewPassRepeatVisible((cur) => !cur);
+	};
+
 	const [error, setError] = useState("");
 
 	const accessToken = localStorage.getItem("blueberry-access");
@@ -35,7 +51,7 @@ const PasswordSection = () => {
 			setIsPasswordChanged(true);
 		} else {
 			const data = await res.json();
-			console.log(data)
+			console.log(data);
 			setError("رمز عبور فعلی صحیح نمی باشد");
 		}
 	};
@@ -118,7 +134,19 @@ const PasswordSection = () => {
 									}
 									id="current-password"
 									placeholder="رمز عبور فعلی حساب خود را وارد کنید"
-									type="password"
+									type={
+										isOldPassVisible ? "text" : "password"
+									}
+								/>
+								<img
+									src={
+										isOldPassVisible
+											? eyeSlashIcon
+											: eyeIcon
+									}
+									className={styles.eyeIcon}
+									alt="eye icon"
+									onClick={changeOldPassVisibility}
 								/>
 							</div>
 							<div className={styles.inputBox}>
@@ -133,7 +161,19 @@ const PasswordSection = () => {
 									onChange={passChangeHandler}
 									id="password"
 									placeholder="رمز عبور جدید خود را وارد کنید"
-									type="password"
+									type={
+										isNewPassVisible ? "text" : "password"
+									}
+								/>
+								<img
+									src={
+										isNewPassVisible
+											? eyeSlashIcon
+											: eyeIcon
+									}
+									className={styles.eyeIcon}
+									alt="eye icon"
+									onClick={changeNewPassVisibility}
 								/>
 							</div>
 							<div className={styles.inputBox}>
@@ -150,7 +190,21 @@ const PasswordSection = () => {
 									}
 									id="password-confirm"
 									placeholder="رمز عبور جدید خود را دوباره وارد کنید"
-									type="password"
+									type={
+										isNewPassRepeatVisible
+											? "text"
+											: "password"
+									}
+								/>
+								<img
+									src={
+										isNewPassRepeatVisible
+											? eyeSlashIcon
+											: eyeIcon
+									}
+									className={styles.eyeIcon}
+									alt="eye icon"
+									onClick={changeNewPassRepeatVisibility}
 								/>
 							</div>
 						</>
@@ -168,7 +222,19 @@ const PasswordSection = () => {
 									onChange={passChangeHandler}
 									id="password"
 									placeholder="رمز عبور خود را وارد کنید"
-									type="password"
+									type={
+										isNewPassVisible ? "text" : "password"
+									}
+								/>
+								<img
+									src={
+										isNewPassVisible
+											? eyeSlashIcon
+											: eyeIcon
+									}
+									className={styles.eyeIcon}
+									alt="eye icon"
+									onClick={changeNewPassVisibility}
 								/>
 							</div>
 							<div className={styles.inputBox}>
@@ -185,7 +251,21 @@ const PasswordSection = () => {
 									}
 									id="password-confirm"
 									placeholder="رمز عبور خود را دوباره وارد کنید"
-									type="password"
+									type={
+										isNewPassRepeatVisible
+											? "text"
+											: "password"
+									}
+								/>
+								<img
+									src={
+										isNewPassRepeatVisible
+											? eyeSlashIcon
+											: eyeIcon
+									}
+									className={styles.eyeIcon}
+									alt="eye icon"
+									onClick={changeNewPassRepeatVisibility}
 								/>
 							</div>
 						</>
