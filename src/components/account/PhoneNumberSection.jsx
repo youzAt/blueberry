@@ -18,8 +18,8 @@ const PhoneNumberSection = () => {
 	const [otp, setOtp] = useState("");
 	const [remainingTime, setRemainingTime] = useState(WAITING_TIME);
 	const [showConfirmAlert, setShowConfirmAlert] = useState(false);
-	const [phoneNumber, setPhoneNumber] = useState("");
-	const [curPhoneNumber, setCurPhoneNumber] = useState("");
+	const [newPhoneNumber, setNewPhoneNumber] = useState("");
+	const [prevPhoneNumber, setPrevPhoneNumber] = useState("");
 	const [hasPhoneError, setHasPhoneError] = useState(false);
 
 	const accessToken = localStorage.getItem("blueberry-access");
@@ -36,8 +36,8 @@ const PhoneNumberSection = () => {
 			if (res.ok) {
 				const data = await res.json();
 				const formattedPhoneNumber = "09" + data.Phone_number.slice(4);
-				setPhoneNumber(formattedPhoneNumber);
-				setCurPhoneNumber(formattedPhoneNumber);
+				setPrevPhoneNumber(formattedPhoneNumber);
+				setNewPhoneNumber(formattedPhoneNumber);
 			}
 		};
 		fetchUserPhoneNumber();
@@ -45,8 +45,9 @@ const PhoneNumberSection = () => {
 
 	const sendOtp = useCallback(async () => {
 		setRemainingTime(30);
+		console.log(newPhoneNumber);
 		const res = await fetch(
-			`${BASE_URL}api/account/change-phone/${phoneNumber}`,
+			`${BASE_URL}api/account/change-phone/${newPhoneNumber}`,
 			{
 				method: "GET",
 				headers: {
@@ -60,9 +61,8 @@ const PhoneNumberSection = () => {
 		} else {
 			setRemainingTime(30);
 			setIsChangingPhone(true);
-			
 		}
-	}, [phoneNumber, accessToken]);
+	}, [newPhoneNumber, accessToken]);
 
 	useEffect(() => {
 		if (remainingTime === 0) return;
@@ -85,30 +85,29 @@ const PhoneNumberSection = () => {
 		setHasError(false);
 		if (value.length === OTP_LENGTH) {
 			const userLoginInfo = {
-				phone_number: phoneNumber,
+				phone_number: newPhoneNumber,
 				otp: value,
 			};
 			const validateOtp = async () => {
-				try {
-					const res = await fetch(
-						`${BASE_URL}api/account/change-phone/`,
-						{
-							method: "PUT",
-							headers: {
-								"content-type": "application/json",
-								Authorization: `Bearer ${accessToken}`,
-							},
-							body: JSON.stringify(userLoginInfo),
-						}
-					);
-					if (!res.ok) throw new Error("");
-					const data = await res.json();
+				const res = await fetch(
+					`${BASE_URL}api/account/change-phone/`,
+					{
+						method: "PUT",
+						headers: {
+							"content-type": "application/json",
+							Authorization: `Bearer ${accessToken}`,
+						},
+						body: JSON.stringify(userLoginInfo),
+					}
+				);
+				const data = await res.json();
+				console.log(data);
+				if (!res.ok) {
+					setHasError(true);
+				} else {
 					setShowConfirmAlert(true);
 					setIsChangingPhone(false);
 					setInputDisable(true);
-					console.log(data);
-				} catch {
-					setHasError(true);
 				}
 			};
 			validateOtp();
@@ -118,7 +117,7 @@ const PhoneNumberSection = () => {
 	const cancelChangePhone = () => {
 		setInputDisable(true);
 		setIsChangingPhone(false);
-		setPhoneNumber(curPhoneNumber);
+		setNewPhoneNumber(prevPhoneNumber);
 	};
 
 	return (
@@ -126,14 +125,14 @@ const PhoneNumberSection = () => {
 			<h5 className={styles.sectionTitle}>شماره موبایل</h5>
 			{showConfirmAlert && (
 				<ConfirmBox btnHandler={() => setShowConfirmAlert(false)}>
-					شماره موبایل با موفقیت به {curPhoneNumber} تغییر یافت.
+					شماره موبایل با موفقیت به {newPhoneNumber} تغییر یافت.
 				</ConfirmBox>
 			)}
 			<Box className={styles.box}>
 				{isChangingPhone ? (
 					<div className={styles.otpForm}>
 						<p className="caption-lg">
-							کد تائید به شماره {phoneNumber} ارسال شد
+							کد تائید به شماره {newPhoneNumber} ارسال شد
 						</p>
 						<p className="caption-lg">
 							کد پیامک شده را جهت تائید شماره موبایل وارد کنید
@@ -194,9 +193,11 @@ const PhoneNumberSection = () => {
 								شماره موبایل
 							</label>
 							<Input
-								onChange={(e) => setPhoneNumber(e.target.value)}
+								onChange={(e) =>
+									setNewPhoneNumber(e.target.value)
+								}
 								disabled={inputDisable}
-								value={phoneNumber}
+								value={newPhoneNumber}
 								id="phone-number"
 								placeholder="شماره موبایل خود را وارد کنید"
 							/>
