@@ -11,20 +11,23 @@ import GetEventTicket from "../components/event/GetEventTicket";
 import GetEventCertificate from "../components/event/GetEventCertificate";
 import Box from "../components/UI/Box";
 import defaultPhoto from "../assets/defaultphoto.png";
+import getAccess from "../hooks/getAccess";
 
 const BASE_URL = "https://api-akbarmasoud.iran.liara.run/";
 
 const EventPage = () => {
 	const [event, setEvent] = useState({});
 	const { eventSlug } = useParams();
-	const accessToken = localStorage.getItem("blueberry-access");
+	const [token, setToken] = useState(() => {
+		return localStorage.getItem("blueberry-access");
+	});
 
 	useEffect(() => {
 		const fetchEvents = async () => {
-			const reqHeader = accessToken
+			const reqHeader = token
 				? {
 						"content-type": "application/json",
-						Authorization: `Bearer ${accessToken}`,
+						Authorization: `Bearer ${token}`,
 				}
 				: {
 						"content-type": "application/json",
@@ -35,10 +38,14 @@ const EventPage = () => {
 				headers: reqHeader,
 			});
 			const data = await res.json();
-			setEvent(data);
+			if (!res.ok && res.status === 401) {
+				getAccess(setToken);
+			} else {
+				setEvent(data);
+			}
 		};
 		fetchEvents();
-	}, [eventSlug, accessToken]);
+	}, [eventSlug, token]);
 
 	const {
 		initial_fee: initialFee,

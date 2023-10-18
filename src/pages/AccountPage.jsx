@@ -31,7 +31,7 @@ const AccountPage = () => {
 	}, [token, navigate]);
 	return (
 		<>
-			<MainHeader />
+			<MainHeader removeBtn />
 			<main className={`container ${styles.accountPage}`}>
 				<SideMenu />
 				<div>

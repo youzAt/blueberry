@@ -1,4 +1,4 @@
-import { useEffect, useReducer, useState } from "react";
+import { useEffect } from "react";
 import Box from "../UI/Box";
 import Input from "../UI/Input";
 import styles from "./SignupForm.module.css";
@@ -37,7 +37,7 @@ const SignupForm = ({ slug, fields, setFields }) => {
 			{fields.map((field, index) => (
 				<div className={styles.inputBox} key={field.filed}>
 					<label htmlFor={field.field} className="caption-lg">
-						{field.question}
+						{field.question} <span className={`caption-lg ${styles.essential}`}>(ضروری)</span>
 					</label>
 					<Input
 						id={field.field}

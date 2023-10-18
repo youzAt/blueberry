@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import EventBox from "../components/event/EventBox";
 import styles from "./EventsPage.module.css";
-import EventBanner from "../components/event/EventBanner";
 import MainHeader from "../components/MainHeader";
 import getAccess from "../hooks/getAccess";
 
@@ -12,7 +11,6 @@ const EventsPage = () => {
 	const [token, setToken] = useState(() => {
 		return localStorage.getItem("blueberry-access");
 	});
-	console.log(token);
 	useEffect(() => {
 		const fetchEvents = async () => {
 			const reqHeader = token

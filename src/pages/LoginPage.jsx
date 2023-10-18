@@ -1,9 +1,9 @@
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import Box from "../components/UI/Box";
-import MainHeader from "../components/MainHeader";
 import leftArrowIcon from "../assets/icons/arrow-left.svg";
 import Button from "../components/UI/Button";
 import styles from "./LoginPage.module.css";
+import MainHeader from "../components/MainHeader";
 
 const LoginPage = () => {
 	const navigate = useNavigate();
@@ -14,10 +14,14 @@ const LoginPage = () => {
 
 	return (
 		<>
-			<MainHeader></MainHeader>
+			<MainHeader removeBtn />
 			<main className="container">
 				<div className={styles.loginBox}>
-					<h5>{location.key === "default" ? "ورود یا ثبت نام" : "ورود به حساب کاربری"}</h5>
+					<h5>
+						{location.key === "default"
+							? "ورود یا ثبت نام"
+							: "ورود به حساب کاربری"}
+					</h5>
 					<Button
 						onClick={backBtnHandler}
 						type="outline"
