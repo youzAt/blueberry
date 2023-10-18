@@ -45,7 +45,6 @@ const PhoneNumberSection = () => {
 
 	const sendOtp = useCallback(async () => {
 		setRemainingTime(30);
-		console.log(newPhoneNumber);
 		const res = await fetch(
 			`${BASE_URL}api/account/change-phone/${newPhoneNumber}`,
 			{
@@ -57,7 +56,8 @@ const PhoneNumberSection = () => {
 			}
 		);
 		if (!res.ok) {
-			setHasPhoneError(true);
+			const data = await res.json();
+			setHasPhoneError(data.error);
 		} else {
 			setRemainingTime(30);
 			setIsChangingPhone(true);
@@ -101,7 +101,6 @@ const PhoneNumberSection = () => {
 					}
 				);
 				const data = await res.json();
-				console.log(data);
 				if (!res.ok) {
 					setHasError(true);
 				} else {
@@ -193,18 +192,18 @@ const PhoneNumberSection = () => {
 								شماره موبایل
 							</label>
 							<Input
-								onChange={(e) =>
-									setNewPhoneNumber(e.target.value)
-								}
+								onChange={(e) => {
+									setHasPhoneError("");
+									setNewPhoneNumber(e.target.value);
+								}}
 								disabled={inputDisable}
 								value={newPhoneNumber}
 								id="phone-number"
 								placeholder="شماره موبایل خود را وارد کنید"
+								className={hasPhoneError && "error"}
 							/>
 							{hasPhoneError && (
-								<ErrorMessage>
-									شماره وارد شده نامعتبر است
-								</ErrorMessage>
+								<ErrorMessage>{hasPhoneError}</ErrorMessage>
 							)}
 						</div>
 						{inputDisable ? (

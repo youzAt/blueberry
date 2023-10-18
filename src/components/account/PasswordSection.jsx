@@ -50,8 +50,7 @@ const PasswordSection = () => {
 			setHasPassword(true);
 			setIsPasswordChanged(true);
 		} else {
-			const data = await res.json();
-			console.log(data);
+			
 			setError("رمز عبور فعلی صحیح نمی باشد");
 		}
 	};
@@ -77,9 +76,7 @@ const PasswordSection = () => {
 		if (!passAlphaCheck || !passChangeHandler || !passLengthCheck) return;
 		if (newPassword !== newPasswordRepeat) {
 			setError("رمز عبور با تکرار آن مطابقت ندارد");
-			console.log(false);
-			console.log(newPassword);
-			console.log(newPasswordRepeat);
+			
 			return;
 		}
 		const userPass = {

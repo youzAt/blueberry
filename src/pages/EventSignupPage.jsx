@@ -47,7 +47,7 @@ const EventSignupPage = () => {
 	const signupHandler = () => {
 		const sendSignupData = async () => {
 			let data = arrayToObject(fields);
-			data = discountCode ? {...data, gift_code: discountCode} : data;
+			data = discountCode ? { ...data, gift_code: discountCode } : data;
 			const res = await fetch(
 				`${BASE_URL}api/event/registration/${eventSlug}/`,
 				{
@@ -59,9 +59,6 @@ const EventSignupPage = () => {
 					},
 				}
 			);
-			console.log(res)
-			const dataa = await res.json();
-			console.log(dataa)
 		};
 		sendSignupData();
 	};

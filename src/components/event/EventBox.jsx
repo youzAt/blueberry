@@ -93,7 +93,6 @@ const EventBox = ({ event }) => {
 				دریافت بلیت
 			</Button>
 		);
-		console.log(status.status)
 	return (
 		<div className={`${styles.eventBox} ${error && "deactive"}`}>
 			<div className={styles.eventBanner}>

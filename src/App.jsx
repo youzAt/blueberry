@@ -41,7 +41,7 @@ const App = () => {
 				<Route path="my-account" element={<AccountPage />} />
 				<Route path="events" element={<EventsPage />} />
 				<Route path="events/:eventSlug" element={<EventPage />} />
-				<Route path="signup/:eventSlug" element={<EventSignupPage />} />
+				<Route path="signup/:eventSlug" element={<EventSignupPage />}  />
 			</Routes>
 		</BrowserRouter>
 	);
