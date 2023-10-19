@@ -62,7 +62,7 @@ const EventSignupPage = () => {
 					body: JSON.stringify(data),
 					headers: {
 						"content-type": "application/json",
-						Authorization: `Bearer ${accessToken}`,
+						Authorization: `Bearer ${token}`,
 					},
 				}
 			);
