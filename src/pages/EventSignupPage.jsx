@@ -6,6 +6,7 @@ import Button from "../components/UI/Button";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import defaultPhoto from "../assets/defaultphoto.svg";
+import getAccess from "../funcs/getAccess";
 
 const BASE_URL = "https://api-akbarmasoud.iran.liara.run/";
 function arrayToObject(array) {
@@ -20,7 +21,9 @@ const EventSignupPage = () => {
 	const [balance, setBalance] = useState("");
 	const [fields, setFields] = useState([]);
 	const [discountCode, setDiscountCode] = useState("");
-	const accessToken = localStorage.getItem("blueberry-access");
+	const [token, setToken] = useState(() => {
+		return localStorage.getItem("blueberry-access");
+	});
 	const { eventSlug } = useParams();
 	useEffect(() => {
 		const fetchEvents = async () => {
@@ -36,14 +39,18 @@ const EventSignupPage = () => {
 				method: "GET",
 				headers: {
 					"content-type": "application/json",
-					Authorization: `Bearer ${accessToken}`,
+					Authorization: `Bearer ${token}`,
 				},
 			});
 			const data = await res.json();
-			setBalance(data.balance);
+			if (!res.ok) {
+				getAccess(setToken);
+			} else {
+				setBalance(data.balance);
+			}
 		};
 		fetchBalance();
-	});
+	}, [token]);
 	const signupHandler = () => {
 		const sendSignupData = async () => {
 			let data = arrayToObject(fields);
