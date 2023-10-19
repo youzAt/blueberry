@@ -71,7 +71,7 @@ const EventSignupPage = () => {
 	};
 	const { name, location, start_time: startTime, poster, fee } = event;
 	return (
-		<div className="container">
+		<div className={`container ${styles.container}`}>
 			<h5 className={styles.pageTitle}>اطلاعات فردی</h5>
 			<p className={`body-md ${styles.desc}`}>
 				با این مشخصات ثبت نام میکنید:
