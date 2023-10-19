@@ -5,7 +5,7 @@ import PaymentBox from "../components/eventSignup/PaymentBox";
 import Button from "../components/UI/Button";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import defaultPhoto from "../assets/defaultphoto.png";
+import defaultPhoto from "../assets/defaultphoto.svg";
 
 const BASE_URL = "https://api-akbarmasoud.iran.liara.run/";
 function arrayToObject(array) {

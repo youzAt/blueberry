@@ -10,7 +10,7 @@ import EventPoster from "../components/event/EventPoster";
 import GetEventTicket from "../components/event/GetEventTicket";
 import GetEventCertificate from "../components/event/GetEventCertificate";
 import Box from "../components/UI/Box";
-import defaultPhoto from "../assets/defaultphoto.png";
+import defaultPhoto from "../assets/defaultphoto.svg";
 import getAccess from "../hooks/getAccess";
 
 const BASE_URL = "https://api-akbarmasoud.iran.liara.run/";

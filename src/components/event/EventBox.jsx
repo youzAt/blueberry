@@ -3,7 +3,7 @@ import moment from "moment-jalaali";
 import fa from "moment/src/locale/fa";
 import Button from "../UI/Button";
 import { useNavigate } from "react-router-dom";
-import defaultPhoto from "../../assets/defaultphoto.png";
+import defaultPhoto from "../../assets/defaultphoto.svg";
 import certificateIcon from "../../assets/icons/award2.svg";
 import ticketIcon from "../../assets/icons/ticket2.svg";
 
