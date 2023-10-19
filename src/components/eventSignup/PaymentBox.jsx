@@ -76,13 +76,15 @@ const PaymentBox = ({ fee, balance, slug, discountCode, setDiscountCode }) => {
 					</div>
 				</div>
 			)}
-			{balance !== 0 && <div className={`${styles.costItem} ${styles.balance}`}>
-				<span className={`body-md `}>پرداخت از اعتبار</span>
-				<div>
-					<h6>{displayedBalance?.toLocaleString()}</h6>
-					<span className="caption-lg">ءتءء</span>
+			{balance !== 0 && (
+				<div className={`${styles.costItem} ${styles.balance}`}>
+					<span className={`body-md `}>پرداخت از اعتبار</span>
+					<div>
+						<h6>{displayedBalance?.toLocaleString()}</h6>
+						<span className="caption-lg">ءتءء</span>
+					</div>
 				</div>
-			</div>}
+			)}
 			<div className={`${styles.costItem} ${styles.final}`}>
 				<span className={`body-md `}>مبلغ قابل پرداخت</span>
 				<div>
@@ -99,7 +101,12 @@ const PaymentBox = ({ fee, balance, slug, discountCode, setDiscountCode }) => {
 					<label htmlFor="discount" className="caption-lg">
 						کد تخفیف دارید؟
 					</label>
-					<div className={styles.inputField}>
+					<form
+						className={styles.inputField}
+						onSubmit={(e) => {
+							e.preventDefault();
+						}}
+					>
 						<Input
 							id="discount"
 							placeholder="کد تخفیف خود را وارد کنید"
@@ -116,7 +123,7 @@ const PaymentBox = ({ fee, balance, slug, discountCode, setDiscountCode }) => {
 						>
 							ثبت
 						</Button>
-					</div>
+					</form>
 					{hasError && (
 						<ErrorMessage>کد وارد شده نامعتبر است</ErrorMessage>
 					)}
