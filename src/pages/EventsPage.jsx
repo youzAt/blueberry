@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import EventBox from "../components/event/EventBox";
 import styles from "./EventsPage.module.css";
 import MainHeader from "../components/MainHeader";
-import getAccess from "../hooks/getAccess";
+import getAccess from "../funcs/getAccess";
 
 const BASE_URL = "https://api-akbarmasoud.iran.liara.run/";
 const EventsPage = () => {

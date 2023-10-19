@@ -4,7 +4,7 @@ import PasswordSection from "../components/account/PasswordSection";
 import PersonalInfoSection from "../components/account/PersonalInfoSection";
 import PhoneNumberSection from "../components/account/PhoneNumberSection";
 import SideMenu from "../components/account/SideMenu";
-import getAccess from "../hooks/getAccess";
+import getAccess from "../funcs/getAccess";
 import styles from "./AccountPage.module.css";
 import { useEffect, useState } from "react";
 const BASE_URL = "https://api-akbarmasoud.iran.liara.run/";
