@@ -1,0 +1,47 @@
+.mainFooter {
+	background-color: #fff;
+	border-top: 1px solid var(--color-border);
+	padding: 32px 0;
+}
+.mainFooter :global(.container) {
+	display: flex;
+	justify-content: space-between;
+}
+.footerLinks {
+	display: flex;
+	gap: 72px;
+}
+
+.footerLinks .listTitle {
+	color: var(--color-primary-dark);
+	margin-bottom: 32px;
+}
+.footerLinks li {
+	color: var(--color-gray-2);
+	margin-bottom: 24px;
+}
+.footerLinks li::before {
+	content: "\2022";
+	color: var(--color-gray-2);
+	font-weight: bold;
+	display: inline-block;
+	width: 1em;
+	margin-left: 0.2em;
+}
+.footerLinks .icons {
+	display: flex;
+	gap: 24px;
+}
+.logos {
+	display: flex;
+	gap: 32px;
+	align-items: start;
+}
+.copyRight {
+	padding-top: 32px;
+	border-top: 1px solid var(--color-border);
+	text-align: center;
+}
+.copyRight span {
+	color: var(--color-primary);
+}

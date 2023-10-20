@@ -7,6 +7,7 @@ import SideMenu from "../components/account/SideMenu";
 import getAccess from "../funcs/getAccess";
 import styles from "./AccountPage.module.css";
 import { useEffect, useState } from "react";
+import MainFooter from "../components/MainFooter";
 const BASE_URL = "https://api-akbarmasoud.iran.liara.run/";
 
 const AccountPage = () => {
@@ -40,6 +41,7 @@ const AccountPage = () => {
 					<PasswordSection />
 				</div>
 			</main>
+			<MainFooter />
 		</>
 	);
 };

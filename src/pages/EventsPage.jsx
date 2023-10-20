@@ -3,6 +3,7 @@ import EventBox from "../components/event/EventBox";
 import styles from "./EventsPage.module.css";
 import MainHeader from "../components/MainHeader";
 import getAccess from "../funcs/getAccess";
+import MainFooter from "../components/MainFooter";
 
 const BASE_URL = "https://api-akbarmasoud.iran.liara.run/";
 const EventsPage = () => {
@@ -62,6 +63,7 @@ const EventsPage = () => {
 					</div>
 				</section>
 			</main>
+			<MainFooter />
 		</>
 	);
 };

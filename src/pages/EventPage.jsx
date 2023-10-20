@@ -12,6 +12,7 @@ import GetEventCertificate from "../components/event/GetEventCertificate";
 import Box from "../components/UI/Box";
 import defaultPhoto from "../assets/defaultphoto.svg";
 import getAccess from "../funcs/getAccess";
+import MainFooter from "../components/MainFooter";
 
 const BASE_URL = "https://api-akbarmasoud.iran.liara.run/";
 
@@ -98,6 +99,7 @@ const EventPage = () => {
 					</aside>
 				</div>
 			</div>
+			<MainFooter/>
 		</>
 	);
 };
