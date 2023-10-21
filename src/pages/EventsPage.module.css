@@ -10,3 +10,10 @@
     gap: 24px;  
     flex-wrap: wrap;
 }
+@media (max-width: 480px) {
+    .eventsSection .events{
+        flex-direction: column;
+        gap: 16px;
+        flex-wrap: unset;
+    }
+}

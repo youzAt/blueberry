@@ -7,3 +7,8 @@
     object-fit: contain;
     display: block;
 }
+@media (max-widtH:480px) {
+    .poster{
+        display: none;
+    }
+}

@@ -15,9 +15,31 @@
 	display: grid;
 	grid-template-columns: 2fr 1fr;
 	gap: 24px;
+	margin-bottom: 16px;
 }
 .side {
 	display: flex;
 	flex-direction: column;
 	gap: 16px;
+}
+
+@media (max-width: 480px) {
+	.container {
+		padding-top: 32px !important;
+	}
+	.pageTitle {
+		margin-bottom: 8px;
+	}
+	.desc {
+		margin-bottom: 16px;
+	}
+	.wrapper {
+		display: flex;
+		flex-direction: column;
+		gap: 0;
+		grid-template-columns: unset;
+	}
+	.eventDesc {
+		display: none;
+	}
 }

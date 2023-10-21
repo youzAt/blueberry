@@ -28,3 +28,9 @@
 .dateItem .date span {
 	color: var(--color-gray-2);
 }
+@media (max-width:480px) {
+	.dates{
+		display: none;
+	}
+	
+}

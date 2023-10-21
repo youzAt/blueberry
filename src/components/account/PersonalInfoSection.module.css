@@ -1,25 +1,48 @@
-.section{
-    margin-bottom: 32px;
+.section {
+	margin-bottom: 32px;
 }
-.section .sectionTitle{
-    color: var(--color-primary-dark);
-    margin-bottom: 24px;
+.section .sectionTitle {
+	color: var(--color-primary-dark);
+	margin-bottom: 24px;
 }
-.section .box{
-    width: 704px;
+.section .box {
+	width: 704px;
 }
 .section form label {
-    color: var(--color-primary-dark);
-    margin-right: 16px;
+	color: var(--color-primary-dark);
+	margin-right: 16px;
 }
-.section .formBox{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
-    margin-bottom: 24px;
+.section .formBox {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 24px;
+	margin-bottom: 24px;
 }
-.section .inputBox{
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+.section .inputBox {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+@media (max-width: 480px) {
+	.section .box {
+		width: 100%;
+	}
+    .section .formBox {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        margin-bottom: 0;
+    }
+    .section form{
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+    .section .inputBox {
+        gap: 8px;
+    }
+    .section .sectionTitle {
+        margin-bottom: 8px;
+    }
 }

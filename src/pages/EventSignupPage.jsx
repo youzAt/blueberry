@@ -83,7 +83,7 @@ const EventSignupPage = () => {
 						fields={fields}
 						setFields={setFields}
 					/>
-					<p className={`body-md ${styles.desc}`}>
+					<p className={`body-md ${styles.desc} ${styles.eventDesc}`}>
 						در این رویداد ثبت نام میکنید:
 					</p>
 					<EventItem

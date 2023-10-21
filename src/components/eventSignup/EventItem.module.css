@@ -29,3 +29,8 @@
 	margin-top: 4px;
 	color: var(--color-primary-dark);
 }
+@media (max-width: 480px) {
+	.eventItemBox{
+		display: none;
+	}
+}

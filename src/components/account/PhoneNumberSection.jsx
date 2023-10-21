@@ -183,7 +183,7 @@ const PhoneNumberSection = () => {
 						</div>
 					</div>
 				) : (
-					<div>
+					<div className={styles.changePhoneNumber}>
 						<div className={styles.inputBox}>
 							<label
 								className="caption-lg"

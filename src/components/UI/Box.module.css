@@ -4,3 +4,9 @@
 	background-color: #fff;
 	padding: 24px;
 }
+
+@media (max-width: 480px) {
+	.box{
+		padding: 16px;
+	}
+}

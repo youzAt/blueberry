@@ -83,3 +83,10 @@
 	background-color: var(--color-primary);
 	color: #fff;
 }
+
+@media (max-width: 480px) {
+	.eventBox{
+		width: 100%;
+		max-width: unset;
+	}
+}

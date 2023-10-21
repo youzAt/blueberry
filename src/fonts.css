@@ -1,26 +1,22 @@
 @font-face {
 	font-family: "IRANSansX-Regular";
-	src:
-	url("./assets/fonts/IRANSansXFaNum-Regular.woff") format("woff"),
-	url("./assets/fonts/IRANSansXFaNum-Regular.woff2") format("woff2");
+	src: url("./assets/fonts/IRANSansXFaNum-Regular.woff") format("woff"),
+		url("./assets/fonts/IRANSansXFaNum-Regular.woff2") format("woff2");
 }
 @font-face {
 	font-family: "IRANSansX-Bold";
-	src:
-	url("./assets/fonts/IRANSansXFaNum-Bold.woff") format("woff"),
-	url("./assets/fonts/IRANSansXFaNum-Bold.woff2") format("woff2");
+	src: url("./assets/fonts/IRANSansXFaNum-Bold.woff") format("woff"),
+		url("./assets/fonts/IRANSansXFaNum-Bold.woff2") format("woff2");
 }
 @font-face {
 	font-family: "IRANSansX-Light";
-	src:
-	url("./assets/fonts/IRANSansXFaNum-Light.woff") format("woff"),
-	url("./assets/fonts/IRANSansXFaNum-Light.woff2") format("woff2");
+	src: url("./assets/fonts/IRANSansXFaNum-Light.woff") format("woff"),
+		url("./assets/fonts/IRANSansXFaNum-Light.woff2") format("woff2");
 }
 @font-face {
 	font-family: "IRANSansX-Medium";
-	src: 
-	url("./assets/fonts/IRANSansXFaNum-Medium.woff") format("woff"),
-	url("./assets/fonts/IRANSansXFaNum-Medium.woff2") format("woff2");
+	src: url("./assets/fonts/IRANSansXFaNum-Medium.woff") format("woff"),
+		url("./assets/fonts/IRANSansXFaNum-Medium.woff2") format("woff2");
 }
 * {
 	line-height: 150%;
@@ -98,4 +94,37 @@ h6 {
 }
 .button-sm {
 	font-size: 14px;
+}
+
+@media (max-width: 480px) {
+	* {
+		line-height: normal;
+	}
+	h1 {
+		font-size: 24px;
+	}
+	h2 {
+		font-size: 20px;
+	}
+	h3 {
+		font-size: 16px;
+	}
+	h4 {
+		font-size: 14px;
+	}
+	.body-lg {
+		font-size: 16px;
+	}
+	.body-md {
+		font-size: 14px;
+	}
+	.body-sm {
+		font-size: 12px;
+	}
+	.button-lg {
+		font-size: 14px;
+	}
+	.button-sm {
+		font-size: 12px;
+	}
 }

@@ -49,3 +49,13 @@
 		transform: rotate(0deg);
 	}
 }
+
+@media (max-width: 480px) {
+	.box, .container, .loginBox {
+		width: 100%;
+	}
+	.box::after,
+	.box::before {
+		display: none;
+	}
+}

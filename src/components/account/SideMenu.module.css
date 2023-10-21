@@ -21,3 +21,9 @@
 .box{
     width: 288px;
 }
+
+@media (max-width: 480px) {
+    .box{
+        display: none;
+    }
+}

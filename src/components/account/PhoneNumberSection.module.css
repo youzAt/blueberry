@@ -64,3 +64,23 @@
     flex-direction: column;
     gap: 16px;
 }
+
+@media (max-width: 480px) {
+	.section .box {
+		width: 100%;
+	}
+    .section .sectionTitle{
+        margin-bottom: 8px;
+    }
+    .section label{
+        margin-bottom: 8px;
+    }
+    .section .inputBox{
+        margin-bottom: 0;
+    }
+    .section .changePhoneNumber{
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+}

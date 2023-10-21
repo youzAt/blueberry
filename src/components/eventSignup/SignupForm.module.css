@@ -22,3 +22,18 @@
 .inputBox:last-child .essential {
 	display: none;
 }
+
+@media (max-width:480px) {
+	.formBox{
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+	}
+	.formBox .inputBox {
+		gap: 8px;
+	}
+	.inputBox label{
+		font-size: 12px !important;
+	}
+	
+}

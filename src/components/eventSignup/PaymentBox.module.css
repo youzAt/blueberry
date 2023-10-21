@@ -57,3 +57,8 @@
     left: 0;
     top: 0;
 }
+@media (max-width:480px) {
+    .costItem{
+        margin-bottom: 24px;
+    }
+}

@@ -12,3 +12,14 @@
 .end{
     text-align: center;
 }
+@media (max-width:480px) {
+    .wrapper{
+        display: block;
+    }
+    main{
+        margin-bottom: 32px;
+    }
+    .sideContent{
+        margin-bottom: 32px;
+    }
+}
