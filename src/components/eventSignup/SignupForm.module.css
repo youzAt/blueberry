@@ -22,8 +22,6 @@
 .inputBox:last-child .essential {
 	display: none;
 }
-.error {
-}
 
 @media (max-width: 480px) {
 	.formBox {

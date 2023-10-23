@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Box from "../UI/Box";
 import Input from "../UI/Input";
 import styles from "./SignupForm.module.css";
