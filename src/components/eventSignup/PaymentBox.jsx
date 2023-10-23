@@ -19,7 +19,7 @@ const PaymentBox = ({ fee, balance, slug, discountCode, setDiscountCode }) => {
 		discount_fee: discountFee,
 		final_fee: finalFee,
 	} = discountDetail;
-	const feee = finalFee ? finalFee : fee;
+	const feee = finalFee || finalFee === 0 ? finalFee : fee;
 	const displayedBalance = balance > feee ? feee : balance;
 	const checkDiscountCode = () => {
 		setDiscountAlert(false);
@@ -40,6 +40,7 @@ const PaymentBox = ({ fee, balance, slug, discountCode, setDiscountCode }) => {
 				setDiscountAlert(true);
 				setShowDiscountInput(false);
 				setDiscountDetail(data);
+				console.log(data);
 			} else {
 				setHasError(true);
 			}
@@ -52,6 +53,7 @@ const PaymentBox = ({ fee, balance, slug, discountCode, setDiscountCode }) => {
 		setDiscountCode("");
 		setDiscountDetail("");
 	};
+	const finalDisplayedFee = feee - balance < 0 ? 0 : feee - balance;
 	return (
 		<Box className={styles.paymentBox}>
 			<div className={`${styles.costItem} ${styles.ticket}`}>
@@ -76,7 +78,7 @@ const PaymentBox = ({ fee, balance, slug, discountCode, setDiscountCode }) => {
 					</div>
 				</div>
 			)}
-			{balance !== 0 && (
+			{displayedBalance !== 0 && (
 				<div className={`${styles.costItem} ${styles.balance}`}>
 					<span className={`body-md `}>پرداخت از اعتبار</span>
 					<div>
@@ -88,12 +90,16 @@ const PaymentBox = ({ fee, balance, slug, discountCode, setDiscountCode }) => {
 			<div className={`${styles.costItem} ${styles.final}`}>
 				<span className={`body-md `}>مبلغ قابل پرداخت</span>
 				<div>
-					<h5>
-						{feee - balance < 0
-							? 0
-							: (feee - balance).toLocaleString()}
-					</h5>
-					<span className="caption-lg">ءتءء</span>
+					{
+						//finalDisplayedFee !== 0 ? (
+						<>
+							<h5>{finalDisplayedFee.toLocaleString()}</h5>
+							<span className="caption-lg">ءتءء</span>
+						</>
+						//) : (
+						//	<h5>رایگان</h5>
+						//)
+					}
 				</div>
 			</div>
 			{showDiscountInput && (
