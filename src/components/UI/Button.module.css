@@ -36,6 +36,6 @@
 .btn.btn.secondary:hover {
 	transform: scale(95%);
 }
-.btn.tertiary:hover {
+.btn.tertiary:hover:not(:global(.deactive)) {
 	background-color: var(--color-gray-3);
 }

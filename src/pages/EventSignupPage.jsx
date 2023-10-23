@@ -79,7 +79,15 @@ const EventSignupPage = () => {
 		};
 		sendSignupData();
 	};
-	const { name, location, start_time: startTime, poster, fee } = event;
+
+	const {
+		name,
+		location,
+		start_time: startTime,
+		poster,
+		fee: finalFee,
+		initial_fee: initialFee,
+	} = event;
 	return (
 		<div className={`container ${styles.container}`}>
 			<h5 className={styles.pageTitle}>اطلاعات فردی</h5>
@@ -107,11 +115,12 @@ const EventSignupPage = () => {
 				</main>
 				<aside className={styles.side}>
 					<PaymentBox
-						fee={fee}
+						fee={finalFee}
 						balance={balance}
 						slug={eventSlug}
 						discountCode={discountCode}
 						setDiscountCode={setDiscountCode}
+						initialFee={initialFee}
 					/>
 					<Button type="secondary" onClick={signupHandler}>
 						شارژ اعتبار و ثبت نام

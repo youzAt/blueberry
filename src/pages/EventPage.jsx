@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
-import styles from "./EventPage.module.css";
 import { useEffect, useState } from "react";
+import styles from "./EventPage.module.css";
 import EventBanner from "../components/event/EventBanner";
 import EventDescription from "../components/event/EventDescription";
 import MainHeader from "../components/MainHeader";

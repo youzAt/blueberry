@@ -8,7 +8,14 @@ import Button from "../UI/Button";
 import ErrorMessage from "../UI/ErrorMessage";
 const BASE_URL = "https://api-akbarmasoud.iran.liara.run/";
 
-const PaymentBox = ({ fee, balance, slug, discountCode, setDiscountCode }) => {
+const PaymentBox = ({
+	fee,
+	initialFee,
+	balance,
+	slug,
+	discountCode,
+	setDiscountCode,
+}) => {
 	const [showDiscountInput, setShowDiscountInput] = useState(true);
 	const [discountAlert, setDiscountAlert] = useState(false);
 	const [discountDetail, setDiscountDetail] = useState("");
@@ -53,15 +60,34 @@ const PaymentBox = ({ fee, balance, slug, discountCode, setDiscountCode }) => {
 		setDiscountDetail("");
 	};
 	const finalDisplayedFee = feee - balance < 0 ? 0 : feee - balance;
+	const initPercent = (1 - fee / initialFee) * 100;
 	return (
 		<Box className={styles.paymentBox}>
 			<div className={`${styles.costItem} ${styles.ticket}`}>
 				<span className={`body-md `}>هزینه بلیت</span>
 				<div>
-					<h6>{fee?.toLocaleString()}</h6>
+					<h6>
+						{initialFee
+							? initialFee.toLocaleString()
+							: fee?.toLocaleString()}
+					</h6>
 					<span className="caption-lg">ءتءء</span>
 				</div>
 			</div>
+			{initialFee && (
+				<div className={`${styles.costItem} ${styles.discount}`}>
+					<span className={`body-md `}>
+						<DiscountBadge isSecondary>
+							{initPercent.toFixed(0)}
+						</DiscountBadge>
+						تخفیف خرید زود هنگام
+					</span>
+					<div>
+						<h6>{(initialFee - fee)?.toLocaleString()}</h6>
+						<span className="caption-lg">ءتءء</span>
+					</div>
+				</div>
+			)}
 			{discountAlert && (
 				<div className={`${styles.costItem} ${styles.discount}`}>
 					<span className={`body-md `}>
