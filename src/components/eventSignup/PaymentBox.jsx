@@ -40,7 +40,6 @@ const PaymentBox = ({ fee, balance, slug, discountCode, setDiscountCode }) => {
 				setDiscountAlert(true);
 				setShowDiscountInput(false);
 				setDiscountDetail(data);
-				console.log(data);
 			} else {
 				setHasError(true);
 			}

@@ -68,20 +68,14 @@ const EventSignupPage = () => {
 		const sendSignupData = async () => {
 			let data = arrayToObject(fields);
 			data = discountCode ? { ...data, gift_code: discountCode } : data;
-			const res = await fetch(
-				`${BASE_URL}api/event/registration/${eventSlug}/`,
-				{
-					method: "POST",
-					body: JSON.stringify(data),
-					headers: {
-						"content-type": "application/json",
-						Authorization: `Bearer ${token}`,
-					},
-				}
-			);
-			const fetchedData = await res.json();
-			console.log(res);
-			console.log(fetchedData);
+			await fetch(`${BASE_URL}api/event/registration/${eventSlug}/`, {
+				method: "POST",
+				body: JSON.stringify(data),
+				headers: {
+					"content-type": "application/json",
+					Authorization: `Bearer ${token}`,
+				},
+			});
 		};
 		sendSignupData();
 	};
