@@ -21,6 +21,7 @@ const EventSignupPage = () => {
 	const [balance, setBalance] = useState("");
 	const [fields, setFields] = useState([]);
 	const [discountCode, setDiscountCode] = useState("");
+	const [hasInputError, setHasInputError] = useState(false);
 	const [token, setToken] = useState(() => {
 		return localStorage.getItem("blueberry-access");
 	});
@@ -51,7 +52,19 @@ const EventSignupPage = () => {
 		};
 		fetchBalance();
 	}, [token]);
+	const validateInput = () => {
+		const valid = fields.some((field) => {
+			if (field.field !== "description") {
+				if (field.answer.trim() === "") {
+					setHasInputError(() => true);
+					return true;
+				}
+			}
+		});
+		return !valid;
+	};
 	const signupHandler = () => {
+		if (!validateInput()) return;
 		const sendSignupData = async () => {
 			let data = arrayToObject(fields);
 			data = discountCode ? { ...data, gift_code: discountCode } : data;
@@ -66,6 +79,9 @@ const EventSignupPage = () => {
 					},
 				}
 			);
+			const fetchedData = await res.json();
+			console.log(res);
+			console.log(fetchedData);
 		};
 		sendSignupData();
 	};
@@ -82,6 +98,8 @@ const EventSignupPage = () => {
 						slug={eventSlug}
 						fields={fields}
 						setFields={setFields}
+						hasInputError={hasInputError}
+						setHasInputError={setHasInputError}
 					/>
 					<p className={`body-md ${styles.desc} ${styles.eventDesc}`}>
 						در این رویداد ثبت نام میکنید:

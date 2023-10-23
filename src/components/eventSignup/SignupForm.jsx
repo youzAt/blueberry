@@ -1,13 +1,20 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Box from "../UI/Box";
 import Input from "../UI/Input";
 import styles from "./SignupForm.module.css";
+import ErrorMessage from "../UI/ErrorMessage";
 const BASE_URL = "https://api-akbarmasoud.iran.liara.run/";
 
-
-const SignupForm = ({ slug, fields, setFields }) => {
+const SignupForm = ({
+	slug,
+	fields,
+	setFields,
+	hasInputError,
+	setHasInputError,
+}) => {
 	const accessToken = localStorage.getItem("blueberry-access");
 	const inputChangeHandler = (e, index) => {
+		setHasInputError(false);
 		const newFields = [...fields];
 		newFields[index].answer = e.target.value;
 		setFields(newFields);
@@ -33,20 +40,32 @@ const SignupForm = ({ slug, fields, setFields }) => {
 	}, [accessToken, setFields, slug]);
 
 	return (
-		<Box className={styles.formBox}>
-			{fields.map((field, index) => (
-				<div className={styles.inputBox} key={field.filed}>
-					<label htmlFor={field.field} className="caption-lg">
-						{field.question} <span className={`caption-lg ${styles.essential}`}>(ضروری)</span>
-					</label>
-					<Input
-						id={field.field}
-						placeholder={`${field.question} خود را وارد کنید`}
-						value={fields.at(index).answer}
-						onChange={(e) => inputChangeHandler(e, index)}
-					/>
-				</div>
-			))}
+		<Box>
+			<div className={styles.formBox}>
+				{fields.map((field, index) => (
+					<div className={styles.inputBox} key={field.filed}>
+						<label htmlFor={field.field} className="caption-lg">
+							{field.question}{" "}
+							<span className={`caption-lg ${styles.essential}`}>
+								(ضروری)
+							</span>
+						</label>
+						<Input
+							key={field.field}
+							id={field.field}
+							placeholder={`${field.question} خود را وارد کنید`}
+							value={fields.at(index).answer}
+							onChange={(e) => inputChangeHandler(e, index)}
+						/>
+					</div>
+				))}
+			</div>
+			{hasInputError && (
+				<ErrorMessage className={styles.error}>
+					(ضروری) : مشخصات خواسته شده با برچسب ضروری نمیتواند خالی
+					باشد
+				</ErrorMessage>
+			)}
 		</Box>
 	);
 };

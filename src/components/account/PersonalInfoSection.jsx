@@ -4,6 +4,7 @@ import Button from "../UI/Button";
 import Input from "../UI/Input";
 import styles from "./PersonalInfoSection.module.css";
 import ConfirmBox from "./ConfirmBox";
+import ErrorMessage from "../UI/ErrorMessage";
 
 const BASE_URL = "https://api-akbarmasoud.iran.liara.run/";
 
@@ -29,6 +30,7 @@ const PersonalInfoSection = () => {
 	const [userProfile, dispatch] = useReducer(reducer, initialProfille);
 	const { firstName, lastName, meliCode, studentNumber } = userProfile;
 	const [hasError, setHasError] = useState("");
+	const [inputError, setInputError] = useState("");
 	const [isSend, setIsSend] = useState(false);
 	const accessToken = localStorage.getItem("blueberry-access");
 
@@ -59,9 +61,24 @@ const PersonalInfoSection = () => {
 			key: e.target.name,
 			payload: e.target.value,
 		});
+		setInputError("");
 	};
 	const formSubmitHandler = (e) => {
 		e.preventDefault();
+		if (
+			!/^\d+$/.test(userProfile.meliCode) ||
+			userProfile.meliCode.length !== 10
+		) {
+			setInputError("meliCode");
+			return;
+		} else if (
+			!/^\d+$/.test(userProfile.studentNumber) ||
+			userProfile.studentNumber.length < 10 ||
+			userProfile.studentNumber.length > 11
+		) {
+			setInputError("studentNumber");
+			return;
+		}
 		setIsSend(false);
 		const userPersonalInfo = {
 			student_id: studentNumber,
@@ -138,7 +155,13 @@ const PersonalInfoSection = () => {
 								name="meliCode"
 								id="meli-code"
 								placeholder="کد ملی خود را وارد کنید"
+								className={inputError === "meliCode" && "error"}
 							/>
+							{inputError === "meliCode" && (
+								<ErrorMessage>
+									کد ملی وارد شده نامعتبر است.
+								</ErrorMessage>
+							)}
 						</div>
 						<div className={styles.inputBox}>
 							<label
@@ -153,7 +176,15 @@ const PersonalInfoSection = () => {
 								name="studentNumber"
 								id="student-number"
 								placeholder="مثلا : 40012345678"
+								className={
+									inputError === "studentNumber" && "error"
+								}
 							/>
+							{inputError === "studentNumber" && (
+								<ErrorMessage>
+									شماره دانشجویی وارد شده نامعتبر است.
+								</ErrorMessage>
+							)}
 						</div>
 					</div>
 					<Button isSmall type="primary">

@@ -22,10 +22,19 @@ const LoginForm = ({ phoneNumber, setPhoneNumber }) => {
 	const inputChangeHandler = (e) => {
 		setPhoneNumber(e.target.value);
 	};
+	const phoneValidate = () => {
+		if (phoneNumber.length < 10 || phoneNumber.length > 13) {
+			setHasError(true);
+			return false;
+		} else {
+			return true;
+		}
+	};
 
 	const submitHander = (e) => {
 		e.preventDefault(); // stop page refresh
 		setHasError(false);
+		if (!phoneValidate()) return;
 		const userPhone = {
 			phone_number: phoneNumber,
 		};
@@ -42,11 +51,11 @@ const LoginForm = ({ phoneNumber, setPhoneNumber }) => {
 						body: JSON.stringify(userPhone),
 					}
 				);
-				if(!res.ok) throw new Error("")
+				if (!res.ok) throw new Error("");
 				const data = await res.json();
 				const userHasPassword = data.password;
 				userHasPassword ? navigate("./password") : navigate("./otp");
-			} catch (er){
+			} catch (er) {
 				setHasError(true);
 			}
 		};
