@@ -19,25 +19,7 @@ const SignupForm = ({
 		newFields[index].answer = e.target.value;
 		setFields(newFields);
 	};
-	useEffect(() => {
-		const fetchFormFields = async () => {
-			const res = await fetch(
-				`${BASE_URL}api/event/registration/${slug}/`,
-				{
-					method: "GET",
-					headers: {
-						"content-type": "application",
-						Authorization: `Bearer ${accessToken}`,
-					},
-				}
-			);
-			const data = await res.json();
-			if (res.ok) {
-				setFields(data.fields);
-			}
-		};
-		fetchFormFields();
-	}, [accessToken, setFields, slug]);
+
 
 	return (
 		<Box>

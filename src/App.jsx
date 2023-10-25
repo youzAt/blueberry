@@ -8,7 +8,8 @@ import AccountPage from "./pages/AccountPage";
 import EventsPage from "./pages/EventsPage";
 import EventPage from "./pages/EventPage";
 import EventSignupPage from "./pages/EventSignupPage";
-import HomePage from './pages/HomePage'
+import HomePage from "./pages/HomePage";
+import SuccessPage from "./pages/SuccessPage";
 
 const App = () => {
 	const [phoneNumber, setPhoneNumber] = useState("");
@@ -41,7 +42,8 @@ const App = () => {
 				<Route path="my-account" element={<AccountPage />} />
 				<Route path="events" element={<EventsPage />} />
 				<Route path="events/:eventSlug" element={<EventPage />} />
-				<Route path="signup/:eventSlug" element={<EventSignupPage />}  />
+				<Route path="signup/:eventSlug" element={<EventSignupPage />} />
+				<Route path="events/:eventSlug/signup-success" element={<SuccessPage />} />
 			</Routes>
 		</BrowserRouter>
 	);

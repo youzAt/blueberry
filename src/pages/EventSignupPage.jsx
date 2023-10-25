@@ -4,7 +4,7 @@ import EventItem from "../components/eventSignup/EventItem";
 import PaymentBox from "../components/eventSignup/PaymentBox";
 import Button from "../components/UI/Button";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import defaultPhoto from "../assets/defaultphoto.svg";
 import getAccess from "../funcs/getAccess";
 
@@ -22,6 +22,7 @@ const EventSignupPage = () => {
 	const [fields, setFields] = useState([]);
 	const [discountCode, setDiscountCode] = useState("");
 	const [hasInputError, setHasInputError] = useState(false);
+	const navigate = useNavigate();
 	const [token, setToken] = useState(() => {
 		return localStorage.getItem("blueberry-access");
 	});
@@ -34,6 +35,7 @@ const EventSignupPage = () => {
 		};
 		fetchEvents();
 	}, [eventSlug]);
+
 	useEffect(() => {
 		const fetchBalance = async () => {
 			const res = await fetch(`${BASE_URL}api/payment/balance/`, {
@@ -63,22 +65,53 @@ const EventSignupPage = () => {
 		});
 		return !valid;
 	};
+
 	const signupHandler = () => {
 		if (!validateInput()) return;
 		const sendSignupData = async () => {
 			let data = arrayToObject(fields);
 			data = discountCode ? { ...data, gift_code: discountCode } : data;
-			await fetch(`${BASE_URL}api/event/registration/${eventSlug}/`, {
-				method: "POST",
-				body: JSON.stringify(data),
-				headers: {
-					"content-type": "application/json",
-					Authorization: `Bearer ${token}`,
-				},
-			});
+			const res = await fetch(
+				`${BASE_URL}api/event/registration/${eventSlug}/`,
+				{
+					method: "POST",
+					body: JSON.stringify(data),
+					headers: {
+						"content-type": "application/json",
+						Authorization: `Bearer ${token}`,
+					},
+				}
+			);
+			const resData = await res.json();
+			if (res.ok) {
+				navigate(`/events/${eventSlug}/signup-success`);
+			}
+			console.log(res);
+			console.log(resData);
 		};
 		sendSignupData();
 	};
+	useEffect(() => {
+		const fetchFormFields = async () => {
+			const res = await fetch(
+				`${BASE_URL}api/event/registration/${eventSlug}/`,
+				{
+					method: "GET",
+					headers: {
+						"content-type": "application",
+						Authorization: `Bearer ${token}`,
+					},
+				}
+			);
+			const data = await res.json();
+			if (res.ok) {
+				setFields(data.fields);
+			} else {
+				navigate(`/events/${eventSlug}`);
+			}
+		};
+		fetchFormFields();
+	}, [setFields, token, eventSlug, navigate]);
 
 	const {
 		name,
