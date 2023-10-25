@@ -2,10 +2,12 @@ import styles from "./EventBox.module.css";
 import moment from "moment-jalaali";
 import fa from "moment/src/locale/fa";
 import Button from "../UI/Button";
-import { useNavigate } from "react-router-dom";
+import { json, useNavigate } from "react-router-dom";
 import defaultPhoto from "../../assets/defaultphoto.svg";
 import certificateIcon from "../../assets/icons/award2.svg";
 import ticketIcon from "../../assets/icons/ticket2.svg";
+import getAccess from "../../funcs/getAccess";
+import { useState } from "react";
 
 moment.locale("fa", fa);
 moment.loadPersian();
@@ -23,6 +25,9 @@ function convertUnixToPersianWeekDate(unixTimestamp) {
 
 	return convertedDate;
 }
+
+const BASE_URL = "https://api-akbarmasoud.iran.liara.run/";
+
 const EventBox = ({ event }) => {
 	const navigate = useNavigate();
 	const {
@@ -35,6 +40,31 @@ const EventBox = ({ event }) => {
 		banner,
 	} = event;
 	const { week, month } = convertUnixToPersianWeekDate(startTime);
+	const [token, setToken] = useState(() => {
+		return localStorage.getItem("blueberry-access");
+	});
+
+	const signupHandler = () => {
+		const loginCheck = async () => {
+			const res = await fetch(`${BASE_URL}api/account/phone-number/`, {
+				method: "GET",
+				headers: {
+					"content-type": "application/json",
+					Authorization: `Bearer ${token}`,
+				},
+			});
+
+			if (!res.ok) {
+				const isLogin = await getAccess(setToken);
+				if (!isLogin) {
+					navigate("/login");
+				}
+			} else if (res.ok) {
+				navigate(`/signup/${slug}`);
+			}
+		};
+		loginCheck();
+	};
 
 	const redirectHandler = () => {
 		navigate(`./${slug}`);
@@ -45,7 +75,7 @@ const EventBox = ({ event }) => {
 				type="outline"
 				isSmall
 				className={styles.signUpBtn}
-				onClick={redirectHandler}
+				onClick={signupHandler}
 			>
 				خرید بلیت
 			</Button>

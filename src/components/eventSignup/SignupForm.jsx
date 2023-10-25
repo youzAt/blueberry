@@ -3,23 +3,14 @@ import Box from "../UI/Box";
 import Input from "../UI/Input";
 import styles from "./SignupForm.module.css";
 import ErrorMessage from "../UI/ErrorMessage";
-const BASE_URL = "https://api-akbarmasoud.iran.liara.run/";
 
-const SignupForm = ({
-	slug,
-	fields,
-	setFields,
-	hasInputError,
-	setHasInputError,
-}) => {
-	const accessToken = localStorage.getItem("blueberry-access");
+const SignupForm = ({ fields, setFields, hasInputError, setHasInputError }) => {
 	const inputChangeHandler = (e, index) => {
 		setHasInputError(false);
 		const newFields = [...fields];
 		newFields[index].answer = e.target.value;
 		setFields(newFields);
 	};
-
 
 	return (
 		<Box>

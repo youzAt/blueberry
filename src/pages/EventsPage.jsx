@@ -12,6 +12,7 @@ const EventsPage = () => {
 	const [token, setToken] = useState(() => {
 		return localStorage.getItem("blueberry-access");
 	});
+	
 	useEffect(() => {
 		const fetchEvents = async () => {
 			const reqHeader = token
