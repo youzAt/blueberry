@@ -2,7 +2,7 @@
 	width: 100%;
 	padding: 32px 0;
 	border-bottom: 1px solid var(--color-border);
-    background-color: #fff;
+	background-color: #fff;
 	margin-bottom: 72px;
 }
 .mainHeader div:global(.container) {
@@ -16,4 +16,24 @@
 	display: flex;
 	align-items: center;
 	gap: 40px;
+}
+.menuIcon {
+	padding: 0;
+	display: none;
+}
+.menuIcon:hover{
+	background-color: unset !important;
+}
+
+@media (max-width: 480px) {
+	.mainHeader .navBox {
+		gap: 24px;
+	}
+	.navbar {
+		display: none;
+	}
+	.menuIcon {
+		display: flex;
+		align-items: center;
+	}
 }

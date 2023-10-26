@@ -1,5 +1,6 @@
 import styles from "./MainHeader.module.css";
 import logo from "../assets/icons/logo-small.svg";
+import menuIcon from "../assets/icons/menu.svg";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Button from "./UI/Button";
@@ -29,13 +30,25 @@ const MainHeader = ({ removeBtn }) => {
 		fetchEvents();
 	}, [token]);
 
+	const openMenuHandler = (e) => {
+		e.target.parentElement.parentElement.parentElement.parentElement.nextElementSibling.firstElementChild.classList.add(
+			"active"
+		);
+	};
 	return (
 		<header className={styles.mainHeader}>
 			<div className="container">
 				{/* logo and nav bar */}
 				<div className={styles.navBox}>
+					<Button
+						type="tertiary"
+						className={styles.menuIcon}
+						onClick={openMenuHandler}
+					>
+						<img src={menuIcon} alt="menu icon" />
+					</Button>
 					<img src={logo} alt="logo icon" />
-					<nav>
+					<nav className={styles.navbar}>
 						<ul>
 							<li className="body-md">
 								<Link to="/events"> رویداد ها </Link>

@@ -1,8 +1,8 @@
 import styles from './Box.module.css'
-const Box = ({className="", children}) => {
+const Box = ({className="", children, ref}) => {
     const classes = `${className} ${styles.box}`
     return (
-        <div className={classes}>
+        <div className={classes} ref={ref}>
             {children}
         </div>
     )

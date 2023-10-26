@@ -1,29 +1,66 @@
-.sideMenu>h6{
-    margin-bottom: 24px;
-    color: var(--color-primary-dark)
+.sideMenu > h6 {
+	margin-bottom: 24px;
+	color: var(--color-primary-dark);
 }
-.sideMenu .menu{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 32px;
+.sideMenu .menu {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 32px;
+	padding-bottom: 24px;
+	border-bottom: 1px solid var(--color-border);
 }
-.menu .menuItem a{
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    color: var(--color-primary-dark)
+.menu .menuItem a {
+	display: flex;
+	align-items: center;
+	gap: 16px;
+	color: var(--color-primary-dark);
 }
 
-.menu .menuItem a.active{
-    color: red;
+.menu .menuItem a.active {
+	color: red;
 }
-.box{
-    width: 288px;
+.box {
+	width: 288px;
+}
+.box button {
+	padding-right: 8px;
+	width: 100%;
+	justify-content: flex-start;
+}
+.box .logoutBtn {
+	margin-top: 16px;
+}
+.box .closeBtn {
+	display: none;
 }
 
 @media (max-width: 480px) {
-    .box{
-        display: none;
-    }
+	.box {
+		width: 290px;
+		border-radius: 0;
+		position: fixed;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		z-index: 999;
+		padding-top: 0;
+		transform: translateX(100%);
+		opacity: 0;
+		transition: 0.3s;
+	}
+	.sideMenu .menu {
+		padding-top: 24px;
+		border-top: 1px solid var(--color-border);
+	}
+	.menuTitle {
+		display: none;
+	}
+	.box:global(.active) {
+		transform: translateX(0);
+		opacity: 1;
+	}
+	.box .closeBtn{
+		display: flex;
+	}
 }
