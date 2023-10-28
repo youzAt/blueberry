@@ -10,6 +10,9 @@
     gap: 24px;  
     flex-wrap: wrap;
 }
+.container{
+    padding-top: 160px !important;
+}
 @media (max-width: 480px) {
     .eventsSection .events{
         flex-direction: column;

@@ -30,10 +30,10 @@ const EventPage = () => {
 				? {
 						"content-type": "application/json",
 						Authorization: `Bearer ${token}`,
-				  }
+				}
 				: {
 						"content-type": "application/json",
-				  };
+				};
 
 			const res = await fetch(`${BASE_URL}api/events/${eventSlug}/`, {
 				method: "GET",
@@ -66,7 +66,7 @@ const EventPage = () => {
 	return (
 		<>
 			<MainHeader />
-			<div className="container">
+			<div className={`container ${styles.container}`}>
 				<h3>{name}</h3>
 				<div className={styles.wrapper}>
 					<main className={styles.mainContent}>

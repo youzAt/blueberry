@@ -1,0 +1,60 @@
+.ticket {
+	width: 392px;
+	border-radius: var(--border-radius-2);
+	overflow: hidden;
+	background-color: #fff;
+}
+.ticket .eventPhoto {
+	width: 100%;
+	display: block;
+}
+.ticketItem span {
+	color: var(--color-gray);
+    margin: 8px;
+    display: inline-block;
+    
+}
+.ticketItem p,
+.ticketItem h6 {
+	color: var(--color-primary-dark);
+}
+.ticketBottom {
+	padding: 24px 16px;
+}
+.ticketDetail {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	row-gap: 18px;
+	margin-bottom: 18px;
+}
+.ticketTitle {
+	margin-bottom: 24px;
+}
+.bottomPart {
+	margin-top: 32px;
+	padding: 24px 60px;
+	border-top: 1px dashed var(--color-border);
+}
+.barcode img {
+	display: block;
+	width: 100%;
+}
+.logo {
+	width: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.logo img {
+	display: block;
+	width: 100%;
+}
+.desc{
+    margin-top: 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+.desc p{
+    line-height: 190%;
+}

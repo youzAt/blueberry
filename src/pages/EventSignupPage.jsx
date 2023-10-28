@@ -86,8 +86,7 @@ const EventSignupPage = () => {
 			if (res.ok) {
 				navigate(`/events/${eventSlug}/signup-success`);
 			}
-			console.log(res);
-			console.log(resData);
+			
 		};
 		sendSignupData();
 	};

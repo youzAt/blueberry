@@ -9,6 +9,9 @@
     column-gap: 24px;
     margin-top: 24px;
 }
+.container{
+    padding-top: 160px !important;
+}
 .end{
     text-align: center;
 }

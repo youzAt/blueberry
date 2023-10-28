@@ -6,7 +6,7 @@ const SuccessPage = () => {
 	return (
 		<>
 			<MainHeader />
-			<main className="container">
+			<main className={`container ${styles.container}`}>
 				<Success />
 			</main>
 			<MainFooter />

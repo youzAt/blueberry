@@ -2,7 +2,12 @@ import styles from "./Success.module.css";
 import Box from "../UI/Box";
 import Button from "../UI/Button";
 import tickIcon from "../../assets/icons/tick-circle-fill.svg";
+import { useNavigate } from "react-router-dom";
 const Success = () => {
+	const navigate = useNavigate();
+	const redirectHandler = () => {
+		navigate("./../ticket");
+	};
 	return (
 		<Box className={styles.successBox}>
 			<div className={styles.icon}>
@@ -15,7 +20,7 @@ const Success = () => {
 			<div className={styles.checkCode}>
 				<p className={`caption-lg`}>کد رهگیری: 2424891413</p>
 			</div>
-			<Button>چاپ بلیت</Button>
+			<Button onClick={redirectHandler}>چاپ بلیت</Button>
 		</Box>
 	);
 };

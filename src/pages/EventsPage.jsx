@@ -46,7 +46,7 @@ const EventsPage = () => {
 	return (
 		<>
 			<MainHeader />
-			<main className="container">
+			<main className={`container ${styles.container}`}>
 				<section className={styles.eventsSection}>
 					<h5>رویداد های جدید</h5>
 					<div className={styles.events}>
