@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import styles from "./EventPage.module.css";
 import EventBanner from "../components/event/EventBanner";
@@ -17,6 +17,7 @@ import MainFooter from "../components/MainFooter";
 const BASE_URL = "https://api-akbarmasoud.iran.liara.run/";
 
 const EventPage = () => {
+	const navigate = useNavigate();
 	const [event, setEvent] = useState({});
 	const { eventSlug } = useParams();
 	const [token, setToken] = useState(() => {
@@ -29,10 +30,10 @@ const EventPage = () => {
 				? {
 						"content-type": "application/json",
 						Authorization: `Bearer ${token}`,
-				}
+				  }
 				: {
 						"content-type": "application/json",
-				};
+				  };
 
 			const res = await fetch(`${BASE_URL}api/events/${eventSlug}/`, {
 				method: "GET",
@@ -41,12 +42,14 @@ const EventPage = () => {
 			const data = await res.json();
 			if (!res.ok && res.status === 401) {
 				getAccess(setToken);
+			} else if (!res.ok && res.status === 404) {
+				navigate("/event-not-fount");
 			} else {
 				setEvent(data);
 			}
 		};
 		fetchEvents();
-	}, [eventSlug, token]);
+	}, [eventSlug, token, navigate]);
 
 	const {
 		initial_fee: initialFee,
@@ -99,7 +102,7 @@ const EventPage = () => {
 					</aside>
 				</div>
 			</div>
-			<MainFooter/>
+			<MainFooter />
 		</>
 	);
 };

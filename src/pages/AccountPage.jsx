@@ -9,6 +9,7 @@ const BASE_URL = "https://api-akbarmasoud.iran.liara.run/";
 
 const AccountPage = () => {
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
+	const navigate = useNavigate()
 	const [token, setToken] = useState(() => {
 		return localStorage.getItem("blueberry-access");
 	});
@@ -26,6 +27,7 @@ const AccountPage = () => {
 			}
 		};
 		loginCheck();
+		navigate('./my-events')
 	}, [token]);
 	return (
 		<>

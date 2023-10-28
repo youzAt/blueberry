@@ -13,6 +13,7 @@ import SuccessPage from "./pages/SuccessPage";
 import ProfilePage from "./pages/ProfilePage";
 import MyEventPage from "./pages/MyEventPage";
 import WalletPage from "./pages/WalletPage";
+import ErrorPage from "./pages/ErrorPage";
 
 const App = () => {
 	const [phoneNumber, setPhoneNumber] = useState("");
@@ -54,6 +55,7 @@ const App = () => {
 					path="events/:eventSlug/signup-success"
 					element={<SuccessPage />}
 				/>
+				<Route path="*" element={<ErrorPage />} />
 			</Routes>
 		</BrowserRouter>
 	);
