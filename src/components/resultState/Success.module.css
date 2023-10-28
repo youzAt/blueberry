@@ -22,3 +22,10 @@
 .successBox button {
 	width: 100%;
 }
+
+
+@media (max-width:480px) {
+	.successBox{
+		width: 90%;
+	}
+}

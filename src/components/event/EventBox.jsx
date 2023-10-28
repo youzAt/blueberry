@@ -99,6 +99,11 @@ const EventBox = ({ event }) => {
 			</div>
 		</div>
 	);
+
+	const redirectTicketHnadler = () => {
+		navigate(`./${slug}/ticket`);
+	};
+
 	const error =
 		status.status !== "ERROR" && status.status !== "END" ? null : (
 			<Button
@@ -118,7 +123,12 @@ const EventBox = ({ event }) => {
 		);
 	const ticket =
 		status.status !== "TICKET" ? null : (
-			<Button type="outline" isSmall className={styles.outBtn}>
+			<Button
+				onClick={redirectTicketHnadler}
+				type="outline"
+				isSmall
+				className={styles.outBtn}
+			>
 				<img src={ticketIcon} alt="ticket icon" />
 				دریافت بلیت
 			</Button>

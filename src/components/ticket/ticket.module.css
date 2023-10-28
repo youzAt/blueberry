@@ -58,3 +58,9 @@
 .desc p{
     line-height: 190%;
 }
+
+@media (max-width:480px) {
+	.ticket{
+		width: 90%;
+	}
+}

@@ -14,10 +14,34 @@
 }
 .price h4 {
 	color: var(--color-primary);
-    display: inline-block;
-    margin: 0 4px;
+	display: inline-block;
+	margin: 0 4px;
 }
-.price s{
+.price s {
 	color: var(--color-gray);
 	margin: 0 8px;
+}
+
+@media (max-width: 480px) {
+	.eventSignup {
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		border-radius: 0;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+
+	}
+	.priceBox h6{
+		margin-bottom: 8px;
+		
+	}
+	.st{
+		display: none;
+	}
+	.checkList {
+		display: none;
+	}
 }

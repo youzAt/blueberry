@@ -37,11 +37,11 @@ const EventSignup = ({ initialFee, finalFee, slug }) => {
 				<h4> رایگان </h4>
 			</div>
 		) : (
-			<>
+			<div className={styles.priceBox}>
 				<h6>قیمت بلیت:</h6>
 				<div className={`caption-lg ${styles.price}`}>
 					{initialFee && (
-						<p className="body-xl">
+						<p className={`body-xl ${styles.st}`}>
 							<s> {initialFee?.toLocaleString()} </s>
 							<DiscountBadge>{discount.toFixed(0)}</DiscountBadge>
 						</p>
@@ -49,7 +49,7 @@ const EventSignup = ({ initialFee, finalFee, slug }) => {
 					<h4> {finalFee?.toLocaleString()} </h4>
 					ءتءء
 				</div>
-			</>
+			</div>
 		);
 	return (
 		<Box className={styles.eventSignup}>
@@ -63,7 +63,7 @@ const EventSignup = ({ initialFee, finalFee, slug }) => {
 			<Button type="secondary" onClick={signupHandler}>
 				ثبت نام کنید
 			</Button>
-			<CheckListItem isLarge>کسب گواهی شرکت در دوره</CheckListItem>
+			<CheckListItem isLarge className={styles.checkList}>کسب گواهی شرکت در دوره</CheckListItem>
 		</Box>
 	);
 };

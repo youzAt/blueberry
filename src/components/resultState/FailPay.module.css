@@ -4,7 +4,7 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-    text-align: center;
+	text-align: center;
 	gap: 13px;
 }
 
@@ -25,11 +25,17 @@
 	height: 118px;
 	background-color: #fef0f3;
 	border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 11px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 11px;
 }
-.failPayBox .desc{
-    line-height: 180%;
+.failPayBox .desc {
+	line-height: 180%;
+}
+
+@media (max-width: 480px) {
+	.failPayBox {
+		width: 90%;
+	}
 }
