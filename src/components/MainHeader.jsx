@@ -7,7 +7,7 @@ import Button from "./UI/Button";
 
 const BASE_URL = "https://api-akbarmasoud.iran.liara.run/";
 
-const MainHeader = ({ removeBtn }) => {
+const MainHeader = ({ removeBtn, setIsMenuOpen }) => {
 	const [isLogin, setIsLogin] = useState(false);
 	const token = localStorage.getItem("blueberry-access");
 	const navigate = useNavigate();
@@ -30,10 +30,8 @@ const MainHeader = ({ removeBtn }) => {
 		fetchEvents();
 	}, [token]);
 
-	const openMenuHandler = (e) => {
-		e.target.parentElement.parentElement.parentElement.parentElement.nextElementSibling.firstElementChild.classList.add(
-			"active"
-		);
+	const openMenuHandler = () => {
+		setIsMenuOpen(true);
 	};
 	return (
 		<header className={styles.mainHeader}>

@@ -12,6 +12,7 @@ const BASE_URL = "https://api-akbarmasoud.iran.liara.run/";
 
 const AccountPage = () => {
 	const navigate = useNavigate();
+	const [isMenuOpen, setIsMenuOpen] = useState(false);
 	const [token, setToken] = useState(() => {
 		return localStorage.getItem("blueberry-access");
 	});
@@ -32,9 +33,12 @@ const AccountPage = () => {
 	}, [token, navigate]);
 	return (
 		<>
-			<MainHeader removeBtn />
+			<MainHeader removeBtn setIsMenuOpen={setIsMenuOpen} />
 			<main className={`container ${styles.accountPage}`}>
-				<SideMenu />
+				<SideMenu
+					setIsMenuOpen={setIsMenuOpen}
+					isMenuOpen={isMenuOpen}
+				/>
 				<div>
 					<PersonalInfoSection />
 					<PhoneNumberSection />

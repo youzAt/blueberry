@@ -11,18 +11,18 @@ import Button from "../UI/Button";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useRef } from "react";
 
-const SideMenu = () => {
+const SideMenu = ({ setIsMenuOpen, isMenuOpen }) => {
 	const navigate = useNavigate();
 	const logoutHandler = () => {
 		localStorage.removeItem("blueberry-access");
 		localStorage.removeItem("blueberry-refresh");
 		navigate("/events");
 	};
-	const closeMenuHandler = (e) => {
-		e.target.parentElement.parentElement.classList.remove("active");
+	const closeMenuHandler = () => {
+		setIsMenuOpen(false);
 	};
 	return (
-		<Box className={`${styles.box} `}>
+		<Box className={`${styles.box} ${isMenuOpen && styles.active}`}>
 			<div className={styles.sideMenu}>
 				<h6 className={styles.menuTitle}>پنل کاربری</h6>
 				<Button

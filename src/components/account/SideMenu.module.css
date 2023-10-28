@@ -56,11 +56,11 @@
 	.menuTitle {
 		display: none;
 	}
-	.box:global(.active) {
+	.box.active {
 		transform: translateX(0);
 		opacity: 1;
 	}
-	.box .closeBtn{
+	.box .closeBtn {
 		display: flex;
 	}
 }
