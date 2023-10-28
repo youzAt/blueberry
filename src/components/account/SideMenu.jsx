@@ -9,7 +9,6 @@ import rightArrowIcon from "../../assets/icons/arrow-right.svg";
 import Box from "../UI/Box";
 import Button from "../UI/Button";
 import { NavLink, useNavigate } from "react-router-dom";
-import { useRef } from "react";
 
 const SideMenu = ({ setIsMenuOpen, isMenuOpen }) => {
 	const navigate = useNavigate();
@@ -36,21 +35,40 @@ const SideMenu = ({ setIsMenuOpen, isMenuOpen }) => {
 				</Button>
 				<ul className={styles.menu}>
 					<li className={styles.menuItem}>
-						<NavLink>
+						<NavLink
+							onClick={closeMenuHandler}
+							to="./my-events"
+							className={({ isActive }) => {
+								return isActive ? styles.active : undefined;
+							}}
+						>
 							<img src={noteIcon} alt="note icon" />
 							<span className="body-md">رویداد های من</span>
 						</NavLink>
 					</li>
+
 					<li className={styles.menuItem}>
-						<NavLink>
-							<img src={walletIcon} alt="wallet icon" />
-							<span className="body-md">کیف پول</span>
+						<NavLink
+							onClick={closeMenuHandler}
+							to="./profile"
+							className={({ isActive }) => {
+								return isActive ? styles.active : undefined;
+							}}
+						>
+							<img src={userEditIcon} alt="user edit icon" />
+							<span className="body-md">اطلاعات فردی</span>
 						</NavLink>
 					</li>
 					<li className={styles.menuItem}>
-						<NavLink>
-							<img src={userEditIcon} alt="user edit icon" />
-							<span className="body-md">ویرایش اطلاعات</span>
+						<NavLink
+							onClick={closeMenuHandler}
+							to="./wallet"
+							className={({ isActive }) => {
+								return isActive ? styles.active : undefined;
+							}}
+						>
+							<img src={walletIcon} alt="wallet icon" />
+							<span className="body-md">کیف پول</span>
 						</NavLink>
 					</li>
 				</ul>

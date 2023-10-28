@@ -1,0 +1,17 @@
+.noEvents {
+	width: 100%;
+	height: 50vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+.noEvents h5 {
+	margin-bottom: 21px;
+	color: var(--color-primary-dark);
+}
+.noEvents p {
+	margin-bottom: 29px;
+	text-align: center;
+	color: var(--color-primary-dark);
+}

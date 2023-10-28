@@ -1,0 +1,29 @@
+.balanceBox {
+	display: flex;
+	gap: 16px;
+}
+.icon {
+	width: 64px;
+	height: 64px;
+	background-color: var(--color-primary-lighter);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: var(--border-radius-1);
+}
+.amount {
+	display: flex;
+    align-items: flex-end;
+	gap: 4px;
+}
+.amount span {
+	color: var(--color-gray-2);
+}
+.amount h6 {
+	color: var(--color-primary);
+}
+.detail {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}

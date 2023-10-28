@@ -1,0 +1,11 @@
+.walletPage{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+.walletPage section{
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}

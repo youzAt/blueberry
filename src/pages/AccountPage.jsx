@@ -1,8 +1,5 @@
-import { useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import MainHeader from "../components/MainHeader";
-import PasswordSection from "../components/account/PasswordSection";
-import PersonalInfoSection from "../components/account/PersonalInfoSection";
-import PhoneNumberSection from "../components/account/PhoneNumberSection";
 import SideMenu from "../components/account/SideMenu";
 import getAccess from "../funcs/getAccess";
 import styles from "./AccountPage.module.css";
@@ -11,7 +8,6 @@ import MainFooter from "../components/MainFooter";
 const BASE_URL = "https://api-akbarmasoud.iran.liara.run/";
 
 const AccountPage = () => {
-	const navigate = useNavigate();
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
 	const [token, setToken] = useState(() => {
 		return localStorage.getItem("blueberry-access");
@@ -30,7 +26,7 @@ const AccountPage = () => {
 			}
 		};
 		loginCheck();
-	}, [token, navigate]);
+	}, [token]);
 	return (
 		<>
 			<MainHeader removeBtn setIsMenuOpen={setIsMenuOpen} />
@@ -39,11 +35,7 @@ const AccountPage = () => {
 					setIsMenuOpen={setIsMenuOpen}
 					isMenuOpen={isMenuOpen}
 				/>
-				<div>
-					<PersonalInfoSection />
-					<PhoneNumberSection />
-					<PasswordSection />
-				</div>
+				<>{<Outlet />}</>
 			</main>
 			<MainFooter />
 		</>

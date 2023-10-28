@@ -1,0 +1,30 @@
+.title {
+	margin-bottom: 8px;
+	display: block;
+}
+.increaseForm {
+	display: flex;
+	flex-direction: column;
+    align-items: flex-start;
+	gap: 16px;
+}
+.increaseForm .input {
+	width: 100%;
+}
+.input::-webkit-inner-spin-button{
+    display: none;
+}
+.amounts {
+	display: flex;
+	gap: 8px;
+    width: 100%;
+}
+.amountOption {
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+}
+.amountOption .desc {
+	color: var(--color-gray-2);
+}

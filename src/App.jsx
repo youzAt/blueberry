@@ -10,6 +10,9 @@ import EventPage from "./pages/EventPage";
 import EventSignupPage from "./pages/EventSignupPage";
 import HomePage from "./pages/HomePage";
 import SuccessPage from "./pages/SuccessPage";
+import ProfilePage from "./pages/ProfilePage";
+import MyEventPage from "./pages/MyEventPage";
+import WalletPage from "./pages/WalletPage";
 
 const App = () => {
 	const [phoneNumber, setPhoneNumber] = useState("");
@@ -39,11 +42,18 @@ const App = () => {
 						element={<LoginOtpForm phoneNumber={phoneNumber} />}
 					/>
 				</Route>
-				<Route path="my-account" element={<AccountPage />} />
+				<Route path="my-account" element={<AccountPage />}>
+					<Route path="profile" element={<ProfilePage />} />
+					<Route path="my-events" element={<MyEventPage />} />
+					<Route path="wallet" element={<WalletPage />} />
+				</Route>
 				<Route path="events" element={<EventsPage />} />
 				<Route path="events/:eventSlug" element={<EventPage />} />
 				<Route path="signup/:eventSlug" element={<EventSignupPage />} />
-				<Route path="events/:eventSlug/signup-success" element={<SuccessPage />} />
+				<Route
+					path="events/:eventSlug/signup-success"
+					element={<SuccessPage />}
+				/>
 			</Routes>
 		</BrowserRouter>
 	);
