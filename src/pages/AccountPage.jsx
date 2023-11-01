@@ -5,9 +5,10 @@ import getAccess from "../funcs/getAccess";
 import styles from "./AccountPage.module.css";
 import { useEffect, useState } from "react";
 import MainFooter from "../components/layout/MainFooter";
-const BASE_URL = "https://api-akbarmasoud.iran.liara.run/";
+import useUrl from "../hooks/useUrl";
 
 const AccountPage = () => {
+	const BASE_URL = useUrl();
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
 	const navigate = useNavigate()
 	const [token, setToken] = useState(() => {
@@ -28,7 +29,7 @@ const AccountPage = () => {
 		};
 		loginCheck();
 		navigate('./my-events')
-	}, [token]);
+	}, [token, BASE_URL]);
 	return (
 		<>
 			<MainHeader removeBtn setIsMenuOpen={setIsMenuOpen} />

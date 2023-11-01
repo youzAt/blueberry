@@ -3,13 +3,13 @@ import Box from "../components/UI/Box";
 import leftArrowIcon from "../assets/icons/arrow-left.svg";
 import Button from "../components/UI/Button";
 import styles from "./LoginPage.module.css";
-
 const LoginPage = () => {
 	const navigate = useNavigate();
 	const backBtnHandler = () => {
 		navigate(-1);
 	};
 	const location = useLocation();
+	
 
 	return (
 		<main className={`container ${styles.container}`}>

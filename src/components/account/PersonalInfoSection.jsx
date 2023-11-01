@@ -5,8 +5,8 @@ import Input from "../UI/Input";
 import styles from "./PersonalInfoSection.module.css";
 import ConfirmBox from "./ConfirmBox";
 import ErrorMessage from "../UI/ErrorMessage";
+import useUrl from "../../hooks/useUrl";
 
-const BASE_URL = "https://api-akbarmasoud.iran.liara.run/";
 
 const initialProfille = {
 	firstName: "",
@@ -19,14 +19,15 @@ const reducer = (state, action) => {
 	switch (action.type) {
 		case "inputChange":
 			return { ...state, [action.key]: action.payload };
-		case "setState":
+			case "setState":
 			return { ...state, ...action.payload };
-		default:
-			throw new Error("Unknown action type");
-	}
-};
-
-const PersonalInfoSection = () => {
+			default:
+				throw new Error("Unknown action type");
+			}
+		};
+		
+		const PersonalInfoSection = () => {
+	const BASE_URL = useUrl();
 	const [userProfile, dispatch] = useReducer(reducer, initialProfille);
 	const { firstName, lastName, meliCode, studentNumber } = userProfile;
 	const [hasError, setHasError] = useState("");
@@ -53,7 +54,7 @@ const PersonalInfoSection = () => {
 			dispatch({ type: "setState", payload: userPersonalInfo });
 		};
 		fetchPersonalInfo();
-	}, [accessToken, dispatch]);
+	}, [accessToken, dispatch, BASE_URL]);
 
 	const inputChangeHandler = (e) => {
 		dispatch({

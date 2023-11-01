@@ -4,15 +4,15 @@ import styles from "./EventsPage.module.css";
 import MainHeader from "../components/layout/MainHeader";
 import getAccess from "../funcs/getAccess";
 import MainFooter from "../components/layout/MainFooter";
+import useUrl from "../hooks/useUrl";
 
-const BASE_URL = "https://api-akbarmasoud.iran.liara.run/";
 const EventsPage = () => {
+	const BASE_URL = useUrl();
 	const [events, setEvents] = useState([]);
-
 	const [token, setToken] = useState(() => {
 		return localStorage.getItem("blueberry-access");
 	});
-	
+
 	useEffect(() => {
 		const fetchEvents = async () => {
 			const reqHeader = token
@@ -36,7 +36,7 @@ const EventsPage = () => {
 			}
 		};
 		fetchEvents();
-	}, [token]);
+	}, [token, BASE_URL]);
 	const doneEvents = events
 		.slice()
 		.filter((event) => event.status.status === "END");

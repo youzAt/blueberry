@@ -1,13 +1,14 @@
 import styles from "./MainHeader.module.css";
-import logo from "../assets/icons/logo-small.svg";
-import menuIcon from "../assets/icons/menu.svg";
+import logo from "../../assets/icons/logo-small.svg";
+import menuIcon from "../../assets/icons/menu.svg";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Button from "../UI/Button";
+import useUrl from "../../hooks/useUrl";
 
-const BASE_URL = "https://api-akbarmasoud.iran.liara.run/";
 
 const MainHeader = ({ removeBtn, setIsMenuOpen }) => {
+	const BASE_URL = useUrl();
 	const [isLogin, setIsLogin] = useState(false);
 	const token = localStorage.getItem("blueberry-access");
 	const navigate = useNavigate();
@@ -28,7 +29,7 @@ const MainHeader = ({ removeBtn, setIsMenuOpen }) => {
 			}
 		};
 		fetchEvents();
-	}, [token]);
+	}, [token, BASE_URL]);
 
 	const openMenuHandler = () => {
 		setIsMenuOpen(true);

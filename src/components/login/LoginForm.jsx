@@ -1,5 +1,6 @@
 // hooks
 import { useState } from "react";
+import useUrl from "../../hooks/useUrl";
 
 // styles
 import styles from "./LoginForm.module.css";
@@ -13,9 +14,10 @@ import Button from "../UI/Button";
 import ErrorMessage from "../UI/ErrorMessage";
 import { useNavigate } from "react-router-dom";
 
-const BASE_URL = "https://api-akbarmasoud.iran.liara.run/";
+
 
 const LoginForm = ({ phoneNumber, setPhoneNumber }) => {
+	const BASE_URL = useUrl();
 	const [hasError, setHasError] = useState(false);
 	const navigate = useNavigate();
 

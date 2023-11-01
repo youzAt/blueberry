@@ -13,10 +13,11 @@ import Box from "../components/UI/Box";
 import defaultPhoto from "../assets/defaultphoto.svg";
 import getAccess from "../funcs/getAccess";
 import MainFooter from "../components/layout/MainFooter";
+import useUrl from "../hooks/useUrl";
 
-const BASE_URL = "https://api-akbarmasoud.iran.liara.run/";
 
 const EventPage = () => {
+	const BASE_URL = useUrl()
 	const navigate = useNavigate();
 	const [event, setEvent] = useState({});
 	const { eventSlug } = useParams();
@@ -49,7 +50,7 @@ const EventPage = () => {
 			}
 		};
 		fetchEvents();
-	}, [eventSlug, token, navigate]);
+	}, [eventSlug, token, navigate, BASE_URL]);
 
 	const {
 		initial_fee: initialFee,

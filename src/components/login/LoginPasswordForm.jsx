@@ -11,10 +11,11 @@ import keyIcon from "../../assets/icons/key.svg";
 import eyeSlashIcon from "../../assets/icons/eye-slash.svg";
 import eyeIcon from "../../assets/icons/eye.svg";
 import smsIcon from "../../assets/icons/sms.svg";
+import useUrl from "../../hooks/useUrl";
 
-const BASE_URL = "https://api-akbarmasoud.iran.liara.run/";
 
 const LoginPasswordForm = ({ phoneNumber }) => {
+	const BASE_URL = useUrl();
 	const [isPassVisible, setIsPassVisible] = useState(false);
 	const [password, setPassword] = useState("");
 	const [hasError, setHasError] = useState(false);

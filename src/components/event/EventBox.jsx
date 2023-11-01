@@ -2,12 +2,13 @@ import styles from "./EventBox.module.css";
 import moment from "moment-jalaali";
 import fa from "moment/src/locale/fa";
 import Button from "../UI/Button";
-import { json, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import defaultPhoto from "../../assets/defaultphoto.svg";
 import certificateIcon from "../../assets/icons/award2.svg";
 import ticketIcon from "../../assets/icons/ticket2.svg";
 import getAccess from "../../funcs/getAccess";
 import { useState } from "react";
+import useUrl from "../../hooks/useUrl";
 
 moment.locale("fa", fa);
 moment.loadPersian();
@@ -26,9 +27,8 @@ function convertUnixToPersianWeekDate(unixTimestamp) {
 	return convertedDate;
 }
 
-const BASE_URL = "https://api-akbarmasoud.iran.liara.run/";
-
 const EventBox = ({ event }) => {
+	const BASE_URL = useUrl();
 	const navigate = useNavigate();
 	const {
 		slug,

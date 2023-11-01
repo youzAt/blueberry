@@ -6,10 +6,11 @@ import DiscountBadge from "./DiscountBadge";
 import { useNavigate } from "react-router-dom";
 import LoginModal from "../eventSignup/LoginModal";
 import { useState } from "react";
+import useUrl from "../../hooks/useUrl";
 
-const BASE_URL = "https://api-akbarmasoud.iran.liara.run/";
 
 const EventSignup = ({ initialFee, finalFee, slug }) => {
+	const BASE_URL = useUrl();
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const accessToken = localStorage.getItem("blueberry-access");
 	const navigate = useNavigate();

@@ -6,12 +6,13 @@ import Button from "../UI/Button";
 import ErrorMessage from "../UI/ErrorMessage";
 import ConfirmBox from "./ConfirmBox";
 import { useState, useCallback, useEffect } from "react";
+import useUrl from "../../hooks/useUrl";
 
 const WAITING_TIME = 30;
-const BASE_URL = "https://api-akbarmasoud.iran.liara.run/";
 const OTP_LENGTH = 6;
 
 const PhoneNumberSection = () => {
+	const BASE_URL = useUrl();
 	const [inputDisable, setInputDisable] = useState(true);
 	const [isChangingPhone, setIsChangingPhone] = useState(false);
 	const [hasError, setHasError] = useState(false);
@@ -41,7 +42,7 @@ const PhoneNumberSection = () => {
 			}
 		};
 		fetchUserPhoneNumber();
-	}, [accessToken]);
+	}, [accessToken, BASE_URL]);
 
 	const sendOtp = useCallback(async () => {
 		setRemainingTime(30);
@@ -62,7 +63,7 @@ const PhoneNumberSection = () => {
 			setRemainingTime(30);
 			setIsChangingPhone(true);
 		}
-	}, [newPhoneNumber, accessToken]);
+	}, [newPhoneNumber, accessToken, BASE_URL]);
 
 	useEffect(() => {
 		if (remainingTime === 0) return;
@@ -100,7 +101,6 @@ const PhoneNumberSection = () => {
 						body: JSON.stringify(userLoginInfo),
 					}
 				);
-				const data = await res.json();
 				if (!res.ok) {
 					setHasError(true);
 				} else {

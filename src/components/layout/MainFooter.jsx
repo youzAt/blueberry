@@ -1,9 +1,9 @@
 import styles from "./MainFooter.module.css";
-import instagramIcon from "../assets/icons/instagram.svg";
-import telegramIcon from "../assets/icons/telegram.svg";
-import linkedinIcon from "../assets/icons/linkedin.svg";
-import blueberryLogo from "../assets/icons/blueberrylogotext.svg";
-import basuLogo from "../assets/icons/basuLogo.svg";
+import instagramIcon from "../../assets/icons/instagram.svg";
+import telegramIcon from "../../assets/icons/telegram.svg";
+import linkedinIcon from "../../assets/icons/linkedin.svg";
+import blueberryLogo from "../../assets/icons/blueberrylogotext.svg";
+import basuLogo from "../../assets/icons/basuLogo.svg";
 
 const MainFooter = () => {
 	return (

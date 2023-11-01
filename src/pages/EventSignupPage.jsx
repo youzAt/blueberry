@@ -7,8 +7,8 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import defaultPhoto from "../assets/defaultphoto.svg";
 import getAccess from "../funcs/getAccess";
+import useUrl from "../hooks/useUrl";
 
-const BASE_URL = "https://api-akbarmasoud.iran.liara.run/";
 function arrayToObject(array) {
 	return array.reduce((acc, item) => {
 		acc[item.field] = item.answer;
@@ -17,6 +17,7 @@ function arrayToObject(array) {
 }
 
 const EventSignupPage = () => {
+	const BASE_URL = useUrl()
 	const [event, setEvent] = useState({});
 	const [balance, setBalance] = useState("");
 	const [fields, setFields] = useState([]);
@@ -34,7 +35,7 @@ const EventSignupPage = () => {
 			setEvent(data);
 		};
 		fetchEvents();
-	}, [eventSlug]);
+	}, [eventSlug, BASE_URL]);
 
 	useEffect(() => {
 		const fetchBalance = async () => {
@@ -53,7 +54,7 @@ const EventSignupPage = () => {
 			}
 		};
 		fetchBalance();
-	}, [token]);
+	}, [token, BASE_URL]);
 	const validateInput = () => {
 		const valid = fields.some((field) => {
 			if (field.field !== "description") {
@@ -82,7 +83,6 @@ const EventSignupPage = () => {
 					},
 				}
 			);
-			const resData = await res.json();
 			if (res.ok) {
 				navigate(`/events/${eventSlug}/signup-success`);
 			}
@@ -110,7 +110,7 @@ const EventSignupPage = () => {
 			}
 		};
 		fetchFormFields();
-	}, [setFields, token, eventSlug, navigate]);
+	}, [setFields, token, eventSlug, navigate, BASE_URL]);
 
 	const {
 		name,

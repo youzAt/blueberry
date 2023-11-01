@@ -15,54 +15,60 @@ import MyEventPage from "./pages/MyEventPage";
 import WalletPage from "./pages/WalletPage";
 import ErrorPage from "./pages/ErrorPage";
 import TicketPage from "./pages/TicketPage";
+import { UrlProvider } from "./context/UrlProvider";
 
 const App = () => {
 	const [phoneNumber, setPhoneNumber] = useState("");
 
 	return (
-		<BrowserRouter>
-			<Routes>
-				<Route index element={<HomePage />} />
-				<Route path="login" element={<LoginPage />}>
+		<UrlProvider>
+			<BrowserRouter>
+				<Routes>
+					<Route index element={<HomePage />} />
+					<Route path="login" element={<LoginPage />}>
+						<Route
+							index
+							element={
+								<LoginForm
+									phoneNumber={phoneNumber}
+									setPhoneNumber={setPhoneNumber}
+								/>
+							}
+						/>
+						<Route
+							path="password"
+							element={
+								<LoginPasswordForm phoneNumber={phoneNumber} />
+							}
+						/>
+						<Route
+							path="otp"
+							element={<LoginOtpForm phoneNumber={phoneNumber} />}
+						/>
+					</Route>
+					<Route path="my-account" element={<AccountPage />}>
+						<Route path="profile" element={<ProfilePage />} />
+						<Route path="my-events" element={<MyEventPage />} />
+						<Route path="wallet" element={<WalletPage />} />
+					</Route>
+					<Route path="events" element={<EventsPage />} />
+					<Route path="events/:eventSlug" element={<EventPage />} />
 					<Route
-						index
-						element={
-							<LoginForm
-								phoneNumber={phoneNumber}
-								setPhoneNumber={setPhoneNumber}
-							/>
-						}
+						path="signup/:eventSlug"
+						element={<EventSignupPage />}
 					/>
 					<Route
-						path="password"
-						element={
-							<LoginPasswordForm phoneNumber={phoneNumber} />
-						}
+						path="events/:eventSlug/signup-success"
+						element={<SuccessPage />}
 					/>
 					<Route
-						path="otp"
-						element={<LoginOtpForm phoneNumber={phoneNumber} />}
+						path="events/:eventSlug/ticket"
+						element={<TicketPage />}
 					/>
-				</Route>
-				<Route path="my-account" element={<AccountPage />}>
-					<Route path="profile" element={<ProfilePage />} />
-					<Route path="my-events" element={<MyEventPage />} />
-					<Route path="wallet" element={<WalletPage />} />
-				</Route>
-				<Route path="events" element={<EventsPage />} />
-				<Route path="events/:eventSlug" element={<EventPage />} />
-				<Route path="signup/:eventSlug" element={<EventSignupPage />} />
-				<Route
-					path="events/:eventSlug/signup-success"
-					element={<SuccessPage />}
-				/>
-				<Route
-					path="events/:eventSlug/ticket"
-					element={<TicketPage />}
-				/>
-				<Route path="*" element={<ErrorPage />} />
-			</Routes>
-		</BrowserRouter>
+					<Route path="*" element={<ErrorPage />} />
+				</Routes>
+			</BrowserRouter>
+		</UrlProvider>
 	);
 };
 

@@ -6,7 +6,7 @@ import { useState } from "react";
 import Input from "../UI/Input";
 import Button from "../UI/Button";
 import ErrorMessage from "../UI/ErrorMessage";
-const BASE_URL = "https://api-akbarmasoud.iran.liara.run/";
+import useUrl from "../../hooks/useUrl";
 
 const PaymentBox = ({
 	fee,
@@ -16,6 +16,7 @@ const PaymentBox = ({
 	discountCode,
 	setDiscountCode,
 }) => {
+	const BASE_URL = useUrl();
 	const [showDiscountInput, setShowDiscountInput] = useState(true);
 	const [discountAlert, setDiscountAlert] = useState(false);
 	const [discountDetail, setDiscountDetail] = useState("");

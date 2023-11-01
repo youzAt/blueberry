@@ -4,12 +4,13 @@ import OTPInput from "react-otp-input";
 import Button from "../UI/Button";
 import ErrorMessage from "../UI/ErrorMessage";
 import { useNavigate } from "react-router-dom";
+import useUrl from "../../hooks/useUrl";
 
 const WAITING_TIME = 30;
-const BASE_URL = "https://api-akbarmasoud.iran.liara.run/";
 const OTP_LENGTH = 6;
 
 const LoginOtpForm = ({ phoneNumber }) => {
+	const BASE_URL = useUrl();
 	const [otp, setOtp] = useState();
 	const [hasError, setHasError] = useState(false);
 	const [remainingTime, setRemainingTime] = useState(WAITING_TIME);
@@ -17,9 +18,8 @@ const LoginOtpForm = ({ phoneNumber }) => {
 
 	// send otp to user phone
 	const sendOtp = useCallback(async () => {
-		const res = await fetch(`${BASE_URL}api/account/otp/${phoneNumber}`);
-		const data = await res.json();
-	}, [phoneNumber]);
+		await fetch(`${BASE_URL}api/account/otp/${phoneNumber}`);
+	}, [phoneNumber, BASE_URL]);
 
 	// resend-button timer
 	useEffect(() => {
@@ -59,7 +59,7 @@ const LoginOtpForm = ({ phoneNumber }) => {
 					const data = await res.json();
 					localStorage.setItem("blueberry-access", data.access);
 					localStorage.setItem("blueberry-refresh", data.refresh);
-					navigate('/my-account');
+					navigate("/my-account");
 				} catch {
 					setHasError(true);
 				}
@@ -68,10 +68,10 @@ const LoginOtpForm = ({ phoneNumber }) => {
 		}
 	};
 
-	const sendOtpHandler = ()=>{
+	const sendOtpHandler = () => {
 		setRemainingTime(WAITING_TIME);
 		sendOtp();
-	}
+	};
 
 	return (
 		<div className={styles.otpForm}>

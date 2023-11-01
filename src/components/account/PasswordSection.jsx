@@ -8,9 +8,10 @@ import ConfirmBox from "./ConfirmBox";
 import CheckListItem from "../UI/CheckListItem";
 import eyeSlashIcon from "../../assets/icons/eye-slash.svg";
 import eyeIcon from "../../assets/icons/eye.svg";
-const BASE_URL = "https://api-akbarmasoud.iran.liara.run/";
+import useUrl from "../../hooks/useUrl";
 
 const PasswordSection = () => {
+	const BASE_URL = useUrl();
 	const [newPassword, setNewPassword] = useState("");
 	const [newPasswordRepeat, setNewPasswordRepeat] = useState("");
 	const [oldPassword, setOldPassword] = useState("");
@@ -68,7 +69,7 @@ const PasswordSection = () => {
 			setHasPassword(data.password);
 		};
 		checkPassStat();
-	}, [accessToken]);
+	}, [accessToken, BASE_URL]);
 
 	const addPassHandler = (e) => {
 		e.preventDefault();
