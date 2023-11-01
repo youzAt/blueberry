@@ -1,5 +1,5 @@
-import MainFooter from "../components/MainFooter";
-import MainHeader from "../components/MainHeader";
+import MainFooter from "../components/layout/MainFooter";
+import MainHeader from "../components/layout/MainHeader";
 import Success from "../components/resultState/Success";
 import styles from "./SuccessPage.module.css";
 const SuccessPage = () => {

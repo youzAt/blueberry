@@ -1,10 +1,10 @@
 import { Outlet, useNavigate } from "react-router-dom";
-import MainHeader from "../components/MainHeader";
+import MainHeader from "../components/layout/MainHeader";
 import SideMenu from "../components/account/SideMenu";
 import getAccess from "../funcs/getAccess";
 import styles from "./AccountPage.module.css";
 import { useEffect, useState } from "react";
-import MainFooter from "../components/MainFooter";
+import MainFooter from "../components/layout/MainFooter";
 const BASE_URL = "https://api-akbarmasoud.iran.liara.run/";
 
 const AccountPage = () => {

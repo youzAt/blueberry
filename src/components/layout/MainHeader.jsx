@@ -3,7 +3,7 @@ import logo from "../assets/icons/logo-small.svg";
 import menuIcon from "../assets/icons/menu.svg";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import Button from "./UI/Button";
+import Button from "../UI/Button";
 
 const BASE_URL = "https://api-akbarmasoud.iran.liara.run/";
 
