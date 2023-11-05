@@ -1,5 +1,5 @@
 // hooks
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useUrl from "../../hooks/useUrl";
 
 // styles
@@ -13,8 +13,6 @@ import Input from "../UI/Input";
 import Button from "../UI/Button";
 import ErrorMessage from "../UI/ErrorMessage";
 import { useNavigate } from "react-router-dom";
-
-
 
 const LoginForm = ({ phoneNumber, setPhoneNumber }) => {
 	const BASE_URL = useUrl();
@@ -32,6 +30,10 @@ const LoginForm = ({ phoneNumber, setPhoneNumber }) => {
 			return true;
 		}
 	};
+
+	useEffect(()=>{
+		setPhoneNumber("")
+	}, [setPhoneNumber])
 
 	const submitHander = (e) => {
 		e.preventDefault(); // stop page refresh

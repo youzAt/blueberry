@@ -2,14 +2,18 @@ import styles from "./ticket.module.css";
 import defaultPhoto from "../../assets/defaultphoto.svg";
 import barcode from "../../assets/barcode-png.png";
 import logo from "../../assets/icons/logo-small.svg";
-const ticket = () => {
+import React from "react";
+// eslint-disable-next-line react/display-name
+const ticket = React.forwardRef((props, ref) => {
 	return (
-		<div className={styles.ticket}>
-			<img
-				className={styles.eventPhoto}
-				src={defaultPhoto}
-				alt="evet photo"
-			/>
+		<div className={styles.ticket} ref={ref}>
+			<div className={styles.eventBanner}>
+				<img
+					className={styles.eventPhoto}
+					src={defaultPhoto}
+					alt="evet photo"
+				/>
+			</div>
 			<div className={styles.ticketBottom}>
 				<div className={`${styles.ticketItem} ${styles.ticketTitle}`}>
 					<span className="caption-lg">رویداد</span>
@@ -53,6 +57,5 @@ const ticket = () => {
 			</div>
 		</div>
 	);
-};
-
+});
 export default ticket;

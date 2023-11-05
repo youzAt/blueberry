@@ -6,6 +6,7 @@
 	overflow: hidden;
 	background-color: #fff;
 	padding: 8px;
+	cursor: pointer;
 	transition: 0.3s ease-in-out;
 }
 .eventBox:hover {

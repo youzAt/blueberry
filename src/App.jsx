@@ -1,4 +1,9 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import {
+	BrowserRouter,
+	Route,
+	Routes,
+	useSearchParams,
+} from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import LoginForm from "./components/login/LoginForm";
 import LoginPasswordForm from "./components/login/LoginPasswordForm";
@@ -19,7 +24,8 @@ import { UrlProvider } from "./context/UrlProvider";
 
 const App = () => {
 	const [phoneNumber, setPhoneNumber] = useState("");
-
+	const [nextUrl, setNextUrl] = useState("");
+	
 	return (
 		<UrlProvider>
 			<BrowserRouter>
@@ -38,12 +44,20 @@ const App = () => {
 						<Route
 							path="password"
 							element={
-								<LoginPasswordForm phoneNumber={phoneNumber} />
+								<LoginPasswordForm
+									phoneNumber={phoneNumber}
+									nextUrl={nextUrl}
+								/>
 							}
 						/>
 						<Route
 							path="otp"
-							element={<LoginOtpForm phoneNumber={phoneNumber} />}
+							element={
+								<LoginOtpForm
+									phoneNumber={phoneNumber}
+									nextUrl={nextUrl}
+								/>
+							}
 						/>
 					</Route>
 					<Route path="my-account" element={<AccountPage />}>
@@ -51,8 +65,14 @@ const App = () => {
 						<Route path="my-events" element={<MyEventPage />} />
 						<Route path="wallet" element={<WalletPage />} />
 					</Route>
-					<Route path="events" element={<EventsPage />} />
-					<Route path="events/:eventSlug" element={<EventPage />} />
+					<Route
+						path="events"
+						element={<EventsPage setNextUrl={setNextUrl} />}
+					/>
+					<Route
+						path="events/:eventSlug"
+						element={<EventPage setNextUrl={setNextUrl} />}
+					/>
 					<Route
 						path="signup/:eventSlug"
 						element={<EventSignupPage />}

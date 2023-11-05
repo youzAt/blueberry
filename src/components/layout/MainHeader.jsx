@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 import Button from "../UI/Button";
 import useUrl from "../../hooks/useUrl";
 
-
 const MainHeader = ({ removeBtn, setIsMenuOpen }) => {
 	const BASE_URL = useUrl();
 	const [isLogin, setIsLogin] = useState(false);
@@ -46,7 +45,9 @@ const MainHeader = ({ removeBtn, setIsMenuOpen }) => {
 					>
 						<img src={menuIcon} alt="menu icon" />
 					</Button>
-					<img src={logo} alt="logo icon" />
+					<Link to="/events">
+						<img src={logo} alt="logo icon" />
+					</Link>
 					<nav className={styles.navbar}>
 						<ul>
 							<li className="body-md">

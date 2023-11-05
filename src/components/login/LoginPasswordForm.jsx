@@ -14,7 +14,7 @@ import smsIcon from "../../assets/icons/sms.svg";
 import useUrl from "../../hooks/useUrl";
 
 
-const LoginPasswordForm = ({ phoneNumber }) => {
+const LoginPasswordForm = ({ phoneNumber, nextUrl }) => {
 	const BASE_URL = useUrl();
 	const [isPassVisible, setIsPassVisible] = useState(false);
 	const [password, setPassword] = useState("");
@@ -49,7 +49,7 @@ const LoginPasswordForm = ({ phoneNumber }) => {
 				const data = await res.json();
 				localStorage.setItem("blueberry-access", data.access);
 				localStorage.setItem("blueberry-refresh", data.refresh);
-				navigate("/my-account");
+				navigate(nextUrl ? `/events/${nextUrl}` : "/my-account");
 			} catch {
 				setHasError(true);
 			}

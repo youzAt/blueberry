@@ -1,13 +1,21 @@
+.paymentBox{
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
 .costItem {
 	display: flex;
 	justify-content: space-between;
-	margin-bottom: 32px;
-    align-items: center;
+	/* margin-bottom: 32px; */
+	align-items: center;
+}
+.costItem:last-child{
+    margin-bottom: 0;
 }
 .costItem div {
 	display: flex;
 	gap: 4px;
-    align-items: center;
+	align-items: center;
 }
 .costItem div span {
 	color: var(--color-gray-2);
@@ -25,40 +33,42 @@
 .discount h6 {
 	color: var(--color-green);
 }
-.discount button{
-    padding: 0;
+.discount button {
+	padding: 0;
 }
-.final > span{
-    color: var(--color-primary-dark);
+.final > span {
+	color: var(--color-primary-dark);
 }
-.alert{
-    background-color: var(--color-green-surface);
-    color: var(--color-green);
-    border: 1px solid var(--color-green);
-    border-radius: var(--border-radius-1);
-    padding: 16px;
-    text-align: center;
+.alert {
+	background-color: var(--color-green-surface);
+	color: var(--color-green);
+	border: 1px solid var(--color-green);
+	border-radius: var(--border-radius-1);
+	padding: 16px;
+	text-align: center;
 }
 .discountBox label {
-    margin-right: 16px;
-    
+	margin-right: 16px;
 }
-.discountBox .inputField{
-    margin-top: 8px;
-    width: 100%;
-    position: relative;
+.discountBox .inputField {
+	margin-top: 8px;
+	width: 100%;
+	position: relative;
 }
-.inputField input{
-    width: 100%;
-    padding-left: 64px;
+.inputField input {
+	width: 100%;
+	padding-left: 64px;
 }
-.inputField button{
-    position: absolute;
-    left: 0;
-    top: 0;
+.inputField button {
+	position: absolute;
+	left: 0;
+	top: 0;
 }
-@media (max-width:480px) {
-    .costItem{
-        margin-bottom: 24px;
-    }
+.inputField button:hover {
+	background-color: unset !important;
+}
+@media (max-width: 480px) {
+	.costItem {
+		margin-bottom: 24px;
+	}
 }

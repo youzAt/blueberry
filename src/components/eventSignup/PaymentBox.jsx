@@ -62,17 +62,20 @@ const PaymentBox = ({
 	};
 	const finalDisplayedFee = feee - balance < 0 ? 0 : feee - balance;
 	const initPercent = (1 - fee / initialFee) * 100;
+	const ticketPrice = initialFee ? initialFee : fee;
 	return (
 		<Box className={styles.paymentBox}>
 			<div className={`${styles.costItem} ${styles.ticket}`}>
 				<span className={`body-md `}>هزینه بلیت</span>
 				<div>
-					<h6>
-						{initialFee
-							? initialFee.toLocaleString()
-							: fee?.toLocaleString()}
-					</h6>
-					<span className="caption-lg">ءتءء</span>
+					{ticketPrice !== 0 ? (
+						<>
+							<h6>{ticketPrice?.toLocaleString()}</h6>
+							<span className="caption-lg">ءتءء</span>
+						</>
+					) : (
+						<h6>رایگان</h6>
+					)}
 				</div>
 			</div>
 			{initialFee && (
@@ -116,19 +119,17 @@ const PaymentBox = ({
 			<div className={`${styles.costItem} ${styles.final}`}>
 				<span className={`body-md `}>مبلغ قابل پرداخت</span>
 				<div>
-					{
-						//finalDisplayedFee !== 0 ? (
+					{finalDisplayedFee !== 0 ? (
 						<>
 							<h5>{finalDisplayedFee.toLocaleString()}</h5>
 							<span className="caption-lg">ءتءء</span>
 						</>
-						//) : (
-						//	<h5>رایگان</h5>
-						//)
-					}
+					) : (
+						<h5>رایگان</h5>
+					)}
 				</div>
 			</div>
-			{showDiscountInput && (
+			{finalDisplayedFee !== 0 && showDiscountInput && (
 				<div className={styles.discountBox}>
 					<label htmlFor="discount" className="caption-lg">
 						کد تخفیف دارید؟

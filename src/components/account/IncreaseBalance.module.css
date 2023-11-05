@@ -5,19 +5,18 @@
 .increaseForm {
 	display: flex;
 	flex-direction: column;
-    align-items: flex-start;
+	align-items: flex-start;
 	gap: 16px;
 }
 .increaseForm .input {
 	width: 100%;
 }
-.input::-webkit-inner-spin-button{
-    display: none;
-}
+
 .amounts {
 	display: flex;
 	gap: 8px;
-    width: 100%;
+	width: 100%;
+	overflow-y: scroll;
 }
 .amountOption {
 	flex-grow: 1;

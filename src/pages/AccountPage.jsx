@@ -10,7 +10,7 @@ import useUrl from "../hooks/useUrl";
 const AccountPage = () => {
 	const BASE_URL = useUrl();
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
-	const navigate = useNavigate()
+	const navigate = useNavigate();
 	const [token, setToken] = useState(() => {
 		return localStorage.getItem("blueberry-access");
 	});
@@ -28,7 +28,7 @@ const AccountPage = () => {
 			}
 		};
 		loginCheck();
-		navigate('./my-events')
+		navigate("./my-events");
 	}, [token, BASE_URL]);
 	return (
 		<>

@@ -14,9 +14,10 @@ import defaultPhoto from "../assets/defaultphoto.svg";
 import getAccess from "../funcs/getAccess";
 import MainFooter from "../components/layout/MainFooter";
 import useUrl from "../hooks/useUrl";
+import ShortLink from '../components/event/ShortLink'
 
 
-const EventPage = () => {
+const EventPage = ({setNextUrl}) => {
 	const BASE_URL = useUrl()
 	const navigate = useNavigate();
 	const [event, setEvent] = useState({});
@@ -77,7 +78,7 @@ const EventPage = () => {
 					<aside className={styles.sideContent}>
 						{(status?.status === "END" ||
 							status?.status === "ERROR") && (
-							<Box>
+							<Box className={styles.endEvent}>
 								<p className={`caption-lg ${styles.end}`}>
 									{status.details}
 								</p>
@@ -89,6 +90,7 @@ const EventPage = () => {
 						)}
 						{status?.status === "REG" && (
 							<EventSignup
+								setNextUrl={setNextUrl}
 								slug={eventSlug}
 								initialFee={initialFee}
 								finalFee={finalFee}
@@ -99,7 +101,8 @@ const EventPage = () => {
 							startTime={startTime}
 							endTime={endTime}
 						/>
-						<EventPoster name={name} src={poster || defaultPhoto} />
+						{/* <EventPoster name={name} src={poster || defaultPhoto} /> */}
+						<ShortLink/>
 					</aside>
 				</div>
 			</div>

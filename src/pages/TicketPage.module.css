@@ -11,3 +11,16 @@
     align-items: center;
     gap: 16px;
 }
+@media print {
+    .ticketPage h5, .ticketPage .btns{
+        display: none;
+    }
+    .ticketPage{
+        padding-top: 0 !important;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        direction: rtl
+    }
+}

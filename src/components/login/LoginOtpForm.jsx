@@ -6,10 +6,10 @@ import ErrorMessage from "../UI/ErrorMessage";
 import { useNavigate } from "react-router-dom";
 import useUrl from "../../hooks/useUrl";
 
-const WAITING_TIME = 30;
+const WAITING_TIME = 120;
 const OTP_LENGTH = 6;
 
-const LoginOtpForm = ({ phoneNumber }) => {
+const LoginOtpForm = ({ phoneNumber, nextUrl }) => {
 	const BASE_URL = useUrl();
 	const [otp, setOtp] = useState();
 	const [hasError, setHasError] = useState(false);
@@ -59,7 +59,7 @@ const LoginOtpForm = ({ phoneNumber }) => {
 					const data = await res.json();
 					localStorage.setItem("blueberry-access", data.access);
 					localStorage.setItem("blueberry-refresh", data.refresh);
-					navigate("/my-account");
+					navigate(nextUrl ? `/events/${nextUrl}` : "/my-account");
 				} catch {
 					setHasError(true);
 				}

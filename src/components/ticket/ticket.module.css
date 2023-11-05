@@ -1,8 +1,36 @@
 .ticket {
 	width: 392px;
 	border-radius: var(--border-radius-2);
-	overflow: hidden;
 	background-color: #fff;
+	position: relative;
+	border: 1px solid var(--color-border);
+}
+.ticket .eventBanner {
+	border-top-right-radius: var(--border-radius-2);
+	border-top-left-radius: var(--border-radius-2);
+	overflow: hidden;
+}
+.ticket::after,
+.ticket::before {
+	content: "";
+	display: block;
+	position: absolute;
+	width: 64px;
+	height: 64px;
+	border: 1px solid var(--color-border);
+	bottom: 200px;
+	border-radius: 50%;
+	background-color: var(--color-surface);
+	border-right-color: var(--color-surface);
+	border-top-color: var(--color-surface);
+}
+.ticket::after {
+	right: 0;
+	transform: translateX(50%) rotate(45deg);
+}
+.ticket::before {
+	left: 0;
+	transform: translateX(-50%) rotate(-135deg);
 }
 .ticket .eventPhoto {
 	width: 100%;
@@ -10,9 +38,8 @@
 }
 .ticketItem span {
 	color: var(--color-gray);
-    margin: 8px;
-    display: inline-block;
-    
+	margin: 8px 0;
+	display: inline-block;
 }
 .ticketItem p,
 .ticketItem h6 {
@@ -41,26 +68,32 @@
 }
 .logo {
 	width: 64px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 .logo img {
 	display: block;
 	width: 100%;
 }
-.desc{
-    margin-top: 24px;
-    display: flex;
-    align-items: center;
-    gap: 16px;
+.desc {
+	margin-top: 24px;
+	display: flex;
+	align-items: center;
+	gap: 16px;
 }
-.desc p{
-    line-height: 190%;
+.desc p {
+	line-height: 190%;
 }
 
-@media (max-width:480px) {
-	.ticket{
+@media (max-width: 480px) {
+	.ticket {
 		width: 90%;
+	}
+}
+@media print {
+	.ticket::before,
+	.ticket::after {
+		display: none
 	}
 }

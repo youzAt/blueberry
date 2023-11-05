@@ -5,14 +5,37 @@ import MainHeader from "../components/layout/MainHeader";
 import getAccess from "../funcs/getAccess";
 import MainFooter from "../components/layout/MainFooter";
 import useUrl from "../hooks/useUrl";
+import { useNavigate } from "react-router-dom";
 
-const EventsPage = () => {
+const sortEventList = (eventsList) => {
+	let sortedEventList = [];
+	sortedEventList = sortedEventList.concat(
+		eventsList.slice().filter((event) => event.status.status === "REG")
+	);
+	sortedEventList = sortedEventList.concat(
+		eventsList.slice().filter((event) => event.status.status === "TICKET")
+	);
+	sortedEventList = sortedEventList.concat(
+		eventsList
+			.slice()
+			.filter((event) => event.status.status === "CERTIFICATE")
+	);
+	sortedEventList = sortedEventList.concat(
+		eventsList.slice().filter((event) => event.status.status === "ERROR")
+	);
+	return sortedEventList;
+};
+
+const EventsPage = ({setNextUrl}) => {
 	const BASE_URL = useUrl();
+	const navigate = useNavigate();
 	const [events, setEvents] = useState([]);
 	const [token, setToken] = useState(() => {
 		return localStorage.getItem("blueberry-access");
 	});
-
+	const redirectHandler = (slug) => {
+		navigate(`./${slug}`);
+	};
 	useEffect(() => {
 		const fetchEvents = async () => {
 			const reqHeader = token
@@ -40,9 +63,11 @@ const EventsPage = () => {
 	const doneEvents = events
 		.slice()
 		.filter((event) => event.status.status === "END");
-	const curEvents = events
+	const curEvents = sortEventList(events)
 		.slice()
 		.filter((event) => event.status.status !== "END");
+	console.log(events);
+
 	return (
 		<>
 			<MainHeader />
@@ -51,7 +76,12 @@ const EventsPage = () => {
 					<h5>رویداد های جدید</h5>
 					<div className={styles.events}>
 						{curEvents.map((event) => (
-							<EventBox event={event} key={event.slug} />
+							<EventBox
+							setNextUrl={setNextUrl}
+								onClick={() => redirectHandler(event.slug)}
+								event={event}
+								key={event.slug}
+							/>
 						))}
 					</div>
 				</section>

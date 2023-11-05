@@ -27,7 +27,7 @@ function convertUnixToPersianWeekDate(unixTimestamp) {
 	return convertedDate;
 }
 
-const EventBox = ({ event }) => {
+const EventBox = ({ event, onClick, setNextUrl }) => {
 	const BASE_URL = useUrl();
 	const navigate = useNavigate();
 	const {
@@ -57,7 +57,8 @@ const EventBox = ({ event }) => {
 			if (!res.ok) {
 				const isLogin = await getAccess(setToken);
 				if (!isLogin) {
-					navigate("/login");
+					setNextUrl(slug);
+					navigate(`/login`);
 				}
 			} else if (res.ok) {
 				navigate(`/signup/${slug}`);
@@ -66,9 +67,6 @@ const EventBox = ({ event }) => {
 		loginCheck();
 	};
 
-	const redirectHandler = () => {
-		navigate(`./${slug}`);
-	};
 	const eventAction = (
 		<div className={styles.eventAction}>
 			<Button
@@ -134,7 +132,10 @@ const EventBox = ({ event }) => {
 			</Button>
 		);
 	return (
-		<div className={`${styles.eventBox} ${error && "deactive"}`}>
+		<div
+			onClick={onClick}
+			className={`${styles.eventBox} ${error && "deactive"}`}
+		>
 			<div className={styles.eventBanner}>
 				<img src={banner || defaultPhoto} />
 			</div>
@@ -142,7 +143,7 @@ const EventBox = ({ event }) => {
 				<span className={`caption-md ${styles.eventDate}`}>
 					{`هفته ${persianSeqNums.at(week)} ${month}`}
 				</span>
-				<h6 onClick={redirectHandler}>{title}</h6>
+				<h6>{title}</h6>
 
 				{error || certificate || ticket || eventAction}
 			</div>

@@ -8,7 +8,7 @@ import ConfirmBox from "./ConfirmBox";
 import { useState, useCallback, useEffect } from "react";
 import useUrl from "../../hooks/useUrl";
 
-const WAITING_TIME = 30;
+const WAITING_TIME = 120;
 const OTP_LENGTH = 6;
 
 const PhoneNumberSection = () => {
@@ -104,6 +104,7 @@ const PhoneNumberSection = () => {
 				if (!res.ok) {
 					setHasError(true);
 				} else {
+					setPrevPhoneNumber(newPhoneNumber);
 					setShowConfirmAlert(true);
 					setIsChangingPhone(false);
 					setInputDisable(true);
@@ -124,7 +125,7 @@ const PhoneNumberSection = () => {
 			<h5 className={styles.sectionTitle}>شماره موبایل</h5>
 			{showConfirmAlert && (
 				<ConfirmBox btnHandler={() => setShowConfirmAlert(false)}>
-					شماره موبایل با موفقیت به {newPhoneNumber} تغییر یافت.
+					شماره موبایل با موفقیت به {prevPhoneNumber} تغییر یافت.
 				</ConfirmBox>
 			)}
 			<Box className={styles.box}>

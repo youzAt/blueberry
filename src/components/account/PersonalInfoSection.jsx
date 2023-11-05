@@ -157,6 +157,7 @@ const reducer = (state, action) => {
 								id="meli-code"
 								placeholder="کد ملی خود را وارد کنید"
 								className={inputError === "meliCode" && "error"}
+								type="number"
 							/>
 							{inputError === "meliCode" && (
 								<ErrorMessage>
@@ -180,6 +181,7 @@ const reducer = (state, action) => {
 								className={
 									inputError === "studentNumber" && "error"
 								}
+								type="number"
 							/>
 							{inputError === "studentNumber" && (
 								<ErrorMessage>

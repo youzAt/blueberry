@@ -40,7 +40,7 @@ const IncreaseBalance = () => {
 						</Button>
 					))}
 				</div>
-				<Button type="secondary">پرداخت آنلاین</Button>
+				<Button  type="secondary">پرداخت آنلاین</Button>
 			</div>
 		</Box>
 	);

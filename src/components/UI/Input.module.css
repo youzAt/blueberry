@@ -21,3 +21,6 @@
 .input:disabled {
 	color: var(--color-deactive);
 }
+.input[type="number"]::-webkit-inner-spin-button {
+	display: none;
+}

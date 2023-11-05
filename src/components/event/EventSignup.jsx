@@ -8,8 +8,7 @@ import LoginModal from "../eventSignup/LoginModal";
 import { useState } from "react";
 import useUrl from "../../hooks/useUrl";
 
-
-const EventSignup = ({ initialFee, finalFee, slug }) => {
+const EventSignup = ({ initialFee, finalFee, slug, setNextUrl }) => {
 	const BASE_URL = useUrl();
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const accessToken = localStorage.getItem("blueberry-access");
@@ -24,7 +23,9 @@ const EventSignup = ({ initialFee, finalFee, slug }) => {
 				},
 			});
 			if (!res.ok && res.status === 401) {
-				setIsModalOpen(true);
+				// setIsModalOpen(true);
+				setNextUrl(slug);
+				navigate("/login");
 			} else if (res.ok) {
 				navigate(`/signup/${slug}`);
 			}
@@ -64,7 +65,9 @@ const EventSignup = ({ initialFee, finalFee, slug }) => {
 			<Button type="secondary" onClick={signupHandler}>
 				ثبت نام کنید
 			</Button>
-			<CheckListItem isLarge className={styles.checkList}>کسب گواهی شرکت در دوره</CheckListItem>
+			<CheckListItem isLarge className={styles.checkList}>
+				کسب گواهی شرکت در دوره
+			</CheckListItem>
 		</Box>
 	);
 };
