@@ -7,6 +7,7 @@ import ErrorMessage from "../UI/ErrorMessage";
 import ConfirmBox from "./ConfirmBox";
 import { useState, useCallback, useEffect } from "react";
 import useUrl from "../../hooks/useUrl";
+import Loader from "../UI/Loader";
 
 const WAITING_TIME = 120;
 const OTP_LENGTH = 6;
@@ -22,11 +23,13 @@ const PhoneNumberSection = () => {
 	const [newPhoneNumber, setNewPhoneNumber] = useState("");
 	const [prevPhoneNumber, setPrevPhoneNumber] = useState("");
 	const [hasPhoneError, setHasPhoneError] = useState(false);
+	const [isLoading, setIsLoading] = useState(false);
 
 	const accessToken = localStorage.getItem("blueberry-access");
 
 	useEffect(() => {
 		const fetchUserPhoneNumber = async () => {
+			setIsLoading(true);
 			const res = await fetch(`${BASE_URL}api/account/phone-number/`, {
 				method: "GET",
 				headers: {
@@ -40,12 +43,14 @@ const PhoneNumberSection = () => {
 				setPrevPhoneNumber(formattedPhoneNumber);
 				setNewPhoneNumber(formattedPhoneNumber);
 			}
+			setIsLoading(false);
 		};
 		fetchUserPhoneNumber();
-	}, [accessToken, BASE_URL]);
+	}, [accessToken, BASE_URL, setIsLoading]);
 
 	const sendOtp = useCallback(async () => {
-		setRemainingTime(30);
+		setIsLoading(true);
+		setRemainingTime(WAITING_TIME);
 		const res = await fetch(
 			`${BASE_URL}api/account/change-phone/${newPhoneNumber}`,
 			{
@@ -63,6 +68,7 @@ const PhoneNumberSection = () => {
 			setRemainingTime(30);
 			setIsChangingPhone(true);
 		}
+		setIsLoading(false);
 	}, [newPhoneNumber, accessToken, BASE_URL]);
 
 	useEffect(() => {
@@ -83,13 +89,13 @@ const PhoneNumberSection = () => {
 	};
 	const otpChangeHandler = (value) => {
 		setOtp(value);
-		setHasError(false);
 		if (value.length === OTP_LENGTH) {
 			const userLoginInfo = {
 				phone_number: newPhoneNumber,
 				otp: value,
 			};
 			const validateOtp = async () => {
+				setIsLoading(true);
 				const res = await fetch(
 					`${BASE_URL}api/account/change-phone/`,
 					{
@@ -109,6 +115,7 @@ const PhoneNumberSection = () => {
 					setIsChangingPhone(false);
 					setInputDisable(true);
 				}
+				setIsLoading(false);
 			};
 			validateOtp();
 		}
@@ -129,7 +136,9 @@ const PhoneNumberSection = () => {
 				</ConfirmBox>
 			)}
 			<Box className={styles.box}>
-				{isChangingPhone ? (
+				{isLoading ? (
+					<Loader />
+				) : isChangingPhone ? (
 					<div className={styles.otpForm}>
 						<p className="caption-lg">
 							کد تائید به شماره {newPhoneNumber} ارسال شد

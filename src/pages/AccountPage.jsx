@@ -6,11 +6,12 @@ import styles from "./AccountPage.module.css";
 import { useEffect, useState } from "react";
 import MainFooter from "../components/layout/MainFooter";
 import useUrl from "../hooks/useUrl";
+import Loader from "../components/UI/Loader";
 
 const AccountPage = () => {
 	const BASE_URL = useUrl();
-	const [isMenuOpen, setIsMenuOpen] = useState(false);
 	const navigate = useNavigate();
+	const [isMenuOpen, setIsMenuOpen] = useState(false);
 	const [token, setToken] = useState(() => {
 		return localStorage.getItem("blueberry-access");
 	});
@@ -38,7 +39,7 @@ const AccountPage = () => {
 					setIsMenuOpen={setIsMenuOpen}
 					isMenuOpen={isMenuOpen}
 				/>
-				<>{<Outlet />}</>
+				<Outlet />
 			</main>
 			<MainFooter />
 		</>

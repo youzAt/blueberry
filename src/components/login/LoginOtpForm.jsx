@@ -3,13 +3,14 @@ import styles from "./LoginOtpForm.module.css";
 import OTPInput from "react-otp-input";
 import Button from "../UI/Button";
 import ErrorMessage from "../UI/ErrorMessage";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 import useUrl from "../../hooks/useUrl";
 
 const WAITING_TIME = 120;
 const OTP_LENGTH = 6;
 
 const LoginOtpForm = ({ phoneNumber, nextUrl }) => {
+	const { isLoading, setIsLoading } = useOutletContext();
 	const BASE_URL = useUrl();
 	const [otp, setOtp] = useState();
 	const [hasError, setHasError] = useState(false);
@@ -47,6 +48,8 @@ const LoginOtpForm = ({ phoneNumber, nextUrl }) => {
 				otp: value,
 			};
 			const validateOtp = async () => {
+				setIsLoading(true);
+
 				try {
 					const res = await fetch(`${BASE_URL}api/account/login/`, {
 						method: "POST",
@@ -62,6 +65,8 @@ const LoginOtpForm = ({ phoneNumber, nextUrl }) => {
 					navigate(nextUrl ? `/events/${nextUrl}` : "/my-account");
 				} catch {
 					setHasError(true);
+				} finally {
+					setIsLoading(false);
 				}
 			};
 			validateOtp();

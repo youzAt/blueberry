@@ -1,0 +1,10 @@
+.loader{
+    width: 300px;    
+}
+.loaderContainer{
+    width: 100%;
+    height: 50vh;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+}

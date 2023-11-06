@@ -6,6 +6,7 @@ import getAccess from "../funcs/getAccess";
 import MainFooter from "../components/layout/MainFooter";
 import useUrl from "../hooks/useUrl";
 import { useNavigate } from "react-router-dom";
+import Loader from "../components/UI/Loader";
 
 const sortEventList = (eventsList) => {
 	let sortedEventList = [];
@@ -26,9 +27,10 @@ const sortEventList = (eventsList) => {
 	return sortedEventList;
 };
 
-const EventsPage = ({setNextUrl}) => {
+const EventsPage = ({ setNextUrl }) => {
 	const BASE_URL = useUrl();
 	const navigate = useNavigate();
+	const [isLoading, setIsLoading] = useState(false);
 	const [events, setEvents] = useState([]);
 	const [token, setToken] = useState(() => {
 		return localStorage.getItem("blueberry-access");
@@ -38,6 +40,7 @@ const EventsPage = ({setNextUrl}) => {
 	};
 	useEffect(() => {
 		const fetchEvents = async () => {
+			setIsLoading(true);
 			const reqHeader = token
 				? {
 						"content-type": "application/json",
@@ -57,6 +60,7 @@ const EventsPage = ({setNextUrl}) => {
 			} else {
 				setEvents(data);
 			}
+			setIsLoading(false);
 		};
 		fetchEvents();
 	}, [token, BASE_URL]);
@@ -72,27 +76,35 @@ const EventsPage = ({setNextUrl}) => {
 		<>
 			<MainHeader />
 			<main className={`container ${styles.container}`}>
-				<section className={styles.eventsSection}>
-					<h5>رویداد های جدید</h5>
-					<div className={styles.events}>
-						{curEvents.map((event) => (
-							<EventBox
-							setNextUrl={setNextUrl}
-								onClick={() => redirectHandler(event.slug)}
-								event={event}
-								key={event.slug}
-							/>
-						))}
-					</div>
-				</section>
-				<section className={styles.eventsSection}>
-					<h5>رویداد های برگزار شده</h5>
-					<div className={styles.events}>
-						{doneEvents.map((event) => (
-							<EventBox event={event} key={event.slug} />
-						))}
-					</div>
-				</section>
+				{isLoading ? (
+					<Loader />
+				) : (
+					<>
+						<section className={styles.eventsSection}>
+							<h5>رویداد های جدید</h5>
+							<div className={styles.events}>
+								{curEvents.map((event) => (
+									<EventBox
+										setNextUrl={setNextUrl}
+										onClick={() =>
+											redirectHandler(event.slug)
+										}
+										event={event}
+										key={event.slug}
+									/>
+								))}
+							</div>
+						</section>
+						<section className={styles.eventsSection}>
+							<h5>رویداد های برگزار شده</h5>
+							<div className={styles.events}>
+								{doneEvents.map((event) => (
+									<EventBox event={event} key={event.slug} />
+								))}
+							</div>
+						</section>
+					</>
+				)}
 			</main>
 			<MainFooter />
 		</>

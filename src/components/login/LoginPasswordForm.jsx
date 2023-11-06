@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 
 import styles from "./LoginPasswordForm.module.css";
 
@@ -13,8 +13,8 @@ import eyeIcon from "../../assets/icons/eye.svg";
 import smsIcon from "../../assets/icons/sms.svg";
 import useUrl from "../../hooks/useUrl";
 
-
 const LoginPasswordForm = ({ phoneNumber, nextUrl }) => {
+	const { isLoading, setIsLoading } = useOutletContext();
 	const BASE_URL = useUrl();
 	const [isPassVisible, setIsPassVisible] = useState(false);
 	const [password, setPassword] = useState("");
@@ -37,6 +37,7 @@ const LoginPasswordForm = ({ phoneNumber, nextUrl }) => {
 			password: password,
 		};
 		const validatePass = async () => {
+			setIsLoading(true);
 			try {
 				const res = await fetch(`${BASE_URL}api/account/login/`, {
 					method: "POST",
@@ -52,6 +53,8 @@ const LoginPasswordForm = ({ phoneNumber, nextUrl }) => {
 				navigate(nextUrl ? `/events/${nextUrl}` : "/my-account");
 			} catch {
 				setHasError(true);
+			} finally {
+				setIsLoading(false);
 			}
 		};
 		validatePass();

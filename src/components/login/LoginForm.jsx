@@ -12,9 +12,11 @@ import mobileIcon from "../../assets/icons/mobile.svg";
 import Input from "../UI/Input";
 import Button from "../UI/Button";
 import ErrorMessage from "../UI/ErrorMessage";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 
 const LoginForm = ({ phoneNumber, setPhoneNumber }) => {
+	const { isLoading, setIsLoading } = useOutletContext();
+
 	const BASE_URL = useUrl();
 	const [hasError, setHasError] = useState(false);
 	const navigate = useNavigate();
@@ -31,9 +33,9 @@ const LoginForm = ({ phoneNumber, setPhoneNumber }) => {
 		}
 	};
 
-	useEffect(()=>{
-		setPhoneNumber("")
-	}, [setPhoneNumber])
+	useEffect(() => {
+		setPhoneNumber("");
+	}, [setPhoneNumber]);
 
 	const submitHander = (e) => {
 		e.preventDefault(); // stop page refresh
@@ -44,6 +46,7 @@ const LoginForm = ({ phoneNumber, setPhoneNumber }) => {
 		};
 
 		const checkPhone = async () => {
+			setIsLoading(true);
 			try {
 				const res = await fetch(
 					`${BASE_URL}api/account/account-stat/`,
@@ -61,6 +64,8 @@ const LoginForm = ({ phoneNumber, setPhoneNumber }) => {
 				userHasPassword ? navigate("./password") : navigate("./otp");
 			} catch (er) {
 				setHasError(true);
+			} finally {
+				setIsLoading(false);
 			}
 		};
 		checkPhone();

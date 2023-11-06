@@ -6,7 +6,7 @@ import styles from "./PersonalInfoSection.module.css";
 import ConfirmBox from "./ConfirmBox";
 import ErrorMessage from "../UI/ErrorMessage";
 import useUrl from "../../hooks/useUrl";
-
+import Loader from "../UI/Loader";
 
 const initialProfille = {
 	firstName: "",
@@ -19,14 +19,15 @@ const reducer = (state, action) => {
 	switch (action.type) {
 		case "inputChange":
 			return { ...state, [action.key]: action.payload };
-			case "setState":
+		case "setState":
 			return { ...state, ...action.payload };
-			default:
-				throw new Error("Unknown action type");
-			}
-		};
-		
-		const PersonalInfoSection = () => {
+		default:
+			throw new Error("Unknown action type");
+	}
+};
+
+const PersonalInfoSection = () => {
+	const [isLoading, setIsLoading] = useState(false);
 	const BASE_URL = useUrl();
 	const [userProfile, dispatch] = useReducer(reducer, initialProfille);
 	const { firstName, lastName, meliCode, studentNumber } = userProfile;
@@ -37,6 +38,7 @@ const reducer = (state, action) => {
 
 	useEffect(() => {
 		const fetchPersonalInfo = async () => {
+			setIsLoading(true);
 			const res = await fetch(`${BASE_URL}api/account/profile/`, {
 				method: "PUT",
 				headers: {
@@ -52,9 +54,11 @@ const reducer = (state, action) => {
 				lastName: data.last_name,
 			};
 			dispatch({ type: "setState", payload: userPersonalInfo });
+			setIsLoading(false);
 		};
+
 		fetchPersonalInfo();
-	}, [accessToken, dispatch, BASE_URL]);
+	}, [accessToken, dispatch, BASE_URL, setIsLoading]);
 
 	const inputChangeHandler = (e) => {
 		dispatch({
@@ -88,6 +92,7 @@ const reducer = (state, action) => {
 			last_name: lastName,
 		};
 		const editProfile = async () => {
+			setIsLoading(true);
 			const res = await fetch(`${BASE_URL}api/account/profile/`, {
 				method: "PUT",
 				headers: {
@@ -102,6 +107,7 @@ const reducer = (state, action) => {
 			} else {
 				setHasError(Object.values(data).at(0));
 			}
+			setIsLoading(false)
 		};
 		editProfile();
 	};
@@ -119,81 +125,97 @@ const reducer = (state, action) => {
 				</ConfirmBox>
 			)}
 			<Box className={styles.box}>
-				<form onSubmit={formSubmitHandler}>
-					<div className={styles.formBox}>
-						<div className={styles.inputBox}>
-							<label className="caption-lg" htmlFor="first-name">
-								نام
-							</label>
-							<Input
-								onChange={inputChangeHandler}
-								value={firstName}
-								name="firstName"
-								id="first-name"
-								placeholder="نام خود را وارد کنید"
-							/>
-						</div>
-						<div className={styles.inputBox}>
-							<label className="caption-lg" htmlFor="last-name">
-								نام خانوادگی
-							</label>
-							<Input
-								onChange={inputChangeHandler}
-								value={lastName}
-								name="lastName"
-								id="last-name"
-								placeholder="نام خانوادگی خود را وارد کنید"
-							/>
-						</div>
+				{isLoading ? (
+					<Loader />
+				) : (
+					<form onSubmit={formSubmitHandler}>
+						<div className={styles.formBox}>
+							<div className={styles.inputBox}>
+								<label
+									className="caption-lg"
+									htmlFor="first-name"
+								>
+									نام
+								</label>
+								<Input
+									onChange={inputChangeHandler}
+									value={firstName}
+									name="firstName"
+									id="first-name"
+									placeholder="نام خود را وارد کنید"
+								/>
+							</div>
+							<div className={styles.inputBox}>
+								<label
+									className="caption-lg"
+									htmlFor="last-name"
+								>
+									نام خانوادگی
+								</label>
+								<Input
+									onChange={inputChangeHandler}
+									value={lastName}
+									name="lastName"
+									id="last-name"
+									placeholder="نام خانوادگی خود را وارد کنید"
+								/>
+							</div>
 
-						<div className={styles.inputBox}>
-							<label className="caption-lg" htmlFor="meli-code">
-								کد ملی
-							</label>
-							<Input
-								onChange={inputChangeHandler}
-								value={meliCode}
-								name="meliCode"
-								id="meli-code"
-								placeholder="کد ملی خود را وارد کنید"
-								className={inputError === "meliCode" && "error"}
-								type="number"
-							/>
-							{inputError === "meliCode" && (
-								<ErrorMessage>
-									کد ملی وارد شده نامعتبر است.
-								</ErrorMessage>
-							)}
+							<div className={styles.inputBox}>
+								<label
+									className="caption-lg"
+									htmlFor="meli-code"
+								>
+									کد ملی
+								</label>
+								<Input
+									onChange={inputChangeHandler}
+									value={meliCode}
+									name="meliCode"
+									id="meli-code"
+									placeholder="کد ملی خود را وارد کنید"
+									className={
+										inputError === "meliCode" && "error"
+									}
+									type="number"
+								/>
+								{inputError === "meliCode" && (
+									<ErrorMessage>
+										کد ملی وارد شده نامعتبر است.
+									</ErrorMessage>
+								)}
+							</div>
+							<div className={styles.inputBox}>
+								<label
+									className="caption-lg"
+									htmlFor="student-number"
+								>
+									شماره دانشجویی
+								</label>
+								<Input
+									onChange={inputChangeHandler}
+									value={studentNumber}
+									name="studentNumber"
+									id="student-number"
+									placeholder="مثلا : 40012345678"
+									className={
+										inputError === "studentNumber" &&
+										"error"
+									}
+									type="number"
+								/>
+								{inputError === "studentNumber" && (
+									<ErrorMessage>
+										شماره دانشجویی وارد شده نامعتبر است.
+									</ErrorMessage>
+								)}
+							</div>
 						</div>
-						<div className={styles.inputBox}>
-							<label
-								className="caption-lg"
-								htmlFor="student-number"
-							>
-								شماره دانشجویی
-							</label>
-							<Input
-								onChange={inputChangeHandler}
-								value={studentNumber}
-								name="studentNumber"
-								id="student-number"
-								placeholder="مثلا : 40012345678"
-								className={
-									inputError === "studentNumber" && "error"
-								}
-								type="number"
-							/>
-							{inputError === "studentNumber" && (
-								<ErrorMessage>
-									شماره دانشجویی وارد شده نامعتبر است.
-								</ErrorMessage>
-							)}
-						</div>
-					</div>
-					<Button isSmall type="primary">
-						ذخیره تغییرات
-					</Button>
-				</form>
+						<Button isSmall type="primary">
+							ذخیره تغییرات
+						</Button>
+					</form>
+				)}
 			</Box>
 		</div>
 	);

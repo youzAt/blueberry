@@ -17,7 +17,7 @@ function arrayToObject(array) {
 }
 
 const EventSignupPage = () => {
-	const BASE_URL = useUrl()
+	const BASE_URL = useUrl();
 	const [event, setEvent] = useState({});
 	const [balance, setBalance] = useState("");
 	const [fields, setFields] = useState([]);
@@ -86,7 +86,6 @@ const EventSignupPage = () => {
 			if (res.ok) {
 				navigate(`/events/${eventSlug}/signup-success`);
 			}
-			
 		};
 		sendSignupData();
 	};

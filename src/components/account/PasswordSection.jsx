@@ -9,6 +9,7 @@ import CheckListItem from "../UI/CheckListItem";
 import eyeSlashIcon from "../../assets/icons/eye-slash.svg";
 import eyeIcon from "../../assets/icons/eye.svg";
 import useUrl from "../../hooks/useUrl";
+import Loader from "../UI/Loader";
 
 const PasswordSection = () => {
 	const BASE_URL = useUrl();
@@ -23,6 +24,7 @@ const PasswordSection = () => {
 	const [isOldPassVisible, setIsOldPassVisible] = useState(false);
 	const [isNewPassVisible, setIsNewPassVisible] = useState(false);
 	const [isNewPassRepeatVisible, setIsNewPassRepeatVisible] = useState(false);
+	const [isLoading, setIsLoading] = useState(false);
 
 	const changeOldPassVisibility = () => {
 		setIsOldPassVisible((cur) => !cur);
@@ -39,6 +41,7 @@ const PasswordSection = () => {
 	const accessToken = localStorage.getItem("blueberry-access");
 
 	const sendPass = async (userPass) => {
+		setIsLoading(true);
 		const res = await fetch(`${BASE_URL}api/account/set-password/`, {
 			method: "POST",
 			headers: {
@@ -51,13 +54,15 @@ const PasswordSection = () => {
 			setHasPassword(true);
 			setIsPasswordChanged(true);
 		} else {
-			
 			setError("رمز عبور فعلی صحیح نمی باشد");
 		}
+		setIsLoading(false);
 	};
 
 	useEffect(() => {
 		const checkPassStat = async () => {
+			setIsLoading(true);
+
 			const res = await fetch(`${BASE_URL}api/account/user/password/`, {
 				method: "GET",
 				headers: {
@@ -67,6 +72,7 @@ const PasswordSection = () => {
 			});
 			const data = await res.json();
 			setHasPassword(data.password);
+			setIsLoading(false);
 		};
 		checkPassStat();
 	}, [accessToken, BASE_URL]);
@@ -77,7 +83,7 @@ const PasswordSection = () => {
 		if (!passAlphaCheck || !passChangeHandler || !passLengthCheck) return;
 		if (newPassword !== newPasswordRepeat) {
 			setError("رمز عبور با تکرار آن مطابقت ندارد");
-			
+
 			return;
 		}
 		const userPass = {
@@ -115,188 +121,198 @@ const PasswordSection = () => {
 				</ConfirmBox>
 			)}
 			<Box className={styles.box}>
-				<form onSubmit={addPassHandler}>
-					{hasPassword ? (
-						<>
-							<div className={styles.inputBox}>
-								<label
-									className="caption-lg"
-									htmlFor="current-password"
-								>
-									رمز عبور فعلی
-								</label>
-								<Input
-									value={oldPassword}
-									onChange={(e) =>
-										setOldPassword(e.target.value)
-									}
-									id="current-password"
-									placeholder="رمز عبور فعلی حساب خود را وارد کنید"
-									type={
-										isOldPassVisible ? "text" : "password"
-									}
-								/>
-								<img
-									src={
-										isOldPassVisible
-											? eyeSlashIcon
-											: eyeIcon
-									}
-									className={styles.eyeIcon}
-									alt="eye icon"
-									onClick={changeOldPassVisibility}
-								/>
-							</div>
-							<div className={styles.inputBox}>
-								<label
-									className="caption-lg"
-									htmlFor="password"
-								>
-									رمز عبور جدید
-								</label>
-								<Input
-									value={newPassword}
-									onChange={passChangeHandler}
-									id="password"
-									placeholder="رمز عبور جدید خود را وارد کنید"
-									type={
-										isNewPassVisible ? "text" : "password"
-									}
-								/>
-								<img
-									src={
-										isNewPassVisible
-											? eyeSlashIcon
-											: eyeIcon
-									}
-									className={styles.eyeIcon}
-									alt="eye icon"
-									onClick={changeNewPassVisibility}
-								/>
-							</div>
-							<div className={styles.inputBox}>
-								<label
-									className="caption-lg"
-									htmlFor="password-confirm"
-								>
-									تکرار رمز عبور جدید
-								</label>
-								<Input
-									value={newPasswordRepeat}
-									onChange={(e) =>
-										setNewPasswordRepeat(e.target.value)
-									}
-									id="password-confirm"
-									placeholder="رمز عبور جدید خود را دوباره وارد کنید"
-									type={
-										isNewPassRepeatVisible
-											? "text"
-											: "password"
-									}
-								/>
-								<img
-									src={
-										isNewPassRepeatVisible
-											? eyeSlashIcon
-											: eyeIcon
-									}
-									className={styles.eyeIcon}
-									alt="eye icon"
-									onClick={changeNewPassRepeatVisibility}
-								/>
-							</div>
-						</>
-					) : (
-						<>
-							<div className={styles.inputBox}>
-								<label
-									className="caption-lg"
-									htmlFor="password"
-								>
-									رمز عبور
-								</label>
-								<Input
-									value={newPassword}
-									onChange={passChangeHandler}
-									id="password"
-									placeholder="رمز عبور خود را وارد کنید"
-									type={
-										isNewPassVisible ? "text" : "password"
-									}
-								/>
-								<img
-									src={
-										isNewPassVisible
-											? eyeSlashIcon
-											: eyeIcon
-									}
-									className={styles.eyeIcon}
-									alt="eye icon"
-									onClick={changeNewPassVisibility}
-								/>
-							</div>
-							<div className={styles.inputBox}>
-								<label
-									className="caption-lg"
-									htmlFor="password-confirm"
-								>
-									تکرار رمز عبور
-								</label>
-								<Input
-									value={newPasswordRepeat}
-									onChange={(e) =>
-										setNewPasswordRepeat(e.target.value)
-									}
-									id="password-confirm"
-									placeholder="رمز عبور خود را دوباره وارد کنید"
-									type={
-										isNewPassRepeatVisible
-											? "text"
-											: "password"
-									}
-								/>
-								<img
-									src={
-										isNewPassRepeatVisible
-											? eyeSlashIcon
-											: eyeIcon
-									}
-									className={styles.eyeIcon}
-									alt="eye icon"
-									onClick={changeNewPassRepeatVisibility}
-								/>
-							</div>
-						</>
-					)}
-					{error && <ErrorMessage>{error}</ErrorMessage>}
-					<div className={styles.checkListBox}>
-						<CheckListItem
-							className={!passNumberCheck && "deactive"}
-						>
-							رمز عبور متشکل از حداقل یک رقم 9-0 باشد
-						</CheckListItem>
-						<CheckListItem
-							className={!passAlphaCheck && "deactive"}
-						>
-							رمز عبور متشکل از حداقل یک کاراکتر از حروف بزرگ
-							انگلیسی A-Z باشد
-						</CheckListItem>
-						<CheckListItem
-							className={!passLengthCheck && "deactive"}
-						>
-							رمز عبور حداقل ۸ کاراکتر باشد
-						</CheckListItem>
-					</div>
-					{hasPassword ? (
-						<Button isSmall type="primary">
-							تغییر رمز عبور
-						</Button>
-					) : (
-						<Button isSmall type="primary">
-							افزودن رمز عبور
-						</Button>
-					)}
-				</form>
+				{isLoading ? (
+					<Loader />
+				) : (
+					<form onSubmit={addPassHandler}>
+						{hasPassword ? (
+							<>
+								<div className={styles.inputBox}>
+									<label
+										className="caption-lg"
+										htmlFor="current-password"
+									>
+										رمز عبور فعلی
+									</label>
+									<Input
+										value={oldPassword}
+										onChange={(e) =>
+											setOldPassword(e.target.value)
+										}
+										id="current-password"
+										placeholder="رمز عبور فعلی حساب خود را وارد کنید"
+										type={
+											isOldPassVisible
+												? "text"
+												: "password"
+										}
+									/>
+									<img
+										src={
+											isOldPassVisible
+												? eyeSlashIcon
+												: eyeIcon
+										}
+										className={styles.eyeIcon}
+										alt="eye icon"
+										onClick={changeOldPassVisibility}
+									/>
+								</div>
+								<div className={styles.inputBox}>
+									<label
+										className="caption-lg"
+										htmlFor="password"
+									>
+										رمز عبور جدید
+									</label>
+									<Input
+										value={newPassword}
+										onChange={passChangeHandler}
+										id="password"
+										placeholder="رمز عبور جدید خود را وارد کنید"
+										type={
+											isNewPassVisible
+												? "text"
+												: "password"
+										}
+									/>
+									<img
+										src={
+											isNewPassVisible
+												? eyeSlashIcon
+												: eyeIcon
+										}
+										className={styles.eyeIcon}
+										alt="eye icon"
+										onClick={changeNewPassVisibility}
+									/>
+								</div>
+								<div className={styles.inputBox}>
+									<label
+										className="caption-lg"
+										htmlFor="password-confirm"
+									>
+										تکرار رمز عبور جدید
+									</label>
+									<Input
+										value={newPasswordRepeat}
+										onChange={(e) =>
+											setNewPasswordRepeat(e.target.value)
+										}
+										id="password-confirm"
+										placeholder="رمز عبور جدید خود را دوباره وارد کنید"
+										type={
+											isNewPassRepeatVisible
+												? "text"
+												: "password"
+										}
+									/>
+									<img
+										src={
+											isNewPassRepeatVisible
+												? eyeSlashIcon
+												: eyeIcon
+										}
+										className={styles.eyeIcon}
+										alt="eye icon"
+										onClick={changeNewPassRepeatVisibility}
+									/>
+								</div>
+							</>
+						) : (
+							<>
+								<div className={styles.inputBox}>
+									<label
+										className="caption-lg"
+										htmlFor="password"
+									>
+										رمز عبور
+									</label>
+									<Input
+										value={newPassword}
+										onChange={passChangeHandler}
+										id="password"
+										placeholder="رمز عبور خود را وارد کنید"
+										type={
+											isNewPassVisible
+												? "text"
+												: "password"
+										}
+									/>
+									<img
+										src={
+											isNewPassVisible
+												? eyeSlashIcon
+												: eyeIcon
+										}
+										className={styles.eyeIcon}
+										alt="eye icon"
+										onClick={changeNewPassVisibility}
+									/>
+								</div>
+								<div className={styles.inputBox}>
+									<label
+										className="caption-lg"
+										htmlFor="password-confirm"
+									>
+										تکرار رمز عبور
+									</label>
+									<Input
+										value={newPasswordRepeat}
+										onChange={(e) =>
+											setNewPasswordRepeat(e.target.value)
+										}
+										id="password-confirm"
+										placeholder="رمز عبور خود را دوباره وارد کنید"
+										type={
+											isNewPassRepeatVisible
+												? "text"
+												: "password"
+										}
+									/>
+									<img
+										src={
+											isNewPassRepeatVisible
+												? eyeSlashIcon
+												: eyeIcon
+										}
+										className={styles.eyeIcon}
+										alt="eye icon"
+										onClick={changeNewPassRepeatVisibility}
+									/>
+								</div>
+							</>
+						)}
+						{error && <ErrorMessage>{error}</ErrorMessage>}
+						<div className={styles.checkListBox}>
+							<CheckListItem
+								className={!passNumberCheck && "deactive"}
+							>
+								رمز عبور متشکل از حداقل یک رقم 9-0 باشد
+							</CheckListItem>
+							<CheckListItem
+								className={!passAlphaCheck && "deactive"}
+							>
+								رمز عبور متشکل از حداقل یک کاراکتر از حروف بزرگ
+								انگلیسی A-Z باشد
+							</CheckListItem>
+							<CheckListItem
+								className={!passLengthCheck && "deactive"}
+							>
+								رمز عبور حداقل ۸ کاراکتر باشد
+							</CheckListItem>
+						</div>
+						{hasPassword ? (
+							<Button isSmall type="primary">
+								تغییر رمز عبور
+							</Button>
+						) : (
+							<Button isSmall type="primary">
+								افزودن رمز عبور
+							</Button>
+						)}
+					</form>
+				)}
 			</Box>
 		</div>
 	);

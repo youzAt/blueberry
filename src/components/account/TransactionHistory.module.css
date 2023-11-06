@@ -12,6 +12,7 @@
 	color: #4b5259;
 	text-align: center;
 	padding: 16px;
+	min-width: 120px;
 }
 .transactionBox th {
 	border-bottom: 1px solid var(--color-border);

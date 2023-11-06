@@ -6,6 +6,7 @@ import styles from "./LoginPage.module.css";
 import { useEffect, useState } from "react";
 import getAccess from "../funcs/getAccess";
 import useUrl from "../hooks/useUrl";
+import Loader from '../components/UI/Loader'
 const LoginPage = () => {
 	const navigate = useNavigate();
 	const backBtnHandler = () => {
@@ -13,12 +14,14 @@ const LoginPage = () => {
 	};
 	const location = useLocation();
 	const BASE_URL = useUrl();
+	const [isLoadig, setIsLoading] = useState(false);
 
 	const [token, setToken] = useState(() => {
 		return localStorage.getItem("blueberry-access");
 	});
 	useEffect(() => {
 		const loginCheck = async () => {
+			setIsLoading(true);
 			const res = await fetch(`${BASE_URL}api/account/phone-number/`, {
 				method: "GET",
 				headers: {
@@ -34,12 +37,14 @@ const LoginPage = () => {
 			} else {
 				navigate("/events");
 			}
+			setIsLoading(false)
 		};
 		loginCheck();
 	}, [token, BASE_URL, navigate]);
 
 	return (
 		<main className={`container ${styles.container}`}>
+			{isLoadig ? <Loader /> : 
 			<div className={styles.loginBox}>
 				<h5>
 					{location.key === "default"
@@ -54,9 +59,9 @@ const LoginPage = () => {
 					<img src={leftArrowIcon} alt="left arrow icon" />
 				</Button>
 				<Box className={styles.box}>
-					<Outlet />
+					<Outlet context={{isLoadig, setIsLoading}} />
 				</Box>
-			</div>
+			</div>}
 		</main>
 	);
 };
