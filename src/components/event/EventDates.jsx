@@ -7,7 +7,10 @@ import moment from "moment-jalaali";
 function convertUnixToPersianWeekDate(unixTimestamp) {
 	const date = new Date(unixTimestamp * 1000);
 	moment.loadPersian({ dialect: "persian-modern" });
-	const persianDate = moment(date).format("dddd jD jMMMM jYYYY", "fa");
+	const persianDate = {
+		data: moment(date).format("dddd jD jMMMM jYYYY", "fa"),
+		hour: `${moment(date).hour()}:${moment(date).minute()}`,
+	};
 
 	return persianDate;
 }
@@ -19,21 +22,21 @@ const EventDates = ({ regTime, startTime, endTime }) => {
 				<img src={timerIcon} alt="timer icon" />
 				<div className={`body-md ${styles.date}`}>
 					<p>زمان پایان ثبت نام</p>
-					<span>{convertUnixToPersianWeekDate(regTime)}</span>
+					<span>{convertUnixToPersianWeekDate(regTime).data} --- ساعت {convertUnixToPersianWeekDate(regTime).hour}</span>
 				</div>
 			</div>
 			<div className={styles.dateItem}>
 				<img src={calendarIcon} alt="timer icon" />
 				<div className={`body-md ${styles.date}`}>
 					<p>شروع دوره</p>
-					<span>{convertUnixToPersianWeekDate(startTime)}</span>
+					<span>{convertUnixToPersianWeekDate(startTime).data} --- ساعت {convertUnixToPersianWeekDate(startTime).hour}</span>
 				</div>
 			</div>
 			<div className={styles.dateItem}>
 				<img src={calendarIcon} alt="timer icon" />
 				<div className={`body-md ${styles.date}`}>
 					<p>زمان پایان دوره</p>
-					<span>{convertUnixToPersianWeekDate(endTime)}</span>
+					<span>{convertUnixToPersianWeekDate(endTime).data} --- ساعت {convertUnixToPersianWeekDate(endTime).hour}</span>
 				</div>
 			</div>
 		</Box>

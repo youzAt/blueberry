@@ -2,13 +2,19 @@ import Box from "../UI/Box";
 import Button from "../UI/Button";
 import Input from "../UI/Input";
 import styles from "./ShortLink.module.css";
-const ShortLink = () => {
+const ShortLink = ({ link }) => {
+	const inputValue = `bberry.id/e/${link}`;
+	const copyHandler = () => {
+		navigator.clipboard.writeText(inputValue);
+	};
 	return (
 		<Box className={styles.shortLinkBox}>
 			<h6>لینک رویداد:</h6>
 			<div className={styles.inputBox}>
-				<Input />
-				<Button>کپی</Button>
+				<Input disabled value={inputValue} />
+				<Button type="outline" onClick={copyHandler}>
+					کپی
+				</Button>
 			</div>
 		</Box>
 	);

@@ -18,11 +18,11 @@ import ShortLink from "../components/event/ShortLink";
 import Loader from "../components/UI/Loader";
 
 const EventPage = ({ setNextUrl }) => {
-	const BASE_URL = useUrl();
 	const navigate = useNavigate();
 	const [event, setEvent] = useState({});
 	const [isLoading, setIsLoaing] = useState(false);
 	const { eventSlug } = useParams();
+	const BASE_URL = useUrl();
 	const [token, setToken] = useState(() => {
 		return localStorage.getItem("blueberry-access");
 	});
@@ -34,10 +34,10 @@ const EventPage = ({ setNextUrl }) => {
 				? {
 						"content-type": "application/json",
 						Authorization: `Bearer ${token}`,
-				  }
+				}
 				: {
 						"content-type": "application/json",
-				  };
+				};
 
 			const res = await fetch(`${BASE_URL}api/events/${eventSlug}/`, {
 				method: "GET",
@@ -67,6 +67,7 @@ const EventPage = ({ setNextUrl }) => {
 		description,
 		// poster,
 		banner,
+		short_link: link,
 	} = event;
 	return (
 		<>
@@ -119,7 +120,7 @@ const EventPage = ({ setNextUrl }) => {
 									endTime={endTime}
 								/>
 								{/* <EventPoster name={name} src={poster || defaultPhoto} /> */}
-								<ShortLink />
+								<ShortLink link={link} />
 							</aside>
 						</div>
 					</>

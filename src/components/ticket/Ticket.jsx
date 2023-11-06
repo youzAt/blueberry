@@ -3,48 +3,66 @@ import defaultPhoto from "../../assets/defaultphoto.svg";
 import barcode from "../../assets/barcode-png.png";
 import logo from "../../assets/icons/logo-small.svg";
 import React from "react";
+import moment from "moment-jalaali";
+const TIME = 1699268455;
+
+function convertUnixToPersianWeekDate(unixTimestamp) {
+	const date = new Date(unixTimestamp * 1000);
+	moment.loadPersian({ dialect: "persian-modern" });
+	const persianDate = {
+		data: moment(date).format("dddd jD jMMMM jYYYY", "fa"),
+		hour: `${moment(date).hour()}:${moment(date).minute()}`,
+	};
+
+	return persianDate;
+}
+console.log(convertUnixToPersianWeekDate(TIME).hour)
 // eslint-disable-next-line react/display-name
-const ticket = React.forwardRef((props, ref) => {
+const ticket = React.forwardRef(({ info }, ref) => {
+	const { event, answers, short_link: shortLink } = info;
+	console.log();
 	return (
 		<div className={styles.ticket} ref={ref}>
 			<div className={styles.eventBanner}>
 				<img
 					className={styles.eventPhoto}
-					src={defaultPhoto}
-					alt="evet photo"
+					src={event?.banner ? event.banner : defaultPhoto}
+					alt={`${event?.name} event banner`}
 				/>
 			</div>
 			<div className={styles.ticketBottom}>
 				<div className={`${styles.ticketItem} ${styles.ticketTitle}`}>
 					<span className="caption-lg">رویداد</span>
-					<h6>مسابقه دوم لیگ BCPC</h6>
+					<h6>{event?.name}</h6>
 				</div>
 				<div className={styles.ticketDetail}>
-					<div className={styles.ticketItem}>
-						<span className="caption-lg">دانشجو</span>
-						<p className="body-md">صالح سلیمانی</p>
-					</div>
-					<div className={styles.ticketItem}>
-						<span className="caption-lg">شماره دانشجوئی</span>
-						<p className="body-md">۴۰۰۱۲۳۵۸۰۱۸</p>
-					</div>
+					{answers?.map((item) => (
+						<div key={item.question} className={styles.ticketItem}>
+							<span className="caption-lg">{item.question}</span>
+							<p className="body-md">{item.answer}</p>
+						</div>
+					))}
+
 					<div className={styles.ticketItem}>
 						<span className="caption-lg">تاریخ</span>
-						<p className="body-md">شنبه ۱۶ مهر ۱۴۰۱</p>
+						<p className="body-md">
+							{convertUnixToPersianWeekDate(TIME).data}
+						</p>
 					</div>
 					<div className={styles.ticketItem}>
 						<span className="caption-lg">زمان</span>
-						<p className="body-md">ساعت ۱۳</p>
+						<p className="body-md">ساعت {convertUnixToPersianWeekDate(TIME).hour}</p>
 					</div>
-				</div>
-				<div className={styles.ticketItem}>
-					<span className="caption-lg">محل برگزاری</span>
-					<p className="body-md">دانشکده مهندسی، کارگاه کامپیوتر</p>
+					<div className={styles.ticketItem}>
+						<span className="caption-lg">محل برگزاری</span>
+						<p className="body-md">{event?.location}</p>
+					</div>
 				</div>
 			</div>
 			<div className={styles.bottomPart}>
 				<div className={styles.barcode}>
 					<img src={barcode} alt="ticket barcode" />
+					<span className="body-lg">{shortLink}</span>
 				</div>
 				<div className={styles.desc}>
 					<div className={styles.logo}>

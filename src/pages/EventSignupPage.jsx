@@ -90,7 +90,9 @@ const EventSignupPage = () => {
 				}
 			);
 			if (res.ok) {
-				navigate(`/events/${eventSlug}/signup-success`);
+				const data = await res.json();
+				console.log(data)
+				navigate(`/events/${eventSlug}/signup-success?code=${data.short_link}`);
 			}
 			setIsLoading(false);
 		};

@@ -1,6 +1,24 @@
-.shortLinkBox{
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    gap: 16px;
+.shortLinkBox {
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	gap: 16px;
+    z-index: -1;
+}
+.inputBox {
+	position: relative;
+}
+.inputBox input {
+	width: 100%;
+	background-color: #fff;
+	color: var(--color-primary-dark) !important;
+    padding-left: 80px;
+    direction: ltr;
+}
+.inputBox button {
+	position: absolute;
+	left: 0;
+	top: 0;
+	border-radius: 16px 0 0 16px;
+	padding: 14px 18px;
 }

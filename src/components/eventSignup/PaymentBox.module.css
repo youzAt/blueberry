@@ -68,7 +68,7 @@
 	background-color: unset !important;
 }
 @media (max-width: 480px) {
-	.costItem {
-		margin-bottom: 24px;
+	.paymentBox{
+		gap: 24px;
 	}
 }

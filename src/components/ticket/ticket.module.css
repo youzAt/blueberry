@@ -5,11 +5,6 @@
 	position: relative;
 	border: 1px solid var(--color-border);
 }
-.ticket .eventBanner {
-	border-top-right-radius: var(--border-radius-2);
-	border-top-left-radius: var(--border-radius-2);
-	overflow: hidden;
-}
 .ticket::after,
 .ticket::before {
 	content: "";
@@ -18,7 +13,7 @@
 	width: 64px;
 	height: 64px;
 	border: 1px solid var(--color-border);
-	bottom: 200px;
+	bottom: 228px;
 	border-radius: 50%;
 	background-color: var(--color-surface);
 	border-right-color: var(--color-surface);
@@ -32,6 +27,13 @@
 	left: 0;
 	transform: translateX(-50%) rotate(-135deg);
 }
+.ticket .eventBanner {
+	border-top-right-radius: var(--border-radius-2);
+	border-top-left-radius: var(--border-radius-2);
+	overflow: hidden;
+	height: 227px;
+}
+
 .ticket .eventPhoto {
 	width: 100%;
 	display: block;
@@ -58,9 +60,14 @@
 	margin-bottom: 24px;
 }
 .bottomPart {
-	margin-top: 32px;
+	/* margin-top: 32px; */
 	padding: 24px 60px;
 	border-top: 1px dashed var(--color-border);
+}
+.barcode{
+	display: flex;
+	align-items: center;
+	flex-direction: column;
 }
 .barcode img {
 	display: block;
@@ -94,6 +101,6 @@
 @media print {
 	.ticket::before,
 	.ticket::after {
-		display: none
+		display: none;
 	}
 }
