@@ -8,6 +8,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import defaultPhoto from "../assets/defaultphoto.svg";
 import getAccess from "../funcs/getAccess";
 import useUrl from "../hooks/useUrl";
+import Loader from "../components/UI/Loader";
 
 function arrayToObject(array) {
 	return array.reduce((acc, item) => {
@@ -23,6 +24,8 @@ const EventSignupPage = () => {
 	const [fields, setFields] = useState([]);
 	const [discountCode, setDiscountCode] = useState("");
 	const [hasInputError, setHasInputError] = useState(false);
+	const [isLoading, setIsLoading] = useState(false);
+	const [isLoading2, setIsLoading2] = useState(false);
 	const navigate = useNavigate();
 	const [token, setToken] = useState(() => {
 		return localStorage.getItem("blueberry-access");
@@ -39,6 +42,7 @@ const EventSignupPage = () => {
 
 	useEffect(() => {
 		const fetchBalance = async () => {
+			setIsLoading2(true);
 			const res = await fetch(`${BASE_URL}api/payment/balance/`, {
 				method: "GET",
 				headers: {
@@ -52,6 +56,7 @@ const EventSignupPage = () => {
 			} else {
 				setBalance(data.balance);
 			}
+			setIsLoading2(false);
 		};
 		fetchBalance();
 	}, [token, BASE_URL]);
@@ -70,6 +75,7 @@ const EventSignupPage = () => {
 	const signupHandler = () => {
 		if (!validateInput()) return;
 		const sendSignupData = async () => {
+			setIsLoading(true);
 			let data = arrayToObject(fields);
 			data = discountCode ? { ...data, gift_code: discountCode } : data;
 			const res = await fetch(
@@ -86,11 +92,13 @@ const EventSignupPage = () => {
 			if (res.ok) {
 				navigate(`/events/${eventSlug}/signup-success`);
 			}
+			setIsLoading(false);
 		};
 		sendSignupData();
 	};
 	useEffect(() => {
 		const fetchFormFields = async () => {
+			setIsLoading(true);
 			const res = await fetch(
 				`${BASE_URL}api/event/registration/${eventSlug}/`,
 				{
@@ -107,6 +115,7 @@ const EventSignupPage = () => {
 			} else {
 				navigate(`/events/${eventSlug}`);
 			}
+			setIsLoading(false);
 		};
 		fetchFormFields();
 	}, [setFields, token, eventSlug, navigate, BASE_URL]);
@@ -121,43 +130,52 @@ const EventSignupPage = () => {
 	} = event;
 	return (
 		<div className={`container ${styles.container}`}>
-			<h5 className={styles.pageTitle}>اطلاعات فردی</h5>
-			<p className={`body-md ${styles.desc}`}>
-				با این مشخصات ثبت نام میکنید:
-			</p>
-			<div className={styles.wrapper}>
-				<main>
-					<SignupForm
-						slug={eventSlug}
-						fields={fields}
-						setFields={setFields}
-						hasInputError={hasInputError}
-						setHasInputError={setHasInputError}
-					/>
-					<p className={`body-md ${styles.desc} ${styles.eventDesc}`}>
-						در این رویداد ثبت نام میکنید:
+			{isLoading || isLoading2 ? (
+				<Loader />
+			) : (
+				<>
+					<h5 className={styles.pageTitle}>اطلاعات فردی</h5>
+					<p className={`body-md ${styles.desc}`}>
+						با این مشخصات ثبت نام میکنید:
 					</p>
-					<EventItem
-						name={name}
-						location={location}
-						startTime={startTime}
-						poster={poster || defaultPhoto}
-					/>
-				</main>
-				<aside className={styles.side}>
-					<PaymentBox
-						fee={finalFee}
-						balance={balance}
-						slug={eventSlug}
-						discountCode={discountCode}
-						setDiscountCode={setDiscountCode}
-						initialFee={initialFee}
-					/>
-					<Button type="secondary" onClick={signupHandler}>
-						شارژ اعتبار و ثبت نام
-					</Button>
-				</aside>
-			</div>
+					<div className={styles.wrapper}>
+						<main>
+							<SignupForm
+								slug={eventSlug}
+								fields={fields}
+								setFields={setFields}
+								hasInputError={hasInputError}
+								setHasInputError={setHasInputError}
+							/>
+							<p
+								className={`body-md ${styles.desc} ${styles.eventDesc}`}
+							>
+								در این رویداد ثبت نام میکنید:
+							</p>
+							<EventItem
+								name={name}
+								location={location}
+								startTime={startTime}
+								poster={poster || defaultPhoto}
+							/>
+						</main>
+
+						<aside className={styles.side}>
+							<PaymentBox
+								fee={finalFee}
+								balance={balance}
+								slug={eventSlug}
+								discountCode={discountCode}
+								setDiscountCode={setDiscountCode}
+								initialFee={initialFee}
+							/>
+							<Button type="secondary" onClick={signupHandler}>
+								شارژ اعتبار و ثبت نام
+							</Button>
+						</aside>
+					</div>
+				</>
+			)}
 		</div>
 	);
 };
