@@ -1,10 +1,10 @@
 .ticketPage{
-    width: 100%;
     display: flex;
     align-items: center;
     flex-direction: column;
     gap: 40px;
     padding-top: 160px !important;
+    overflow: hidden;
 }
 .ticketPage .btns{
     display: flex;
@@ -21,6 +21,6 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        direction: rtl
+        direction: rtl;
     }
 }

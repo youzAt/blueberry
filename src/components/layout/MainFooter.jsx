@@ -18,7 +18,7 @@ const socialMedia = [
 	{ link: "#", logo: linkedinIcon, alt: "linkedin icon" },
 ];
 
-const MainFooter = () => {
+const MainFooter = ({ className }) => {
 	const [newestEvents, setNewesetEvents] = useState([]);
 	const [latestEvents, setLatestEvents] = useState([]);
 	const BASE_URL = useUrl();
@@ -53,7 +53,7 @@ const MainFooter = () => {
 		fetchLatestEvents();
 	}, [BASE_URL]);
 	return (
-		<footer className={styles.mainFooter}>
+		<footer className={`${styles.mainFooter}  ${className}`}>
 			<div className="container">
 				<div className={styles.footerLinks}>
 					<div>

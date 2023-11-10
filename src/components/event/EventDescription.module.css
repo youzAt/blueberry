@@ -3,3 +3,9 @@
 	color: var(--color-primary-dark);
     text-wrap: wrap;
 }
+@media (max-width: 480px) {
+	.desc:global(.body-lg){
+		font-size: 14px !important;
+	}
+	
+}

@@ -33,7 +33,6 @@
 	overflow: hidden;
 	height: 227px;
 }
-
 .ticket .eventPhoto {
 	width: 100%;
 	display: block;
@@ -95,7 +94,11 @@
 
 @media (max-width: 480px) {
 	.ticket {
-		width: 90%;
+		width: 100%;
+	}
+	.ticket::after,.ticket::before{
+		/* display: none; */
+		bottom: 210px;
 	}
 }
 @media print {

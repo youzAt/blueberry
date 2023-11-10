@@ -127,7 +127,7 @@ const EventPage = ({ setNextUrl }) => {
 				)}
 			</div>
 
-			<MainFooter />
+			<MainFooter className={styles.footer} />
 		</>
 	);
 };

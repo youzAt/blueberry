@@ -82,7 +82,7 @@ const EventSignupPage = () => {
 	};
 
 	const signupHandler = () => {
-		if (!validateInput()) return;
+		if (inputError.length !== 0) return;
 		const sendSignupData = async () => {
 			setIsLoading(true);
 			let data = arrayToObject(fields);
