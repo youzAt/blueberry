@@ -40,7 +40,6 @@ const TicketPage = () => {
 				navigate("/event-not-fount");
 			} else {
 				setTicketInfo(data);
-				console.log(data);
 			}
 			// setIsLoaing(false);
 		};
@@ -53,7 +52,7 @@ const TicketPage = () => {
 	});
 	return (
 		<>
-			<MainHeader removeMenu/>
+			<MainHeader removeMenu />
 			<main className={styles.ticketPage} ref={ticketRef}>
 				<h5>چاپ بلیط</h5>
 				<Ticket info={ticketInfo} />

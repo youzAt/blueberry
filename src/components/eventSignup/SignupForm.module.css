@@ -11,10 +11,10 @@
 .formBox .inputBox {
 	display: flex;
 	flex-direction: column;
-	gap: 10px;
 }
 .inputBox label {
 	margin-right: 16px;
+	margin-bottom: 10px;
 }
 .essential {
 	color: var(--color-error);

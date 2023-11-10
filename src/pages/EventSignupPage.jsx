@@ -23,7 +23,7 @@ const EventSignupPage = () => {
 	const [balance, setBalance] = useState("");
 	const [fields, setFields] = useState([]);
 	const [discountCode, setDiscountCode] = useState("");
-	const [hasInputError, setHasInputError] = useState(false);
+	const [inputError, setInputError] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
 	const [isLoading2, setIsLoading2] = useState(false);
 	const navigate = useNavigate();
@@ -61,15 +61,24 @@ const EventSignupPage = () => {
 		fetchBalance();
 	}, [token, BASE_URL]);
 	const validateInput = () => {
-		const valid = fields.some((field) => {
-			if (field.field !== "description") {
-				if (field.answer.trim() === "") {
-					setHasInputError(() => true);
-					return true;
-				}
+		fields.forEach((field) => {
+			switch (field.field) {
+				case "personal_id":
+					if (field.answer.length !== 10)
+						setInputError((cur) => [...cur, "personal_id"]);
+					break;
+				case "student_id":
+					if (field.answer.length < 10 || field.answer.length > 11)
+						setInputError((cur) => [...cur, "student_id"]);
+					break;
+				case "description":
+					break;
+				default:
+					if (field.answer.trim() === "")
+						setInputError((cur) => [...cur, field.field]);
+					break;
 			}
 		});
-		return !valid;
 	};
 
 	const signupHandler = () => {
@@ -91,8 +100,9 @@ const EventSignupPage = () => {
 			);
 			if (res.ok) {
 				const data = await res.json();
-				console.log(data)
-				navigate(`/events/${eventSlug}/signup-success?code=${data.short_link}`);
+				navigate(
+					`/events/${eventSlug}/signup-success?code=${data.short_link}`
+				);
 			}
 			setIsLoading(false);
 		};
@@ -146,8 +156,8 @@ const EventSignupPage = () => {
 								slug={eventSlug}
 								fields={fields}
 								setFields={setFields}
-								hasInputError={hasInputError}
-								setHasInputError={setHasInputError}
+								inputError={inputError}
+								setInputError={setInputError}
 							/>
 							<p
 								className={`body-md ${styles.desc} ${styles.eventDesc}`}

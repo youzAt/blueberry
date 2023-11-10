@@ -4,9 +4,10 @@ import Input from "../UI/Input";
 import styles from "./SignupForm.module.css";
 import ErrorMessage from "../UI/ErrorMessage";
 
-const SignupForm = ({ fields, setFields, hasInputError, setHasInputError }) => {
-	const inputChangeHandler = (e, index) => {
-		setHasInputError(false);
+const SignupForm = ({ fields, setFields, inputError, setInputError }) => {
+	const inputChangeHandler = (e, index, field) => {
+		const newErrors = inputError.filter((error) => error !== field);
+		setInputError(newErrors);
 		const newFields = [...fields];
 		newFields[index].answer = e.target.value;
 		setFields(newFields);
@@ -28,17 +29,27 @@ const SignupForm = ({ fields, setFields, hasInputError, setHasInputError }) => {
 							id={field.field}
 							placeholder={`${field.question} خود را وارد کنید`}
 							value={fields.at(index).answer}
-							onChange={(e) => inputChangeHandler(e, index)}
+							onChange={(e) =>
+								inputChangeHandler(e, index, field.field)
+							}
+							type={
+								field.field === "student_id" ||
+								field.field === "personal_id"
+									? "number"
+									: "text"
+							}
+							className={
+								inputError.includes(field.field) && "error"
+							}
 						/>
+						{inputError.includes(field.field) && (
+							<ErrorMessage className={styles.error}>
+								{field.question} وارد شده نامعتبر است.
+							</ErrorMessage>
+						)}
 					</div>
 				))}
 			</div>
-			{hasInputError && (
-				<ErrorMessage className={styles.error}>
-					(ضروری) : مشخصات خواسته شده با برچسب ضروری نمیتواند خالی
-					باشد
-				</ErrorMessage>
-			)}
 		</Box>
 	);
 };

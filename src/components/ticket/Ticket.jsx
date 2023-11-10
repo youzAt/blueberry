@@ -16,11 +16,9 @@ function convertUnixToPersianWeekDate(unixTimestamp) {
 
 	return persianDate;
 }
-console.log(convertUnixToPersianWeekDate(TIME).hour)
 // eslint-disable-next-line react/display-name
 const ticket = React.forwardRef(({ info }, ref) => {
 	const { event, answers, short_link: shortLink } = info;
-	console.log();
 	return (
 		<div className={styles.ticket} ref={ref}>
 			<div className={styles.eventBanner}>
