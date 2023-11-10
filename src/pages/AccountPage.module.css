@@ -8,5 +8,7 @@
 @media (max-width: 480px) {
 	.accountPage {
 		display: block;
+	padding-top: 130px !important;
+
 	}
 }

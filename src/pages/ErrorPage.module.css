@@ -5,3 +5,12 @@
     gap: 24px;
     padding-top: 160px !important;
 }
+@media (max-width: 480px) {
+    .errorPage{
+        width: 100%;
+        padding: 32px;
+    }
+    .errorPage img{
+        width: 100%;
+    }
+}

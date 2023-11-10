@@ -99,7 +99,7 @@ const EventBox = ({ event, onClick, setNextUrl }) => {
 	);
 
 	const redirectTicketHnadler = () => {
-		navigate(`./${slug}/ticket`);
+		navigate(`/events/${slug}/ticket`);
 	};
 
 	const error =
