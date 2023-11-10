@@ -71,7 +71,7 @@ const EventPage = ({ setNextUrl }) => {
 	} = event;
 	return (
 		<>
-			<MainHeader />
+			<MainHeader removeMenu/>
 
 			<div className={`container ${styles.container}`}>
 				{isLoading ? (

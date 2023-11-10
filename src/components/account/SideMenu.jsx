@@ -5,10 +5,12 @@ import walletIcon from "../../assets/icons/wallet.svg";
 import noteIcon from "../../assets/icons/note.svg";
 import logoutIcon from "../../assets/icons/logout.svg";
 import rightArrowIcon from "../../assets/icons/arrow-right.svg";
+import blueberryLogo from "../../assets/icons/blueberrylogotext.svg";
+
 
 import Box from "../UI/Box";
 import Button from "../UI/Button";
-import { NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 
 const SideMenu = ({ setIsMenuOpen, isMenuOpen }) => {
 	const navigate = useNavigate();
@@ -82,6 +84,9 @@ const SideMenu = ({ setIsMenuOpen, isMenuOpen }) => {
 				<img src={logoutIcon} alt="logout icon" />
 				خروج از حساب
 			</Button>
+			<Link to="/events" className={styles.blueLogo}>
+				<img src={blueberryLogo} alt="Blueberry logo" />
+			</Link>
 		</Box>
 	);
 };

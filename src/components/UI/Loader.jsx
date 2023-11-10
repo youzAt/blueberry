@@ -6,6 +6,7 @@ const Loader = () => {
 	return (
 		<div className={styles.loaderContainer}>
 			<Lottie className={styles.loader} animationData={loaderAniamtion}  />
+			
 		</div>
 	);
 };

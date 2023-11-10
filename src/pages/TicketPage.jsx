@@ -53,7 +53,7 @@ const TicketPage = () => {
 	});
 	return (
 		<>
-			<MainHeader />
+			<MainHeader removeMenu/>
 			<main className={styles.ticketPage} ref={ticketRef}>
 				<h5>چاپ بلیط</h5>
 				<Ticket info={ticketInfo} />

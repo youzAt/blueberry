@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import Button from "../UI/Button";
 import useUrl from "../../hooks/useUrl";
 
-const MainHeader = ({ removeBtn, setIsMenuOpen }) => {
+const MainHeader = ({ removeBtn, removeMenu, setIsMenuOpen }) => {
 	const BASE_URL = useUrl();
 	const [isLogin, setIsLogin] = useState(false);
 	const token = localStorage.getItem("blueberry-access");
@@ -38,13 +38,15 @@ const MainHeader = ({ removeBtn, setIsMenuOpen }) => {
 			<div className="container">
 				{/* logo and nav bar */}
 				<div className={styles.navBox}>
-					<Button
-						type="tertiary"
-						className={styles.menuIcon}
-						onClick={openMenuHandler}
-					>
-						<img src={menuIcon} alt="menu icon" />
-					</Button>
+					{!removeMenu && (
+						<Button
+							type="tertiary"
+							className={styles.menuIcon}
+							onClick={openMenuHandler}
+						>
+							<img src={menuIcon} alt="menu icon" />
+						</Button>
+					)}
 					<Link to="/events">
 						<img src={logo} alt="logo icon" />
 					</Link>

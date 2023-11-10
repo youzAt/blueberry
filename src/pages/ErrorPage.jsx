@@ -10,7 +10,7 @@ const ErrorPage = () => {
     }
 	return (
 		<>
-			<MainHeader />
+			<MainHeader removeMenu />
 			<main className={styles.errorPage}>
 				<img src={errorLogo} alt="404 logo" />
 				<h5>صفحه‌ای که دنبالش هستید رو پیدا نکردیم</h5>

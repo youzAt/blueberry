@@ -8,7 +8,7 @@ const SuccessPage = () => {
 	const trackingCode = searchParams.get('code');	
 	return (
 		<>
-			<MainHeader />
+			<MainHeader removeMenu />
 			<main className={`container ${styles.container}`}>
 				<Success trackingCode={trackingCode}/>
 			</main>

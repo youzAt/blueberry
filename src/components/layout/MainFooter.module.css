@@ -21,6 +21,9 @@
 	color: var(--color-gray-2);
 	margin-bottom: 24px;
 }
+.footerLinks li a {
+	color: var(--color-gray-2);
+}
 .footerLinks li::before {
 	content: "\2022";
 	color: var(--color-gray-2);

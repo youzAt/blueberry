@@ -40,6 +40,9 @@
 .box .closeBtn {
 	display: none;
 }
+.blueLogo{
+	display: none;
+}
 
 @media (max-width: 480px) {
 	.box {
@@ -50,10 +53,11 @@
 		right: 0;
 		bottom: 0;
 		z-index: 999;
-		padding-top: 0;
+		padding-top: 16px;
 		transform: translateX(100%);
 		opacity: 0;
 		transition: 0.3s;
+		
 	}
 	.sideMenu .menu {
 		padding-top: 24px;
@@ -68,5 +72,12 @@
 	}
 	.box .closeBtn {
 		display: flex;
+	}
+	.blueLogo{
+		display: block;
+		position: absolute;
+		bottom: 32px;
+		right: 50%;
+		transform: translateX(50%)
 	}
 }

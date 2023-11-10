@@ -70,11 +70,10 @@ const EventsPage = ({ setNextUrl }) => {
 	const curEvents = sortEventList(events)
 		.slice()
 		.filter((event) => event.status.status !== "END");
-	console.log(events);
 
 	return (
 		<>
-			<MainHeader />
+			<MainHeader removeMenu />
 			<main className={`container ${styles.container}`}>
 				{isLoading ? (
 					<Loader />
