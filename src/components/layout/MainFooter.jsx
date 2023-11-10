@@ -125,7 +125,7 @@ const MainFooter = () => {
 					</Link>
 				</div>
 			</div>
-			<p className={`body-md ${styles.copyRight}`}>
+			<p className={`body-md ${styles.copyRight} container`}>
 				کلیه حقوق مادی و معنوی این وب سایت برای <span>بلوبری </span>
 				محفوظ است
 			</p>

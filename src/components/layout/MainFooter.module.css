@@ -4,7 +4,7 @@
 	padding: 32px 0;
 	margin-top: 32px;
 }
-.mainFooter :global(.container) {
+.mainFooter div:global(.container) {
 	display: flex;
 	justify-content: space-between;
 }
@@ -42,7 +42,7 @@
 	align-items: start;
 }
 .copyRight {
-	padding-top: 32px;
+	padding-top: 32px !important; 
 	border-top: 1px solid var(--color-border);
 	text-align: center;
 }
@@ -50,7 +50,18 @@
 	color: var(--color-primary);
 }
 @media (max-width: 480px) {
-	.mainFooter {
-		display: none;
+	.mainFooter div:global(.container) {
+		display: flex;
+		flex-direction: column;
+		gap: 32px;
 	}
+	.footerLinks{
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+	}
+	.logos{
+		padding-bottom: 16px;
+	}
+	
 }
