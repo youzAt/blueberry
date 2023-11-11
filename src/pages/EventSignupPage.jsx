@@ -61,28 +61,40 @@ const EventSignupPage = () => {
 		fetchBalance();
 	}, [token, BASE_URL]);
 	const validateInput = () => {
+		let hasError = false;
 		fields.forEach((field) => {
 			switch (field.field) {
 				case "personal_id":
-					if (field.answer.length !== 10)
+					if (field.answer.length !== 10) {
 						setInputError((cur) => [...cur, "personal_id"]);
+						hasError = true;
+					}
 					break;
 				case "student_id":
-					if (field.answer.length < 10 || field.answer.length > 11)
+					if (field.answer.length < 10 || field.answer.length > 11) {
 						setInputError((cur) => [...cur, "student_id"]);
+						hasError = true;
+					}
+
 					break;
 				case "description":
 					break;
 				default:
-					if (field.answer.trim() === "")
+					if (field.answer.trim() === "") {
 						setInputError((cur) => [...cur, field.field]);
+						hasError = true;
+					}
+
 					break;
 			}
 		});
+		return hasError;
 	};
 
 	const signupHandler = () => {
-		if (inputError.length !== 0) return;
+		const hasErrors = validateInput();
+		console.log("input error " + hasErrors);
+		if (hasErrors) return;
 		const sendSignupData = async () => {
 			setIsLoading(true);
 			let data = arrayToObject(fields);
@@ -104,6 +116,9 @@ const EventSignupPage = () => {
 					`/events/${eventSlug}/signup-success?code=${data.short_link}`
 				);
 			}
+			const dataa = await res.json();
+			console.log(res);
+			console.log(dataa);
 			setIsLoading(false);
 		};
 		sendSignupData();
