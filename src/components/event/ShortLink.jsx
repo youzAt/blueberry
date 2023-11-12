@@ -6,6 +6,7 @@ const ShortLink = ({ link }) => {
 	const inputValue = `bberry.id/e/${link}`;
 	const copyHandler = () => {
 		navigator.clipboard.writeText(inputValue);
+		console.log("hello")
 	};
 	return (
 		<Box className={styles.shortLinkBox}>

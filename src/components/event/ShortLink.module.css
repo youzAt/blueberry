@@ -3,7 +3,6 @@
 	flex-direction: column;
 	text-align: center;
 	gap: 16px;
-    z-index: -1;
 }
 .inputBox {
 	position: relative;
@@ -21,4 +20,5 @@
 	top: 0;
 	border-radius: 16px 0 0 16px;
 	padding: 14px 18px;
+	transition: 0.3;
 }
