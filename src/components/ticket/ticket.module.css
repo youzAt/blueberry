@@ -33,6 +33,11 @@
 	overflow: hidden;
 	height: 227px;
 }
+.ticket .eventBanner img{
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
 .ticket .eventPhoto {
 	width: 100%;
 	display: block;
