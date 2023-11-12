@@ -1,10 +1,9 @@
 import styles from "./ticket.module.css";
 import defaultPhoto from "../../assets/defaultphoto.svg";
-import barcode from "../../assets/barcode-png.png";
 import logo from "../../assets/icons/logo-small.svg";
 import React from "react";
 import moment from "moment-jalaali";
-const TIME = 1699268455;
+import Barcode from "react-barcode";
 
 function convertUnixToPersianWeekDate(unixTimestamp) {
 	const date = new Date(unixTimestamp * 1000);
@@ -18,7 +17,7 @@ function convertUnixToPersianWeekDate(unixTimestamp) {
 }
 // eslint-disable-next-line react/display-name
 const ticket = React.forwardRef(({ info }, ref) => {
-	const { event, answers, short_link: shortLink } = info;
+	const { event, answers, short_link: shortLink} = info;
 	return (
 		<div className={styles.ticket} ref={ref}>
 			<div className={styles.eventBanner}>
@@ -44,12 +43,12 @@ const ticket = React.forwardRef(({ info }, ref) => {
 					<div className={styles.ticketItem}>
 						<span className="caption-lg">تاریخ</span>
 						<p className="body-md">
-							{convertUnixToPersianWeekDate(TIME).data}
+							{convertUnixToPersianWeekDate(event?.start_time).data}
 						</p>
 					</div>
 					<div className={styles.ticketItem}>
 						<span className="caption-lg">زمان</span>
-						<p className="body-md">ساعت {convertUnixToPersianWeekDate(TIME).hour}</p>
+						<p className="body-md">ساعت {convertUnixToPersianWeekDate(event?.start_time).hour}</p>
 					</div>
 					<div className={styles.ticketItem}>
 						<span className="caption-lg">محل برگزاری</span>
@@ -59,8 +58,9 @@ const ticket = React.forwardRef(({ info }, ref) => {
 			</div>
 			<div className={styles.bottomPart}>
 				<div className={styles.barcode}>
-					<img src={barcode} alt="ticket barcode" />
-					<span className="body-lg">{shortLink}</span>
+					{/* <img src={barcode} alt="ticket barcode" /> */}
+					<Barcode value={shortLink}/>
+					{/* <span className="body-lg">{shortLink}</span> */}
 				</div>
 				<div className={styles.desc}>
 					<div className={styles.logo}>

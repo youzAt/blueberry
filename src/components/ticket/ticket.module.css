@@ -13,7 +13,7 @@
 	width: 64px;
 	height: 64px;
 	border: 1px solid var(--color-border);
-	bottom: 228px;
+	bottom: 240px;
 	border-radius: 50%;
 	background-color: var(--color-surface);
 	border-right-color: var(--color-surface);
@@ -103,7 +103,7 @@
 	}
 	.ticket::after,.ticket::before{
 		/* display: none; */
-		bottom: 210px;
+		bottom: 235px;
 	}
 }
 @media print {
