@@ -6,7 +6,7 @@ import EventDescription from "../components/event/EventDescription";
 import MainHeader from "../components/layout/MainHeader";
 import EventSignup from "../components/event/EventSignup";
 import EventDates from "../components/event/EventDates";
-// import EventPoster from "../components/event/EventPoster";
+import EventPoster from "../components/event/EventPoster";
 import GetEventTicket from "../components/event/GetEventTicket";
 import GetEventCertificate from "../components/event/GetEventCertificate";
 import Box from "../components/UI/Box";
@@ -65,7 +65,7 @@ const EventPage = ({ setNextUrl }) => {
 		name,
 		status,
 		description,
-		// poster,
+		poster,
 		banner,
 		short_link: link,
 	} = event;
@@ -119,7 +119,7 @@ const EventPage = ({ setNextUrl }) => {
 									startTime={startTime}
 									endTime={endTime}
 								/>
-								{/* <EventPoster name={name} src={poster || defaultPhoto} /> */}
+								<EventPoster name={name} src={poster || defaultPhoto} />
 								<ShortLink link={link} />
 							</aside>
 						</div>
