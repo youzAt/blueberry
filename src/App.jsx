@@ -2,7 +2,6 @@ import {
 	BrowserRouter,
 	Route,
 	Routes,
-	useSearchParams,
 } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import LoginForm from "./components/login/LoginForm";

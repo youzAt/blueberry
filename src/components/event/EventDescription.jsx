@@ -1,6 +1,5 @@
 import Box from "../UI/Box";
 import styles from "./EventDescription.module.css";
-import Markdown from "react-markdown";
 const EventDescription = ({ children }) => {
 	return (
 		<Box>
