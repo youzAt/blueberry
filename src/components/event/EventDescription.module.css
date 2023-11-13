@@ -1,11 +1,11 @@
 .desc {
 	margin-bottom: 22px;
 	color: var(--color-primary-dark);
-    text-wrap: wrap;
+	text-wrap: wrap;
+	overflow-wrap: break-word;
 }
 @media (max-width: 480px) {
-	.desc:global(.body-lg){
+	.desc:global(.body-lg) {
 		font-size: 14px !important;
 	}
-	
 }

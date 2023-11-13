@@ -45,10 +45,10 @@ const EventsPage = ({ setNextUrl }) => {
 				? {
 						"content-type": "application/json",
 						Authorization: `Bearer ${token}`,
-				}
+				  }
 				: {
 						"content-type": "application/json",
-				};
+				  };
 
 			const res = await fetch(BASE_URL + "api/events/", {
 				method: "GET",
@@ -98,7 +98,13 @@ const EventsPage = ({ setNextUrl }) => {
 							<h5>رویداد های برگزار شده</h5>
 							<div className={styles.events}>
 								{doneEvents.map((event) => (
-									<EventBox event={event} key={event.slug} />
+									<EventBox
+										onClick={() =>
+											redirectHandler(event.slug)
+										}
+										event={event}
+										key={event.slug}
+									/>
 								))}
 							</div>
 						</section>

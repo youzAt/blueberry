@@ -3,7 +3,7 @@ import Button from "../UI/Button";
 import Input from "../UI/Input";
 import styles from "./ShortLink.module.css";
 const ShortLink = ({ link }) => {
-	const inputValue = `bberry.id/e/${link}`;
+	const inputValue = `ssceb.ir/e/${link}`;
 	const copyHandler = () => {
 		navigator.clipboard.writeText(inputValue);
 		console.log("hello")

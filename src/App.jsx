@@ -21,11 +21,12 @@ import WalletPage from "./pages/WalletPage";
 import ErrorPage from "./pages/ErrorPage";
 import TicketPage from "./pages/TicketPage";
 import { UrlProvider } from "./context/UrlProvider";
+import ShortLinkPage from "./pages/ShortLinkPage";
 
 const App = () => {
 	const [phoneNumber, setPhoneNumber] = useState("");
 	const [nextUrl, setNextUrl] = useState("");
-	
+
 	return (
 		<UrlProvider>
 			<BrowserRouter>
@@ -85,6 +86,7 @@ const App = () => {
 						path="events/:eventSlug/ticket"
 						element={<TicketPage />}
 					/>
+					<Route path="e/:shortLink" element={<ShortLinkPage />} />
 					<Route path="*" element={<ErrorPage />} />
 				</Routes>
 			</BrowserRouter>
