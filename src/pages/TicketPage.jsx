@@ -9,6 +9,7 @@ import { useEffect, useRef, useState } from "react";
 import useUrl from "../hooks/useUrl";
 import getAccess from "../funcs/getAccess";
 import { useNavigate } from "react-router-dom";
+import TicketWarning from "../components/ticket/TicketWarning";
 
 const TicketPage = () => {
 	const BASE_URL = useUrl();
@@ -45,6 +46,9 @@ const TicketPage = () => {
 		};
 		fetchEvents();
 	}, [eventSlug, token, navigate, BASE_URL]);
+	console.log(ticketInfo);
+	
+	// console.log(event)
 
 	const ticketRef = useRef();
 	const printTicketHandler = useReactToPrint({
@@ -55,6 +59,9 @@ const TicketPage = () => {
 			<MainHeader removeMenu />
 			<main className={`${styles.ticketPage} container`} ref={ticketRef}>
 				<h5>چاپ بلیط</h5>
+				{ticketInfo?.event?.ticket_warnings.length !== 0 && <TicketWarning
+					warningDetails={ticketInfo?.event?.ticket_warnings}
+				/>}
 				<Ticket info={ticketInfo} />
 				<div className={styles.btns}>
 					<Button onClick={printTicketHandler}>پرینت بلیت</Button>

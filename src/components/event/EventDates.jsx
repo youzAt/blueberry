@@ -9,7 +9,7 @@ function convertUnixToPersianWeekDate(unixTimestamp) {
 	moment.loadPersian({ dialect: "persian-modern" });
 	const persianDate = {
 		data: moment(date).format("dddd jD jMMMM jYYYY", "fa"),
-		hour: `${moment(date).hour()}:${moment(date).minute()}`,
+		hour: `${String(moment(date).hour()).padStart(2,'0')}:${String(moment(date).minute()).padStart(2,0)}`,
 	};
 
 	return persianDate;

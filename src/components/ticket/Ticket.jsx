@@ -4,20 +4,21 @@ import logo from "../../assets/icons/logo-small.svg";
 import React from "react";
 import moment from "moment-jalaali";
 import Barcode from "react-barcode";
+import warningIcon from "../../assets/icons/info-circle.svg";
 
 function convertUnixToPersianWeekDate(unixTimestamp) {
 	const date = new Date(unixTimestamp * 1000);
 	moment.loadPersian({ dialect: "persian-modern" });
 	const persianDate = {
 		data: moment(date).format("dddd jD jMMMM jYYYY", "fa"),
-		hour: `${moment(date).hour()}:${moment(date).minute()}`,
+		hour: `${String(moment(date).hour()).padStart(2,'0')}:${String(moment(date).minute()).padStart(2,0)}`,
 	};
 
 	return persianDate;
 }
 // eslint-disable-next-line react/display-name
 const ticket = React.forwardRef(({ info }, ref) => {
-	const { event, answers, short_link: shortLink} = info;
+	const { event, answers, short_link: shortLink } = info;
 	return (
 		<div className={styles.ticket} ref={ref}>
 			<div className={styles.eventBanner}>
@@ -28,6 +29,13 @@ const ticket = React.forwardRef(({ info }, ref) => {
 				/>
 			</div>
 			<div className={styles.ticketBottom}>
+				{event?.ticket_warnings.length !== 0 && (
+					<div className={styles.ticketWarning}>
+						<img src={warningIcon} alt="warning icon" />
+
+						<span className="caption-lg">{event?.ticket_warnings?.at(0).title}</span>
+					</div>
+				)}
 				<div className={`${styles.ticketItem} ${styles.ticketTitle}`}>
 					<span className="caption-lg">رویداد</span>
 					<h6>{event?.name}</h6>
@@ -43,12 +51,21 @@ const ticket = React.forwardRef(({ info }, ref) => {
 					<div className={styles.ticketItem}>
 						<span className="caption-lg">تاریخ</span>
 						<p className="body-md">
-							{convertUnixToPersianWeekDate(event?.start_time).data}
+							{
+								convertUnixToPersianWeekDate(event?.start_time)
+									.data
+							}
 						</p>
 					</div>
 					<div className={styles.ticketItem}>
 						<span className="caption-lg">زمان</span>
-						<p className="body-md">ساعت {convertUnixToPersianWeekDate(event?.start_time).hour}</p>
+						<p className="body-md">
+							ساعت{" "}
+							{
+								convertUnixToPersianWeekDate(event?.start_time)
+									.hour
+							}
+						</p>
 					</div>
 					<div className={styles.ticketItem}>
 						<span className="caption-lg">محل برگزاری</span>
@@ -59,7 +76,7 @@ const ticket = React.forwardRef(({ info }, ref) => {
 			<div className={styles.bottomPart}>
 				<div className={styles.barcode}>
 					{/* <img src={barcode} alt="ticket barcode" /> */}
-					<Barcode value={shortLink}/>
+					<Barcode value={shortLink} />
 					{/* <span className="body-lg">{shortLink}</span> */}
 				</div>
 				<div className={styles.desc}>

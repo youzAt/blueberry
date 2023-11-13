@@ -96,7 +96,15 @@
 .desc p {
 	line-height: 190%;
 }
-
+.ticketWarning{
+	display: flex;
+	gap: 8px;
+	align-items: center;
+	margin-bottom: 16px;
+}
+.ticketWarning span{
+	color: var(--color-orange);
+}
 @media (max-width: 480px) {
 	.ticket {
 		width: 100%;
