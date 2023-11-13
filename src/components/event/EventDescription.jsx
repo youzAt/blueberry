@@ -1,9 +1,10 @@
 import Box from "../UI/Box";
 import styles from "./EventDescription.module.css";
+import Markdown from "react-markdown";
 const EventDescription = ({ children }) => {
 	return (
 		<Box>
-			<pre className={`body-lg ${styles.desc}`}>{children}</pre>
+			<pre className={`body-lg ${styles.desc}`}>{children} </pre>
 		</Box>
 	);
 };

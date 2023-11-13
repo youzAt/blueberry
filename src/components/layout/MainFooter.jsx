@@ -3,7 +3,7 @@ import instagramIcon from "../../assets/icons/instagram.svg";
 import telegramIcon from "../../assets/icons/telegram.svg";
 import linkedinIcon from "../../assets/icons/linkedin.svg";
 import blueberryLogo from "../../assets/icons/blueberrylogotext.svg";
-import basuLogo from "../../assets/icons/basuLogo.svg";
+import basuLogo from "../../assets/icons/basuLogo.jpg";
 import useUrl from "../../hooks/useUrl";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -119,7 +119,7 @@ const MainFooter = ({ className }) => {
 					</div>
 				</div>
 				<div className={styles.logos}>
-					<img src={basuLogo} alt="Bu-Ali sina university logo" />
+					<img src={basuLogo} className={styles.basuLogo} alt="Bu-Ali sina university logo" />
 					<Link to="/events" className={styles.blueLogo}>
 						<img src={blueberryLogo} alt="Blueberry logo" />
 					</Link>

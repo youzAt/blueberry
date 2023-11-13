@@ -38,8 +38,12 @@
 }
 .logos {
 	display: flex;
-	gap: 32px;
+	gap: 16px;
 	align-items: start;
+}
+.logos .basuLogo {
+	width: 90px;
+	margin-right: 16px;
 }
 .copyRight {
 	padding-top: 32px !important; 
