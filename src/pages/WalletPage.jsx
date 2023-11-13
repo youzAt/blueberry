@@ -40,10 +40,10 @@ const WalletPage = () => {
 				<h5>افزایش موجودی حساب</h5>
 				<IncreaseBalance />
 			</section>
-			<section>
+			{/* <section>
 				<h5>تراکنش های گذشته</h5>
 				<TransactionHistory />
-			</section>
+			</section> */}
 		</div>
 	);
 };
