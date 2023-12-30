@@ -1,4 +1,4 @@
-const BASE_URL = "https://api-akbarmasoud.iran.liara.run/";
+const BASE_URL = "https://api-blueberry.liara.run/";
 
 const getAccess = async (setToken) => {
 	const refreshToken = localStorage.getItem("blueberry-refresh");
