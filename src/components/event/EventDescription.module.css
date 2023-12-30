@@ -3,6 +3,7 @@
 	color: var(--color-primary-dark);
 	text-wrap: wrap;
 	overflow-wrap: break-word;
+	white-space: pre-wrap;
 }
 @media (max-width: 480px) {
 	.desc:global(.body-lg) {
