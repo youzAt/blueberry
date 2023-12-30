@@ -101,6 +101,9 @@ const EventBox = ({ event, onClick, setNextUrl }) => {
 	const redirectTicketHnadler = () => {
 		navigate(`/events/${slug}/ticket`);
 	};
+	const redicertCertificateHandler = ()=>{
+		navigate(`/c/${status.short_link}`)
+	}
 
 	const error =
 		status.status !== "ERROR" && status.status !== "END" ? null : (
@@ -114,7 +117,7 @@ const EventBox = ({ event, onClick, setNextUrl }) => {
 		);
 	const certificate =
 		status.status !== "CERTIFICATE" ? null : (
-			<Button type="outline" isSmall className={styles.outBtn}>
+			<Button type="outline" isSmall className={styles.outBtn} onClick={redicertCertificateHandler}>
 				<img src={certificateIcon} alt="certificate icon" />
 				دریافت گواهی
 			</Button>

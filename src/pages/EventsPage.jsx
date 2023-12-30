@@ -45,10 +45,10 @@ const EventsPage = ({ setNextUrl }) => {
 				? {
 						"content-type": "application/json",
 						Authorization: `Bearer ${token}`,
-				  }
+				}
 				: {
 						"content-type": "application/json",
-				  };
+				};
 
 			const res = await fetch(BASE_URL + "api/events/", {
 				method: "GET",

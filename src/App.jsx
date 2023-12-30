@@ -21,6 +21,7 @@ import ErrorPage from "./pages/ErrorPage";
 import TicketPage from "./pages/TicketPage";
 import { UrlProvider } from "./context/UrlProvider";
 import ShortLinkPage from "./pages/ShortLinkPage";
+import CertificatePage from "./pages/CertificatePage";
 
 const App = () => {
 	const [phoneNumber, setPhoneNumber] = useState("");
@@ -86,7 +87,9 @@ const App = () => {
 						element={<TicketPage />}
 					/>
 					<Route path="e/:shortLink" element={<ShortLinkPage />} />
+					<Route path="c/:cerId" element={<CertificatePage/>}/>
 					<Route path="*" element={<ErrorPage />} />
+
 				</Routes>
 			</BrowserRouter>
 		</UrlProvider>

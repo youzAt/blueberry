@@ -104,7 +104,7 @@ const EventPage = ({ setNextUrl }) => {
 									<GetEventTicket />
 								)}
 								{status?.status === "CERTIFICATE" && (
-									<GetEventCertificate />
+									<GetEventCertificate cerId={status.short_link} />
 								)}
 								{status?.status === "REG" && (
 									<EventSignup

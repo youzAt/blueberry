@@ -6,7 +6,6 @@ const ShortLink = ({ link }) => {
 	const inputValue = `ssceb.ir/e/${link}`;
 	const copyHandler = () => {
 		navigator.clipboard.writeText(inputValue);
-		console.log("hello")
 	};
 	return (
 		<Box className={styles.shortLinkBox}>
