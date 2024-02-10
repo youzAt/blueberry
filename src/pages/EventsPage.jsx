@@ -45,10 +45,10 @@ const EventsPage = ({ setNextUrl }) => {
 				? {
 						"content-type": "application/json",
 						Authorization: `Bearer ${token}`,
-				}
+				  }
 				: {
 						"content-type": "application/json",
-				};
+				  };
 
 			const res = await fetch(BASE_URL + "api/events/", {
 				method: "GET",
@@ -79,21 +79,23 @@ const EventsPage = ({ setNextUrl }) => {
 					<Loader />
 				) : (
 					<>
-						<section className={styles.eventsSection}>
-							<h5>رویداد های جدید</h5>
-							<div className={styles.events}>
-								{curEvents.map((event) => (
-									<EventBox
-										setNextUrl={setNextUrl}
-										onClick={() =>
-											redirectHandler(event.slug)
-										}
-										event={event}
-										key={event.slug}
-									/>
-								))}
-							</div>
-						</section>
+						{curEvents.length !== 0 && (
+							<section className={styles.eventsSection}>
+								<h5>تازه ترین رویداد ها</h5>
+								<div className={styles.events}>
+									{curEvents.map((event) => (
+										<EventBox
+											setNextUrl={setNextUrl}
+											onClick={() =>
+												redirectHandler(event.slug)
+											}
+											event={event}
+											key={event.slug}
+										/>
+									))}
+								</div>
+							</section>
+						)}
 						<section className={styles.eventsSection}>
 							<h5>رویداد های برگزار شده</h5>
 							<div className={styles.events}>

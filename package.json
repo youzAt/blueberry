@@ -12,6 +12,7 @@
   "dependencies": {
     "lottie-react": "^2.4.0",
     "moment-jalaali": "^0.10.0",
+    "npm": "^10.4.0",
     "react": "^18.2.0",
     "react-barcode": "^1.4.6",
     "react-dom": "^18.2.0",

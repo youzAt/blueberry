@@ -45,7 +45,7 @@ const SideMenu = ({ setIsMenuOpen, isMenuOpen }) => {
 							}}
 						>
 							<img src={noteIcon} alt="note icon" />
-							<span className="body-md">رویداد های من</span>
+							<span className="button-sm">رویداد های من</span>
 						</NavLink>
 					</li>
 
@@ -58,7 +58,7 @@ const SideMenu = ({ setIsMenuOpen, isMenuOpen }) => {
 							}}
 						>
 							<img src={userEditIcon} alt="user edit icon" />
-							<span className="body-md">اطلاعات فردی</span>
+							<span className="button-sm">اطلاعات فردی</span>
 						</NavLink>
 					</li>
 					<li className={styles.menuItem}>
@@ -70,7 +70,7 @@ const SideMenu = ({ setIsMenuOpen, isMenuOpen }) => {
 							}}
 						>
 							<img src={walletIcon} alt="wallet icon" />
-							<span className="body-md">کیف پول</span>
+							<span className="button-sm">کیف پول</span>
 						</NavLink>
 					</li>
 				</ul>
