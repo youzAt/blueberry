@@ -22,6 +22,7 @@ import TicketPage from "./pages/TicketPage";
 import { UrlProvider } from "./context/UrlProvider";
 import ShortLinkPage from "./pages/ShortLinkPage";
 import CertificatePage from "./pages/CertificatePage";
+import WaitPay from "./pages/WaitPay";
 
 const App = () => {
 	const [phoneNumber, setPhoneNumber] = useState("");
@@ -81,6 +82,10 @@ const App = () => {
 					<Route
 						path="events/:eventSlug/signup-success"
 						element={<SuccessPage />}
+					/>
+					<Route
+						path="events/:eventSlug/signup-waiting"
+						element={<WaitPay />}
 					/>
 					<Route
 						path="events/:eventSlug/ticket"

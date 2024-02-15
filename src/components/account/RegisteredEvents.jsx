@@ -12,7 +12,7 @@ const RegisteredEvents = ({ events }) => {
 		.filter((event) => event.status.status === "CERTIFICATE");
 	const curEvents = events
 		.slice()
-		.filter((event) => event.status.status === "TICKET");
+		.filter((event) => event.status.status === "TICKET" || event.status.status === "WAITING_FOR_PAYMENT");
 	return (
 		<div>
 			<section className={styles.eventsSection}>

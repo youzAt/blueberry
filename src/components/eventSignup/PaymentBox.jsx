@@ -30,6 +30,8 @@ const PaymentBox = ({
 	const feee = finalFee || finalFee === 0 ? finalFee : fee;
 	const displayedBalance = balance > feee ? feee : balance;
 	const checkDiscountCode = () => {
+		if (discountCode.trim() === "") return;
+
 		setDiscountAlert(false);
 		setHasError(false);
 		const checkDiscount = async () => {

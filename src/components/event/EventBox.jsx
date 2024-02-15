@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import defaultPhoto from "../../assets/defaultphoto.svg";
 import certificateIcon from "../../assets/icons/award2.svg";
 import ticketIcon from "../../assets/icons/ticket2.svg";
+import dollarIcon from '../../assets/icons/dollar.svg'
 import getAccess from "../../funcs/getAccess";
 import { useState } from "react";
 import useUrl from "../../hooks/useUrl";
@@ -27,7 +28,7 @@ function convertUnixToPersianWeekDate(unixTimestamp) {
 	return convertedDate;
 }
 
-const EventBox = ({ event, onClick, setNextUrl }) => {
+const EventBox = ({ className, event, onClick, setNextUrl }) => {
 	const BASE_URL = useUrl();
 	const navigate = useNavigate();
 	const {
@@ -101,8 +102,13 @@ const EventBox = ({ event, onClick, setNextUrl }) => {
 	const redirectTicketHnadler = () => {
 		navigate(`/events/${slug}/ticket`);
 	};
-	const redicertCertificateHandler = ()=>{
-		navigate(`/c/${status.short_link}`)
+	const redicertCertificateHandler = () => {
+		navigate(`/c/${status.short_link}`);
+	};
+	
+	const redirectPaymentHandler = ()=>{
+		
+		navigate(`/events/${slug}/signup-waiting`);
 	}
 
 	const error =
@@ -111,13 +117,21 @@ const EventBox = ({ event, onClick, setNextUrl }) => {
 				isSmall
 				type="tertiary"
 				className={`deactive ${styles.error}`}
+				onClick={() => {
+					navigate(`/events/${slug}`);
+				}}
 			>
 				{status.details}
 			</Button>
 		);
 	const certificate =
 		status.status !== "CERTIFICATE" ? null : (
-			<Button type="outline" isSmall className={styles.outBtn} onClick={redicertCertificateHandler}>
+			<Button
+				type="outline"
+				isSmall
+				className={styles.outBtn}
+				onClick={redicertCertificateHandler}
+			>
 				<img src={certificateIcon} alt="certificate icon" />
 				دریافت گواهی
 			</Button>
@@ -134,10 +148,24 @@ const EventBox = ({ event, onClick, setNextUrl }) => {
 				دریافت بلیت
 			</Button>
 		);
+	const payment =
+		status.status !== "WAITING_FOR_PAYMENT" ? null : (
+			<Button
+				type="outline"
+				isSmall
+				className={styles.outBtn}
+				onClick={redirectPaymentHandler}
+			>
+				<img src={dollarIcon} alt="dollar icon" />
+				پرداخت و تکمیل ثبت نام
+			</Button>
+		);
 	return (
 		<div
 			onClick={onClick}
-			className={`${styles.eventBox} ${error && "deactive"}`}
+			className={`${className} ${styles.eventBox} ${
+				error && status.status !== "WAITING_FOR_PAYMENT" && "deactive"
+			}`}
 		>
 			<div className={styles.eventBanner}>
 				<img src={banner || defaultPhoto} />
@@ -148,7 +176,7 @@ const EventBox = ({ event, onClick, setNextUrl }) => {
 				</span>
 				<h6>{title}</h6>
 
-				{error || certificate || ticket || eventAction}
+				{error || certificate || ticket || payment || eventAction}
 			</div>
 		</div>
 	);

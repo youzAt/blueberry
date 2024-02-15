@@ -46,9 +46,7 @@ const TicketPage = () => {
 		};
 		fetchEvents();
 	}, [eventSlug, token, navigate, BASE_URL]);
-	console.log(ticketInfo);
 	
-	// console.log(event)
 
 	const ticketRef = useRef();
 	const printTicketHandler = useReactToPrint({

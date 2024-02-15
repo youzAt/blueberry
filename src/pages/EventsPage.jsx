@@ -1,3 +1,4 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
 import { useEffect, useState } from "react";
 import EventBox from "../components/event/EventBox";
 import styles from "./EventsPage.module.css";
@@ -10,6 +11,9 @@ import Loader from "../components/UI/Loader";
 
 const sortEventList = (eventsList) => {
 	let sortedEventList = [];
+	sortedEventList = sortedEventList.concat(
+		eventsList.slice().filter((event) => event.status.status === "WAITING_FOR_PAYMENT")
+	);
 	sortedEventList = sortedEventList.concat(
 		eventsList.slice().filter((event) => event.status.status === "REG")
 	);
@@ -64,13 +68,13 @@ const EventsPage = ({ setNextUrl }) => {
 		};
 		fetchEvents();
 	}, [token, BASE_URL]);
+	// console.log(events)
 	const doneEvents = events
 		.slice()
 		.filter((event) => event.status.status === "END");
 	const curEvents = sortEventList(events)
 		.slice()
 		.filter((event) => event.status.status !== "END");
-
 	return (
 		<>
 			<MainHeader removeMenu />

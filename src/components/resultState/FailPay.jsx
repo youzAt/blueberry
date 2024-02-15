@@ -1,23 +1,32 @@
 import Box from "../UI/Box";
 import Button from "../UI/Button";
-import bagIcon from "../../assets/icons/bag-cross.svg";
+// import bagIcon from "../../assets/icons/bag-cross.svg";
+import walletIcon from "../../assets/icons/wallet-add.svg";
 import styles from "./FailPay.module.css";
-const FailPay = () => {
+
+const FailPay = ({ price, shortLink }) => {
+
 	return (
 		<Box className={styles.failPayBox}>
 			<div className={styles.icon}>
-				<img src={bagIcon} alt="tick icon" />
+				<img src={walletIcon} alt="tick icon" />
 			</div>
-			<h5>متاسفانه پرداخت انجام نشد</h5>
+			<h5>پرداخت و تکمیل ثبت نام</h5>
 			<p className={`body-lg ${styles.desc}`}>
-				بررسی ما نشان می‌دهد پرداخت شما به درستی انجام نشده است و چنانچه
-				مبلغی از حساب شما کسر شده است، حداکثر طی ۷۲ ساعت آینده به حساب
-				شما باز خواهد گشت.
+				پیش ثبت نام با موفقیت انجام شد. <br />
+				<br />
+				برای تکمیل ثبت نام مبلغ {price.toLocaleString() } تومان را در لینک زیر پرداخت
+				کنید.
+				<br />
+				پس از تایید ادمین ثبت نام شما تکیمل و از طریق پیامک به شما اطلاع
+				رسانی خواهد شد.
 			</p>
 			<div className={styles.checkCode}>
-				<p className={`caption-lg`}>کد رهگیری: 2424891413</p>
+				<p className={`caption-lg`}>کد رهگیری: {shortLink}</p>
 			</div>
-			<Button type="secondary"> پرداخت مجدد </Button>
+			<Button type="secondary" className={styles.btn}>
+				<a href="https://zarinp.al/ssce_basu">ورود به درگاه</a>
+			</Button>
 		</Box>
 	);
 };

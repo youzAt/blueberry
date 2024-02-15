@@ -1,0 +1,22 @@
+.certificateBox {
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+	text-align: center;
+}
+
+
+@media (max-width: 480px) {
+	.certificateBox {
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		border-radius: 0;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+		z-index: 999;
+
+	}
+}

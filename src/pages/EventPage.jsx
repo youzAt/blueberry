@@ -1,3 +1,4 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import styles from "./EventPage.module.css";
@@ -16,6 +17,7 @@ import MainFooter from "../components/layout/MainFooter";
 import useUrl from "../hooks/useUrl";
 import ShortLink from "../components/event/ShortLink";
 import Loader from "../components/UI/Loader";
+import WaitPayment from "../components/event/WaitPayment";
 
 const EventPage = ({ setNextUrl }) => {
 	const navigate = useNavigate();
@@ -34,10 +36,10 @@ const EventPage = ({ setNextUrl }) => {
 				? {
 						"content-type": "application/json",
 						Authorization: `Bearer ${token}`,
-				}
+				  }
 				: {
 						"content-type": "application/json",
-				};
+				  };
 
 			const res = await fetch(`${BASE_URL}api/events/${eventSlug}/`, {
 				method: "GET",
@@ -71,7 +73,7 @@ const EventPage = ({ setNextUrl }) => {
 	} = event;
 	return (
 		<>
-			<MainHeader removeMenu/>
+			<MainHeader removeMenu />
 
 			<div className={`container ${styles.container}`}>
 				{isLoading ? (
@@ -104,7 +106,9 @@ const EventPage = ({ setNextUrl }) => {
 									<GetEventTicket />
 								)}
 								{status?.status === "CERTIFICATE" && (
-									<GetEventCertificate cerId={status.short_link} />
+									<GetEventCertificate
+										cerId={status.short_link}
+									/>
 								)}
 								{status?.status === "REG" && (
 									<EventSignup
@@ -114,12 +118,18 @@ const EventPage = ({ setNextUrl }) => {
 										finalFee={finalFee}
 									/>
 								)}
+								{status?.status === "WAITING_FOR_PAYMENT" && (
+									<WaitPayment slug={eventSlug} />
+								)}
 								<EventDates
 									regTime={regTime}
 									startTime={startTime}
 									endTime={endTime}
 								/>
-								<EventPoster name={name} src={poster || defaultPhoto} />
+								<EventPoster
+									name={name}
+									src={poster || defaultPhoto}
+								/>
 								<ShortLink link={link} />
 							</aside>
 						</div>

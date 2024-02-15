@@ -93,12 +93,12 @@ const EventSignupPage = () => {
 
 	const signupHandler = () => {
 		const hasErrors = validateInput();
-		console.log("input error " + hasErrors);
 		if (hasErrors) return;
 		const sendSignupData = async () => {
 			setIsLoading(true);
 			let data = arrayToObject(fields);
 			data = discountCode ? { ...data, gift_code: discountCode } : data;
+			console.log(data);
 			const res = await fetch(
 				`${BASE_URL}api/event/registration/${eventSlug}/`,
 				{
@@ -110,15 +110,18 @@ const EventSignupPage = () => {
 					},
 				}
 			);
-			if (res.ok) {
-				const data = await res.json();
+
+			const dataa = await res.json();
+			if (res.status === 201) {
 				navigate(
-					`/events/${eventSlug}/signup-success?code=${data.short_link}`
+					`/events/${eventSlug}/signup-success?code=${dataa.short_link}`
 				);
 			}
-			const dataa = await res.json();
-			console.log(res);
-			console.log(dataa);
+			if (res.status === 200) {
+				console.log("hello");
+				navigate(`/events/${eventSlug}/signup-waiting`);
+			}
+
 			setIsLoading(false);
 		};
 		sendSignupData();
