@@ -35,6 +35,8 @@ const WaitPay = () => {
 				getAccess(setToken);
 			} else if (!res.ok && res.status === 404) {
 				navigate("/event-not-fount");
+			}else if(!res.ok && res.status === 403){
+				navigate("/events")
 			} else {
 				setPrice(data.amount)
 				setShortLink(data.short_link)

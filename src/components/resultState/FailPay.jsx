@@ -5,7 +5,6 @@ import walletIcon from "../../assets/icons/wallet-add.svg";
 import styles from "./FailPay.module.css";
 
 const FailPay = ({ price, shortLink }) => {
-
 	return (
 		<Box className={styles.failPayBox}>
 			<div className={styles.icon}>
@@ -15,8 +14,9 @@ const FailPay = ({ price, shortLink }) => {
 			<p className={`body-lg ${styles.desc}`}>
 				پیش ثبت نام با موفقیت انجام شد. <br />
 				<br />
-				برای تکمیل ثبت نام مبلغ {price.toLocaleString() } تومان را در لینک زیر پرداخت
-				کنید.
+				برای تکمیل ثبت نام مبلغ
+				<b>{(+price * 10).toLocaleString()} تومان</b>
+				را در لینک زیر پرداخت کنید.
 				<br />
 				پس از تایید ادمین ثبت نام شما تکیمل و از طریق پیامک به شما اطلاع
 				رسانی خواهد شد.
