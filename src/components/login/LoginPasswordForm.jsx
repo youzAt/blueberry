@@ -12,8 +12,12 @@ import eyeSlashIcon from "../../assets/icons/eye-slash.svg";
 import eyeIcon from "../../assets/icons/eye.svg";
 import smsIcon from "../../assets/icons/sms.svg";
 import useUrl from "../../hooks/useUrl";
+import { usePhoneNumber } from "../../context/PhoneNumberProvider";
+import { useNextUrl } from "../../context/NextUrlProvider";
 
-const LoginPasswordForm = ({ phoneNumber, nextUrl }) => {
+const LoginPasswordForm = () => {
+	const { phoneNumber } = usePhoneNumber();
+	const { nextUrl } = useNextUrl();
 	const { isLoading, setIsLoading } = useOutletContext();
 	const BASE_URL = useUrl();
 	const [isPassVisible, setIsPassVisible] = useState(false);

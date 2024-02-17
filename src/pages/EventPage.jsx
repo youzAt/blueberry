@@ -18,8 +18,10 @@ import useUrl from "../hooks/useUrl";
 import ShortLink from "../components/event/ShortLink";
 import Loader from "../components/UI/Loader";
 import WaitPayment from "../components/event/WaitPayment";
+import { useNextUrl } from "../context/NextUrlProvider";
 
-const EventPage = ({ setNextUrl }) => {
+const EventPage = () => {
+	const { setNextUrl } = useNextUrl();
 	const navigate = useNavigate();
 	const [event, setEvent] = useState({});
 	const [isLoading, setIsLoaing] = useState(false);

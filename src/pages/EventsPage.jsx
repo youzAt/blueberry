@@ -8,11 +8,14 @@ import MainFooter from "../components/layout/MainFooter";
 import useUrl from "../hooks/useUrl";
 import { useNavigate } from "react-router-dom";
 import Loader from "../components/UI/Loader";
+import { useNextUrl } from "../context/NextUrlProvider";
 
 const sortEventList = (eventsList) => {
 	let sortedEventList = [];
 	sortedEventList = sortedEventList.concat(
-		eventsList.slice().filter((event) => event.status.status === "WAITING_FOR_PAYMENT")
+		eventsList
+			.slice()
+			.filter((event) => event.status.status === "WAITING_FOR_PAYMENT")
 	);
 	sortedEventList = sortedEventList.concat(
 		eventsList.slice().filter((event) => event.status.status === "REG")
@@ -31,7 +34,8 @@ const sortEventList = (eventsList) => {
 	return sortedEventList;
 };
 
-const EventsPage = ({ setNextUrl }) => {
+const EventsPage = () => {
+	const { setNextUrl } = useNextUrl();
 	const BASE_URL = useUrl();
 	const navigate = useNavigate();
 	const [isLoading, setIsLoading] = useState(false);

@@ -13,8 +13,10 @@ import Input from "../UI/Input";
 import Button from "../UI/Button";
 import ErrorMessage from "../UI/ErrorMessage";
 import { useNavigate, useOutletContext } from "react-router-dom";
+import { usePhoneNumber } from "../../context/PhoneNumberProvider";
 
-const LoginForm = ({ phoneNumber, setPhoneNumber }) => {
+const LoginForm = () => {
+	const { phoneNumber, setPhoneNumber } = usePhoneNumber();
 	const { isLoading, setIsLoading } = useOutletContext();
 
 	const BASE_URL = useUrl();

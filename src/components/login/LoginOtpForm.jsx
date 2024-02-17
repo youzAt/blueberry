@@ -5,11 +5,15 @@ import Button from "../UI/Button";
 import ErrorMessage from "../UI/ErrorMessage";
 import { useNavigate, useOutletContext } from "react-router-dom";
 import useUrl from "../../hooks/useUrl";
+import { usePhoneNumber } from "../../context/PhoneNumberProvider";
+import { useNextUrl } from "../../context/NextUrlProvider";
 
 const WAITING_TIME = 120;
 const OTP_LENGTH = 6;
 
-const LoginOtpForm = ({ phoneNumber, nextUrl }) => {
+const LoginOtpForm = () => {
+	const { phoneNumber } = usePhoneNumber();
+	const { nextUrl } = useNextUrl();
 	const { isLoading, setIsLoading } = useOutletContext();
 	const BASE_URL = useUrl();
 	const [otp, setOtp] = useState();
