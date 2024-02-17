@@ -20,10 +20,10 @@ import Loader from "../components/UI/Loader";
 import WaitPayment from "../components/event/WaitPayment";
 
 const EventPage = ({ setNextUrl }) => {
+	const { eventSlug } = useParams();
 	const navigate = useNavigate();
 	const [event, setEvent] = useState({});
 	const [isLoading, setIsLoaing] = useState(false);
-	const { eventSlug } = useParams();
 	const BASE_URL = useUrl();
 	const [token, setToken] = useState(() => {
 		return localStorage.getItem("blueberry-access");
@@ -71,6 +71,10 @@ const EventPage = ({ setNextUrl }) => {
 		banner,
 		short_link: link,
 	} = event;
+	document.title = "Blue Berry | Event - " + (name || "");
+
+
+
 	return (
 		<>
 			<MainHeader removeMenu />

@@ -158,6 +158,8 @@ const EventSignupPage = () => {
 		fee: finalFee,
 		initial_fee: initialFee,
 	} = event;
+	document.title = "Blue Berry | SignUp - " + (name || "");
+
 	return (
 		<div className={`container ${styles.container}`}>
 			{isLoading || isLoading2 ? (

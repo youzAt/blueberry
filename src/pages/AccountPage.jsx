@@ -9,6 +9,7 @@ import useUrl from "../hooks/useUrl";
 import Loader from "../components/UI/Loader";
 
 const AccountPage = () => {
+	document.title = "Blue Berry | Account"
 	const BASE_URL = useUrl();
 	const navigate = useNavigate();
 	const [isMenuOpen, setIsMenuOpen] = useState(false);

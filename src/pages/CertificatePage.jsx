@@ -12,6 +12,7 @@ import tickIcon from "../assets/icons/tick-circle.svg";
 import Loader from "../components/UI/Loader";
 
 const CertificatePage = () => {
+	document.title = "Blue Berry | Certificate"
 	const BASE_URL = useUrl();
 	const { cerId } = useParams();
 	const [cerSrc, setCerSrc] = useState("");

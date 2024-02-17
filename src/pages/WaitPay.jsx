@@ -9,6 +9,8 @@ import useUrl from "../hooks/useUrl";
 import getAccess from "../funcs/getAccess";
 import { useNavigate } from "react-router-dom";
 const WaitPay = () => {
+	document.title = "Blue Berry | Waiting for payment";
+
 	const BASE_URL = useUrl();
 	const [price, setPrice] = useState("");
 	const [shortLink, setShortLink] = useState("");

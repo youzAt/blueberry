@@ -52,6 +52,7 @@ const TicketPage = () => {
 	const printTicketHandler = useReactToPrint({
 		content: () => ticketRef.current,
 	});
+	document.title = "Blue Berry | Ticket - " + (ticketInfo?.event?.name || "");
 	return (
 		<>
 			<MainHeader removeMenu />

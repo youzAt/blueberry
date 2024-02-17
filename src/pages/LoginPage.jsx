@@ -7,7 +7,9 @@ import { useEffect, useState } from "react";
 import getAccess from "../funcs/getAccess";
 import useUrl from "../hooks/useUrl";
 import Loader from '../components/UI/Loader'
+
 const LoginPage = () => {
+	document.title = "Blue Berry | Login"
 	const navigate = useNavigate();
 	const backBtnHandler = () => {
 		navigate(-1);

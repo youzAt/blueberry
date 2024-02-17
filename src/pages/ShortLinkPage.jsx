@@ -4,6 +4,7 @@ import useUrl from "../hooks/useUrl";
 import { useNavigate, useParams } from "react-router-dom";
 
 const ShortLinkPage = () => {
+	document.title = "Blue Berry | Short Link"
 	const BASE_URL = useUrl();
 	const { shortLink } = useParams();
 	const navigate = useNavigate();
