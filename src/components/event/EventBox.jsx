@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import defaultPhoto from "../../assets/defaultphoto.svg";
 import certificateIcon from "../../assets/icons/award2.svg";
 import ticketIcon from "../../assets/icons/ticket2.svg";
-import dollarIcon from '../../assets/icons/dollar.svg'
+import dollarIcon from "../../assets/icons/dollar.svg";
 import getAccess from "../../funcs/getAccess";
 import { useState } from "react";
 import useUrl from "../../hooks/useUrl";
@@ -76,7 +76,7 @@ const EventBox = ({ className, event, onClick, setNextUrl }) => {
 				className={styles.signUpBtn}
 				onClick={signupHandler}
 			>
-				خرید بلیت
+				ثبت نام
 			</Button>
 			<div className={styles.price}>
 				{initialFee && (
@@ -105,11 +105,10 @@ const EventBox = ({ className, event, onClick, setNextUrl }) => {
 	const redicertCertificateHandler = () => {
 		navigate(`/c/${status.short_link}`);
 	};
-	
-	const redirectPaymentHandler = ()=>{
-		
+
+	const redirectPaymentHandler = () => {
 		navigate(`/events/${slug}/signup-waiting`);
-	}
+	};
 
 	const error =
 		status.status !== "ERROR" && status.status !== "END" ? null : (
