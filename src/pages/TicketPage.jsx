@@ -5,48 +5,13 @@ import Button from "../components/UI/Button";
 import Ticket from "../components/ticket/Ticket";
 import shareIcon from "../assets/icons/share.svg";
 import { useReactToPrint } from "react-to-print";
-import { useEffect, useRef, useState } from "react";
-import useUrl from "../hooks/useUrl";
-import getAccess from "../funcs/getAccess";
-import { useNavigate } from "react-router-dom";
+import { useRef } from "react";
+import { useLoaderData } from "react-router-dom";
 import TicketWarning from "../components/ticket/TicketWarning";
+import { fetchTicketInfo } from "../services/apiEvents";
 
 const TicketPage = () => {
-	const BASE_URL = useUrl();
-	const [ticketInfo, setTicketInfo] = useState({});
-	const [token, setToken] = useState(() => {
-		return localStorage.getItem("blueberry-access");
-	});
-	const navigate = useNavigate();
-	const eventSlug = window.location.pathname.split("/").at(-2);
-
-	useEffect(() => {
-		const fetchEvents = async () => {
-			// setIsLoaing(true);
-
-			const res = await fetch(
-				`${BASE_URL}api/event/ticket/${eventSlug}/`,
-				{
-					method: "GET",
-					headers: {
-						"content-type": "application/json",
-						Authorization: `Bearer ${token}`,
-					},
-				}
-			);
-			const data = await res.json();
-			if (!res.ok && res.status === 401) {
-				getAccess(setToken);
-			} else if (!res.ok && res.status === 404) {
-				navigate("/event-not-fount");
-			} else {
-				setTicketInfo(data);
-			}
-			// setIsLoaing(false);
-		};
-		fetchEvents();
-	}, [eventSlug, token, navigate, BASE_URL]);
-	
+	const ticketInfo = useLoaderData();
 
 	const ticketRef = useRef();
 	const printTicketHandler = useReactToPrint({
@@ -57,9 +22,11 @@ const TicketPage = () => {
 			<MainHeader removeMenu />
 			<main className={`${styles.ticketPage} container`} ref={ticketRef}>
 				<h5>چاپ بلیط</h5>
-				{ticketInfo?.event?.ticket_warnings.length !== 0 && <TicketWarning
-					warningDetails={ticketInfo?.event?.ticket_warnings}
-				/>}
+				{ticketInfo?.event?.ticket_warnings.length !== 0 && (
+					<TicketWarning
+						warningDetails={ticketInfo?.event?.ticket_warnings}
+					/>
+				)}
 				<Ticket info={ticketInfo} />
 				<div className={styles.btns}>
 					<Button onClick={printTicketHandler}>پرینت بلیت</Button>
@@ -75,3 +42,9 @@ const TicketPage = () => {
 };
 
 export default TicketPage;
+
+export const loader = async ({params}) => {
+	const ticketInfo = await fetchTicketInfo(params.eventSlug);
+
+	return ticketInfo;
+};

@@ -4,20 +4,22 @@ import LoginForm from "./components/login/LoginForm";
 import LoginPasswordForm from "./components/login/LoginPasswordForm";
 import LoginOtpForm from "./components/login/LoginOtpForm";
 import AccountPage from "./pages/AccountPage";
-import EventsPage from "./pages/EventsPage";
-import EventPage from "./pages/EventPage";
-import EventSignupPage from "./pages/EventSignupPage";
+import EventsPage, { loader as eventsLoader } from "./pages/EventsPage";
+import EventPage, { loader as eventLoader } from "./pages/EventPage";
+import EventSignupPage, {
+	loader as eventSignupLoader,
+} from "./pages/EventSignupPage";
 import HomePage from "./pages/HomePage";
 import SuccessPage from "./pages/SuccessPage";
 import ProfilePage from "./pages/ProfilePage";
 import MyEventPage from "./pages/MyEventPage";
 import WalletPage from "./pages/WalletPage";
-import ErrorPage from "./pages/ErrorPage";
-import TicketPage from "./pages/TicketPage";
+// import ErrorPage from "./pages/ErrorPage";
+import TicketPage, { loader as ticketLoader } from "./pages/TicketPage";
 import { UrlProvider } from "./context/UrlProvider";
 import ShortLinkPage from "./pages/ShortLinkPage";
 import CertificatePage from "./pages/CertificatePage";
-import WaitPay from "./pages/WaitPay";
+import WaitPayPage, { loader as waitPayLoader } from "./pages/WaitPayPage";
 import PhoneNumberProvider from "./context/PhoneNumberProvider";
 import NextUrlProvider from "./context/NextUrlProvider";
 
@@ -41,13 +43,25 @@ const router = createBrowserRouter([
 			{ path: "wallet", element: <WalletPage /> },
 		],
 	},
-	{ path: "/events", element: <EventsPage /> },
-	{ path: "/events/:eventSlug", element: <EventPage /> },
-	{ path: "/signup/:eventSlug", element: <EventSignupPage /> },
-	{ path: "/events/:eventSlug/signup-success", element: <SuccessPage /> },
-	{ path: "/events/:eventSlug/signup-waiting", element: <WaitPay /> },
-	{ path: "/events/:eventSlug/ticket", element: <TicketPage /> },
-	{ path: "/e/:shortLink", element: <ShortLinkPage /> },
+	{ path: "/events", element: <EventsPage />, loader: eventsLoader }, // DONE ✅
+	{ path: "/events/:eventSlug", element: <EventPage />, loader: eventLoader }, // DONE ✅
+	{
+		path: "/signup/:eventSlug",
+		element: <EventSignupPage />,
+		loader: eventSignupLoader,
+	}, // DONE ✅
+	{ path: "/events/:eventSlug/signup-success", element: <SuccessPage /> }, // DONE ✅
+	{
+		path: "/events/:eventSlug/signup-waiting",
+		element: <WaitPayPage />,
+		loader: waitPayLoader,
+	}, // DONE ✅
+	{
+		path: "/events/:eventSlug/ticket",
+		element: <TicketPage />,
+		loader: ticketLoader,
+	}, // DONE ✅
+	{ path: "/e/:shortLink", element: <ShortLinkPage /> }, // DONE ✅
 	{ path: "/c/:cerId", element: <CertificatePage /> },
 ]);
 
@@ -62,7 +76,6 @@ const App = () => {
 		</UrlProvider>
 	);
 };
-
 
 export default App;
 
@@ -83,7 +96,7 @@ export default App;
 	<Route path="events/:eventSlug" element={<EventPage />} />
 	<Route path="signup/:eventSlug" element={<EventSignupPage />} />
 	<Route path="events/:eventSlug/signup-success" element={<SuccessPage />} />
-	<Route path="events/:eventSlug/signup-waiting" element={<WaitPay />} />
+	<Route path="events/:eventSlug/signup-waiting" element={<WaitPayPage />} />
 	<Route path="events/:eventSlug/ticket" element={<TicketPage />} />
 	<Route path="e/:shortLink" element={<ShortLinkPage />} />
 	<Route path="c/:cerId" element={<CertificatePage />} />

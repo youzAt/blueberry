@@ -1,6 +1,5 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
-import { useNavigate, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useLoaderData, useParams } from "react-router-dom";
 import styles from "./EventPage.module.css";
 import EventBanner from "../components/event/EventBanner";
 import EventDescription from "../components/event/EventDescription";
@@ -12,53 +11,16 @@ import GetEventTicket from "../components/event/GetEventTicket";
 import GetEventCertificate from "../components/event/GetEventCertificate";
 import Box from "../components/UI/Box";
 import defaultPhoto from "../assets/defaultphoto.svg";
-import getAccess from "../funcs/getAccess";
 import MainFooter from "../components/layout/MainFooter";
-import useUrl from "../hooks/useUrl";
 import ShortLink from "../components/event/ShortLink";
-import Loader from "../components/UI/Loader";
 import WaitPayment from "../components/event/WaitPayment";
 import { useNextUrl } from "../context/NextUrlProvider";
+import { fetchEvent } from "../services/apiEvents";
 
 const EventPage = () => {
 	const { setNextUrl } = useNextUrl();
-	const navigate = useNavigate();
-	const [event, setEvent] = useState({});
-	const [isLoading, setIsLoaing] = useState(false);
 	const { eventSlug } = useParams();
-	const BASE_URL = useUrl();
-	const [token, setToken] = useState(() => {
-		return localStorage.getItem("blueberry-access");
-	});
-
-	useEffect(() => {
-		const fetchEvents = async () => {
-			setIsLoaing(true);
-			const reqHeader = token
-				? {
-						"content-type": "application/json",
-						Authorization: `Bearer ${token}`,
-				  }
-				: {
-						"content-type": "application/json",
-				  };
-
-			const res = await fetch(`${BASE_URL}api/events/${eventSlug}/`, {
-				method: "GET",
-				headers: reqHeader,
-			});
-			const data = await res.json();
-			if (!res.ok && res.status === 401) {
-				getAccess(setToken);
-			} else if (!res.ok && res.status === 404) {
-				navigate("/event-not-fount");
-			} else {
-				setEvent(data);
-			}
-			setIsLoaing(false);
-		};
-		fetchEvents();
-	}, [eventSlug, token, navigate, BASE_URL]);
+	const event = useLoaderData();
 
 	const {
 		initial_fee: initialFee,
@@ -78,65 +40,45 @@ const EventPage = () => {
 			<MainHeader removeMenu />
 
 			<div className={`container ${styles.container}`}>
-				{isLoading ? (
-					<Loader />
-				) : (
-					<>
-						<h3>{name}</h3>
-						<div className={styles.wrapper}>
-							<main className={styles.mainContent}>
-								<EventBanner
-									src={banner || defaultPhoto}
-									name={name}
-								/>
-								<EventDescription>
-									{description}
-								</EventDescription>
-							</main>
-							<aside className={styles.sideContent}>
-								{(status?.status === "END" ||
-									status?.status === "ERROR") && (
-									<Box className={styles.endEvent}>
-										<p
-											className={`caption-lg ${styles.end}`}
-										>
-											{status.details}
-										</p>
-									</Box>
-								)}
-								{status?.status === "TICKET" && (
-									<GetEventTicket />
-								)}
-								{status?.status === "CERTIFICATE" && (
-									<GetEventCertificate
-										cerId={status.short_link}
-									/>
-								)}
-								{status?.status === "REG" && (
-									<EventSignup
-										setNextUrl={setNextUrl}
-										slug={eventSlug}
-										initialFee={initialFee}
-										finalFee={finalFee}
-									/>
-								)}
-								{status?.status === "WAITING_FOR_PAYMENT" && (
-									<WaitPayment slug={eventSlug} />
-								)}
-								<EventDates
-									regTime={regTime}
-									startTime={startTime}
-									endTime={endTime}
-								/>
-								<EventPoster
-									name={name}
-									src={poster || defaultPhoto}
-								/>
-								<ShortLink link={link} />
-							</aside>
-						</div>
-					</>
-				)}
+				<h3>{name}</h3>
+				<div className={styles.wrapper}>
+					<main className={styles.mainContent}>
+						<EventBanner src={banner || defaultPhoto} name={name} />
+						<EventDescription>{description}</EventDescription>
+					</main>
+					<aside className={styles.sideContent}>
+						{(status?.status === "END" ||
+							status?.status === "ERROR") && (
+							<Box className={styles.endEvent}>
+								<p className={`caption-lg ${styles.end}`}>
+									{status.details}
+								</p>
+							</Box>
+						)}
+						{status?.status === "TICKET" && <GetEventTicket />}
+						{status?.status === "CERTIFICATE" && (
+							<GetEventCertificate cerId={status.short_link} />
+						)}
+						{status?.status === "REG" && (
+							<EventSignup
+								setNextUrl={setNextUrl}
+								slug={eventSlug}
+								initialFee={initialFee}
+								finalFee={finalFee}
+							/>
+						)}
+						{status?.status === "WAITING_FOR_PAYMENT" && (
+							<WaitPayment slug={eventSlug} />
+						)}
+						<EventDates
+							regTime={regTime}
+							startTime={startTime}
+							endTime={endTime}
+						/>
+						<EventPoster name={name} src={poster || defaultPhoto} />
+						<ShortLink link={link} />
+					</aside>
+				</div>
 			</div>
 
 			<MainFooter className={styles.footer} />
@@ -145,3 +87,8 @@ const EventPage = () => {
 };
 
 export default EventPage;
+
+export const loader = async ({ params }) => {
+	const event = await fetchEvent(params.eventSlug);
+	return event;
+};
