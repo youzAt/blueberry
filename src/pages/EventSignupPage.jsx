@@ -70,13 +70,13 @@ const EventSignupPage = () => {
 						hasError = true;
 					}
 					break;
-				case "student_id":
-					if (field.answer.length < 10 || field.answer.length > 11) {
-						setInputError((cur) => [...cur, "student_id"]);
-						hasError = true;
-					}
+				// case "student_id":
+				// 	if (field.answer.length < 10 || field.answer.length > 11) {
+				// 		setInputError((cur) => [...cur, "student_id"]);
+				// 		hasError = true;
+				// 	}
 
-					break;
+				// 	break;
 				case "description":
 					break;
 				default:
