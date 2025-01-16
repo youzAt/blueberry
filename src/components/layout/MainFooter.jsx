@@ -119,11 +119,28 @@ const MainFooter = ({ className }) => {
 					</div>
 				</div>
 				<div className={styles.logos}>
-					<img src={basuLogo} className={styles.basuLogo} alt="Bu-Ali sina university logo" />
+					<img
+						src={basuLogo}
+						className={styles.basuLogo}
+						alt="Bu-Ali sina university logo"
+					/>
 					<Link to="/events" className={styles.blueLogo}>
 						<img src={blueberryLogo} alt="Blueberry logo" />
 					</Link>
 				</div>
+				<a
+					referrerPolicy="origin"
+					target="_blank"
+					href="https://trustseal.enamad.ir/?id=555480&Code=FNNGJXc0Grr8RvNCIATFoVrCpM4xx5LA"
+				>
+					<img
+						referrerPolicy="origin"
+						src="https://trustseal.enamad.ir/logo.aspx?id=555480&Code=FNNGJXc0Grr8RvNCIATFoVrCpM4xx5LA"
+						alt=""
+						style={{cursor: "pointer"}}
+						code="FNNGJXc0Grr8RvNCIATFoVrCpM4xx5LA"
+					/>
+				</a>
 			</div>
 			<p className={`body-md ${styles.copyRight} container`}>
 				کلیه حقوق مادی و معنوی این وب سایت برای <span>بلوبری </span>

@@ -51,6 +51,7 @@ const PaymentBox = ({
 				setShowDiscountInput(false);
 				setDiscountDetail(data);
 			} else {
+				console.log("wrong code")
 				setHasError(true);
 			}
 		};
