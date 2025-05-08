@@ -52,6 +52,7 @@ body {
 }
 .container {
 	padding: 0 24px;
+	width: 100%;
 	max-width: 1272px; /* 1224px + 24px side paddings */
 	margin: auto;
 }

@@ -1,0 +1,41 @@
+.mainContent,
+.sideContent {
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+}
+.wrapper {
+	display: grid;
+	grid-template-columns: 66% 32%;
+	column-gap: 24px;
+	margin-top: 24px;
+}
+
+.end {
+	text-align: center;
+}
+@media (max-width: 480px) {
+	.wrapper {
+		display: block;
+	}
+	main {
+		margin-bottom: 32px;
+	}
+	.sideContent {
+		margin-bottom: 32px;
+	}
+
+	.endEvent {
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		border-radius: 0;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+	}
+	.footer {
+		padding-bottom: 140px !important;
+	}
+}

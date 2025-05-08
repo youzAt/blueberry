@@ -1,0 +1,95 @@
+.eventBox {
+	/* width: 25%;*/
+	/* width: 288px;  */
+	border-radius: var(--border-radius-2);
+	border: 1px solid var(--color-border);
+	overflow: hidden;
+	background-color: #fff;
+	padding: 8px;
+	cursor: pointer;
+	transition: 0.3s ease-in-out;
+}
+.eventBox:hover {
+	transform: translateY(-8px);
+}
+.eventBox:global(.deactive) {
+	opacity: 0.7;
+}
+.eventBox .eventBanner {
+	width: 100%;
+	height: 167px;
+	overflow: hidden;
+	border-radius: var(--border-radius-1);
+}
+.eventBanner img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+.eventDetails {
+	padding: 8px 8px 16px 8px;
+}
+.eventDate {
+	color: var(--color-gray-2);
+	display: block;
+	margin-bottom: 8px;
+}
+.eventDetails h6 {
+	color: var(--color-primary-dark);
+	margin-bottom: 24px;
+	cursor: pointer;
+	text-overflow: ellipsis;
+	text-wrap: nowrap;
+	overflow: hidden;
+}
+.eventDetails .error {
+	width: 100%;
+	border-top: 1px solid var(--color-border);
+	border-radius: 0;
+	padding-bottom: 0;
+	margin-top: 40px;
+}
+.eventDetails .outBtn {
+	width: 100%;
+}
+.eventAction {
+	display: flex;
+	justify-content: space-between;
+}
+.eventAction .signUpBtn {
+	border-color: var(--color-primary);
+	color: var(--color-primary);
+	transition: 0.2 linear;
+}
+.eventAction .price {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: 8px;
+}
+.price {
+	color: var(--color-gray-2);
+}
+.price s {
+	font-size: 14px;
+	color: var(--color-deactive);
+}
+.price span {
+	font-size: 16px;
+	color: var(--color-primary);
+}
+.price p {
+	text-align: left;
+}
+.signUpBtn:hover {
+	background-color: var(--color-primary);
+	color: #fff;
+}
+
+@media (max-width: 480px) {
+	.eventBox{
+		width: 100%;
+		max-width: unset;
+	}
+}

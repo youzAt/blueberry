@@ -1,0 +1,26 @@
+.ticketPage{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 40px;
+    overflow: hidden;
+    
+}
+.ticketPage .btns{
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+@media print {
+    .ticketPage h5, .ticketPage .btns{
+        display: none;
+    }
+    .ticketPage{
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        direction: rtl;
+    }
+}

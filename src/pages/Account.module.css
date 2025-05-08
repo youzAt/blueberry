@@ -1,0 +1,14 @@
+.accountPage {
+	display: flex;
+	flex-direction: row;
+	gap: 128px;
+	width: 100%;
+}
+.sideMenu {
+	align-self: flex-start;
+}
+@media (max-width: 480px) {
+	.accountPage {
+		display: block;
+	}
+}

@@ -1,0 +1,29 @@
+.secContainer{
+    width: 100%;
+}
+.eventsSection{
+    margin-bottom: 24px;
+    width: 100%;
+}
+.eventsSection h5{
+    color: var(--color-primary-dark);
+    margin-bottom: 24px;
+}
+.eventsSection .events{
+    width: 100%;
+    gap: 24px;
+	display: grid;
+    width: 100%;;
+	grid-template-columns: repeat(auto-fill, minmax(288px, 1fr));
+}
+.container{
+    padding-top: 160px !important;
+}
+@media (max-width: 480px) {
+    .eventsSection .events{
+        flex-direction: column;
+        gap: 16px;
+        flex-wrap: unset;
+    }
+   
+}
