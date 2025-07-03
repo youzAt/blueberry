@@ -1,6 +1,6 @@
 # Blueberry Events Platform
 
-Live Application: [ssceb.ir](https://ssceb.ir)
+Live Application(NOT AVAILABLE AT THE MOMENT!): [ssceb.ir](https://ssceb.ir)
 
 A React-based web application for managing and participating in events. This platform allows users to sign up for events, view event details, get tickets, and access certificates.
 
